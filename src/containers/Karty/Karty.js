@@ -1,33 +1,49 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions"
 
 import Button from "../../components/UI/Button/Button"
 import DodajKuta from "../../components/DodajKuta/DodajKuta"
+import Tabela from '../../components/Tabela/Tabela'
 
-export default class Karty extends Component {
+ class Karty extends Component {
 
 state = {
-buttonIsClicked: false
-
+buttonIsClicked: false,
+buttonDisable: false
 }
 
 
-onClickAction = () => {
-  console.log('asd')
-  !this.state.buttonIsClicked ?  this.setState({ buttonIsClicked: true }): this.setState({ buttonIsClicked: false })
-}
+// onClickAction = () => {
+
+//   !this.props.buttonIsClicked  ?  this.setState({ buttonIsClicked: true, buttonDisable: true }) : this.setState({  buttonIsClicked: false, buttonDisable: false})
+
+
+// }
   render() {
     return (
         <Wrapper>
-            <Button val={'Dodaj Nową Kartę'} clicked={this.onClickAction}/>
+          {!this.props.buttonDisable 
+          ? <Button val={'Dodaj Nową Kartę'} clicked={(a, b) => this.props.onAddingKut(this.props.buttonDisable, this.props.buttonIsClicked, this.props.karty.length)} ></Button>
+          : <h2>Dodajesz Nowa Kartę . . .</h2>
+          }
            {
-             this.state.buttonIsClicked ? <DodajKuta /> : null
+             this.props.buttonIsClicked 
+             ? <DodajKuta  /> 
+
+             : null
            }
+        
+           { !this.props.buttonIsClicked  && this.props.karty.length > 0 ?
+             
+             <Tabela /> : null
+           }
+      
         </Wrapper>
     );
   }
 }
-
 
 const Wrapper = styled.div`
 margin-left: 250px;
@@ -43,3 +59,21 @@ Button{
 }
 
 `
+
+
+const mapStateToProps = state => {
+  return {
+karty: state.karty,
+ buttonIsClicked: state.buttonIsClicked,
+buttonDisable: state.buttonDisable
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddNewKut: () => dispatch(actions.addNewKut()),
+    onAddingKut: (a, b, c) => dispatch(actions.buttonKlicked(a, b, c))
+
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Karty);

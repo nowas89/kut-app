@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 import Button from "../UI/Button/Button"
 
@@ -26,7 +26,7 @@ const dodajCzynnosc = props => {
         <input type="text" name="karta" />
       </label>
       <label>
-        Zużto RBG
+        Zużto Roboczo Godzin
         <input type="number" name="karta" />
       </label>
       <label>

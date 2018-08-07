@@ -6,7 +6,7 @@ import styled from "styled-components";
 const Button = props => {
   return (
     <div>
-      <ButtonUi onClick={props.clicked}>{props.val} </ButtonUi>
+      <ButtonUi onClick={props.clicked} >{props.val} </ButtonUi>
     </div>
   );
 };
