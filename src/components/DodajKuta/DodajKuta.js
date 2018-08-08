@@ -13,6 +13,7 @@ class DodajKuta extends Component {
     numerKuta: null,
     id: this.props.karty.length + 1,
     dodajCzynnosc: false,
+    CzCzynnosci: [],
     wykonawca: '',
     marka: '',
     nrRej: '',
@@ -49,6 +50,8 @@ class DodajKuta extends Component {
     CzIlosc: '',
     CzAsygnata: '',
     CzUwagi: ''
+   
+    
     
   };
 
@@ -208,17 +211,38 @@ componentWillUnmount() {
   };
   dispatchAndAndResetCzynnosc = () => {
 
-      this.props.onAddNewCzynnosc(
-      this.state.CzOperacja,
-      this.state.CzRgb,
-      this.state.CzDataWyk,
-      this.state.CzWykonawca,
-      this.state.CzWyszczegolnienie,
-      this.state.CzOznaczenie,
-      this.state.CzIlosc,
-      this.state.CzAsygnata,
-      this.state.CzUwagi,
-    this.state.id)
+
+let nowyItemCaly = this.state.CzCzynnosci.concat({
+  CzOperacja: this.state.CzOperacja,
+  CzRgb:    this.state.CzRgb,
+  CzDataWyk:    this.state.CzDataWyk,
+  CzWykonawca:    this.state.CzWykonawca,
+  CzWyszczegolnienie:   this.state.CzWyszczegolnienie,
+  CzOznaczenie:   this.state.CzOznaczenie,
+  CzIlosc:   this.state.CzIlosc,
+  CzAsygnata:    this.state.CzAsygnata,
+  CzUwagi:   this.state.CzUwagi}
+)
+
+ this.setState({
+   
+CzCzynnosci: [...nowyItemCaly]
+})
+
+console.log(this.state.CzCzynnosci)
+ 
+  //     this.props.onAddNewCzynnosc(
+  //     this.state.CzOperacja,
+  //     this.state.CzRgb,
+  //     this.state.CzDataWyk,
+  //     this.state.CzWykonawca,
+  //     this.state.CzWyszczegolnienie,
+  //     this.state.CzOznaczenie,
+  //     this.state.CzIlosc,
+  //     this.state.CzAsygnata,
+  //     this.state.CzUwagi,
+  //     this.state.dodajCzynnosc
+  //  )
       
 setTimeout(() => {
   this.setState({
@@ -230,7 +254,10 @@ setTimeout(() => {
     CzOznaczenie: '',
     CzIlosc: '',
     CzAsygnata: '',
-    CzUwagi: '',dodajCzynnosc: false
+    CzUwagi: '',
+
+   dodajCzynnosc: false,
+    
 
   })
 }, 500);
@@ -255,7 +282,8 @@ setTimeout(() => {
       this.state.pobierajacy,
       this.state.waznoscKarty,
       this.props.buttonIsClicked,
-      this.props.buttonDisable
+      this.props.buttonDisable,
+      this.state.CzCzynnosci
     )
 
 
@@ -618,7 +646,8 @@ const mapDispatchToProps = dispatch => {
       pobierajacy,
       waznoscKarty,
       buttonIsClicked,
-      buttonDisable
+      buttonDisable,
+      CzCzynnosci
     ) =>
       dispatch(
         actions.addNewKut(
@@ -638,7 +667,8 @@ const mapDispatchToProps = dispatch => {
           pobierajacy,
           waznoscKarty,
           buttonIsClicked,
-          buttonDisable
+          buttonDisable,
+          CzCzynnosci
         )
       ),
     onAddNewCzynnosc: (
@@ -651,7 +681,7 @@ const mapDispatchToProps = dispatch => {
       asygnata,
       ilosc,
       uwagi,
-      id
+      CzCzynnosci
     ) =>
       dispatch(
         actions.addNewCzynnosc(
@@ -664,7 +694,7 @@ const mapDispatchToProps = dispatch => {
           asygnata,
           ilosc,
           uwagi,
-          id
+          CzCzynnosci
         )
       )
   };

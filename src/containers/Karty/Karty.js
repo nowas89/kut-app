@@ -25,7 +25,7 @@ buttonDisable: false
     return (
         <Wrapper>
           {!this.props.buttonDisable 
-          ? <Button val={'Dodaj Nową Kartę'} clicked={(a, b) => this.props.onAddingKut(this.props.buttonDisable, this.props.buttonIsClicked, this.props.karty.length)} ></Button>
+          ? <Button val={'Dodaj Nową Kartę'} clicked={(a, b) => this.props.onAddingKut(this.props.buttonDisable, this.props.buttonIsClicked )} ></Button>
           : <h2>Dodajesz Nowa Kartę . . .</h2>
           }
            {
@@ -72,7 +72,7 @@ buttonDisable: state.buttonDisable
 const mapDispatchToProps = dispatch => {
   return {
     onAddNewKut: () => dispatch(actions.addNewKut()),
-    onAddingKut: (a, b, c) => dispatch(actions.buttonKlicked(a, b, c))
+    onAddingKut: (a, b) => dispatch(actions.buttonKlicked(a, b))
 
   };
 };

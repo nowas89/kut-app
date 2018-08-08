@@ -11,7 +11,7 @@ export const addNewKut = (state, action) => {
 
 const nowaKarta = [...state.karty]
 
- 
+ console.log(action.CzCzynnosci)
        nowaKarta.push(
         action.id = {
           numerKuta: action.numerKuta,
@@ -28,7 +28,8 @@ const nowaKarta = [...state.karty]
           typ: action.typ, 
           podstawa: action.podstawa, 
           pobierajacy: action.pobierajacy, 
-          waznoscKarty: action.waznoscKarty
+          waznoscKarty: action.waznoscKarty,
+          CzCzynnosci: action.CzCzynnosci
          }
        )
 console.log(nowaKarta)

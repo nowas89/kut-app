@@ -1,7 +1,7 @@
 import * as actionTypes from "./actionTypes";
 
 export const addNewKut = (numerKuta, id, wykonawca, marka, nrRej, wlasciciel, terminWykonania, zadanie,wystawiajacy,opis,uwagi, typ, podstawa, pobierajacy, waznoscKarty, buttonIsClicked,
-    buttonDisable) => {
+    buttonDisable, CzCzynnosci) => {
     return {
         type: actionTypes.ADD_KUT,
         numerKuta: numerKuta,
@@ -20,7 +20,8 @@ export const addNewKut = (numerKuta, id, wykonawca, marka, nrRej, wlasciciel, te
         pobierajacy: pobierajacy, 
         waznoscKarty: waznoscKarty,
         buttonIsClicked: buttonIsClicked,
-    buttonDisable: buttonDisable
+    buttonDisable: buttonDisable,
+    CzCzynnosci: CzCzynnosci
     
     };
 };
@@ -33,7 +34,7 @@ export const addNewCzynnosc = (operacja,
     asygnata,
     ilosc,
     uwagi,
-id) => {
+czynnosci) => {
     return {
         type: actionTypes.ADD_NEW_CZYNNOSC,
         rbg: rbg,
@@ -44,14 +45,13 @@ id) => {
         asygnata: asygnata,
         ilosc: ilosc,
         uwagi: uwagi,
-        id: id
+        czynnosci: czynnosci
     };
 };
-export const buttonKlicked = (btnIsClicked, btnIsDisabled, id) => {
+export const buttonKlicked = (btnIsClicked, btnIsDisabled) => {
     return {
         type: actionTypes.ON_ADDING_KUT,
         btnIsClicked: btnIsClicked,
-        btnIsDisabled: btnIsDisabled,
-        id: id
+        btnIsDisabled: btnIsDisabled
     };
 };
