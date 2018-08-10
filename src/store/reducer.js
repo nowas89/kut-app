@@ -3,7 +3,9 @@ import * as actionTypes from "./actionTypes";
 const initialState = {
 karty: [],
 buttonIsClicked: false,
-buttonDisable: false
+buttonDisable: false,
+otwartakarta: {},
+kartaJestOtwarta: false
 };
 
 
@@ -29,7 +31,8 @@ const nowaKarta = [...state.karty]
           podstawa: action.podstawa, 
           pobierajacy: action.pobierajacy, 
           waznoscKarty: action.waznoscKarty,
-          CzCzynnosci: action.CzCzynnosci
+          CzCzynnosci: action.CzCzynnosci,
+          kartaZdana: action.kartaZdana
          }
        )
 console.log(nowaKarta)
@@ -63,6 +66,48 @@ return{
  }
 
 
+ export const openKut = (state, action) => {
+const nowOtwartaKarta = {
+  numerKuta: action.karta.numerKuta,
+  id: action.karta.id,
+  wykonawca: action.karta.wykonawca,
+  marka: action.karta.marka,
+  nrRej: action.karta.nrRej,
+  wlasciciel: action.karta.wlasciciel,
+  terminWykonania: action.karta.terminWykonania,
+  zadanie: action.karta.zadanie,
+  wystawiajacy: action.karta.wystawiajacy,
+  opis: action.karta.opis,
+  uwagi: action.karta.uwagi,
+  typ: action.karta.typ, 
+  podstawa: action.karta.podstawa, 
+  pobierajacy: action.karta.pobierajacy, 
+  waznoscKarty: action.karta.waznoscKarty,
+  CzCzynnosci: action.karta.CzCzynnosci
+}
+
+console.log(nowOtwartaKarta)
+
+return{
+  ...state,
+  otwartaKarta: nowOtwartaKarta,
+  kartaJestOtwarta: true
+}
+}
+
+
+
+export const zamykanieKarty = (state, action) => {
+
+console.log(action.zamknij)
+
+  return {
+    ...state,
+    kartaJestOtwarta: !action.zamknij
+  }
+}
+
+
 const reducer =  (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_KUT:
@@ -71,6 +116,10 @@ const reducer =  (state = initialState, action) => {
           return addNewCzynnosc(state, action);
         case actionTypes.ON_ADDING_KUT:
           return buttonKlicked(state, action);
+        case actionTypes.OPEN_KUT:
+          return openKut(state, action);
+        case actionTypes.ZAMYKANIE_KARTY:
+          return zamykanieKarty(state, action);
         default:
           return state;
       }

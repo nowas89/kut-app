@@ -1,7 +1,7 @@
 import * as actionTypes from "./actionTypes";
 
 export const addNewKut = (numerKuta, id, wykonawca, marka, nrRej, wlasciciel, terminWykonania, zadanie,wystawiajacy,opis,uwagi, typ, podstawa, pobierajacy, waznoscKarty, buttonIsClicked,
-    buttonDisable, CzCzynnosci) => {
+    buttonDisable, CzCzynnosci, kartaZdana) => {
     return {
         type: actionTypes.ADD_KUT,
         numerKuta: numerKuta,
@@ -21,12 +21,13 @@ export const addNewKut = (numerKuta, id, wykonawca, marka, nrRej, wlasciciel, te
         waznoscKarty: waznoscKarty,
         buttonIsClicked: buttonIsClicked,
     buttonDisable: buttonDisable,
-    CzCzynnosci: CzCzynnosci
+    CzCzynnosci: CzCzynnosci,
+    kartaZdana: kartaZdana
     
     };
 };
 export const addNewCzynnosc = (operacja,
-    rbg,
+    rbh,
     dataWyk,
     wykonawca,
     wyszczegolnienie,
@@ -37,7 +38,7 @@ export const addNewCzynnosc = (operacja,
 czynnosci) => {
     return {
         type: actionTypes.ADD_NEW_CZYNNOSC,
-        rbg: rbg,
+        rbh: rbh,
         dataWyk: dataWyk,
         wykonawca: wykonawca,
         wyszczegolnienie: wyszczegolnienie,
@@ -55,3 +56,19 @@ export const buttonKlicked = (btnIsClicked, btnIsDisabled) => {
         btnIsDisabled: btnIsDisabled
     };
 };
+
+
+export const openKut = (karta) => {
+    return {
+        type: actionTypes.OPEN_KUT,
+        
+        karta: karta
+    }
+}
+export const zamykanieKarty = (zamknij) => {
+    return {
+        type: actionTypes.ZAMYKANIE_KARTY,
+        
+        zamknij: zamknij
+    }
+}

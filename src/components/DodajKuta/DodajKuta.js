@@ -1,99 +1,133 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
+import compose from "recompose/compose";
+import Typography from "@material-ui/core/Typography";
 
 import styled from "styled-components";
 
-import Button from "../UI/Button/Button";
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import SaveIcon from '@material-ui/icons/Save';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+
+
+import classNames from 'classnames';
+
+import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 // import DodajCzynnosc from "../DodajCzynnosc/DodajCzynnosc"
 
+import { withStyles } from "@material-ui/core/styles";
+
+import TextField from "@material-ui/core/TextField";
+
+const styles = theme => ({
+
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+});
 
 class DodajKuta extends Component {
   state = {
-    numerKuta: null,
+    numerKuta:
+      this.props.karty.length + 1 + " / wł / " + new Date().getFullYear(),
     id: this.props.karty.length + 1,
     dodajCzynnosc: false,
+    kartaZdana: false,
     CzCzynnosci: [],
-    wykonawca: '',
-    marka: '',
-    nrRej: '',
-    wlasciciel: '',
+    wykonawca: "",
+    marka: "",
+    nrRej: "",
+    wlasciciel: "",
     terminWykonania:
       new Date().getDate() +
       "/" +
       (new Date().getMonth() + 1) +
       "/" +
       new Date().getFullYear(),
-    zadanie: '',
-    wystawiajacy: '',
-    opis: '',
-    uwagi: '',
-    typ: '',
-    podstawa: '',
-    waznoscKarty:   new Date().getDate() +
-    "/" +
-    (new Date().getMonth() + 1) +
-    "/" +
-    new Date().getFullYear(),
-    pobierajacy: '',
+    zadanie: "",
+    wystawiajacy: "",
+    opis: "",
+    uwagi: "",
+    typ: "",
+    podstawa: "",
+    waznoscKarty:
+      new Date().getDate() +
+      "/" +
+      (new Date().getMonth() + 1) +
+      "/" +
+      new Date().getFullYear(),
+    pobierajacy: "",
 
-    CzOperacja: '',
-    CzRgb: '',
-    CzDataWyk:   new Date().getDate() +
-    "/" +
-    (new Date().getMonth() + 1) +
-    "/" +
-    new Date().getFullYear(),
-    CzWykonawca: '',
-    CzWyszczegolnienie: '',
-    CzOznaczenie: '',
-    CzIlosc: '',
-    CzAsygnata: '',
-    CzUwagi: ''
-   
-    
-    
+    CzOperacja: "",
+    CzRbh: "",
+    CzDataWyk:
+      new Date().getDate() +
+      "/" +
+      (new Date().getMonth() + 1) +
+      "/" +
+      new Date().getFullYear(),
+    CzWykonawca: "",
+    CzWyszczegolnienie: "",
+    CzOznaczenie: "",
+    CzIlosc: "",
+    CzAsygnata: "",
+    CzUwagi: ""
   };
-
-componentWillUnmount() {
-  this.setState({
-    numerKuta: null,
-    id: this.props.karty.length + 1,
-    wykonawca: '',
-    marka: '',
-    nrRej: '',
-    wlasciciel: '',
-    terminWykonania:
-      new Date().getDate() +
-      "/" +
-      (new Date().getMonth() + 1) +
-      "/" +
-      new Date().getFullYear(),
-    zadanie: '',
-    wystawiajacy: '',
-    opis: '',
-    uwagi: '',
-    typ: '',
-    podstawa: '',
-    waznoscKarty: '',
-    pobierajacy: ''
-
-  })
-}
-
   componentDidMount() {
+    this.setState({
+      id: this.props.karty.length + 1
+    });
+    console.log("wlasnie wczytalem kompnent");
+  }
 
-      this.setState({
-        id: this.props.karty.length + 1,
-        numerKuta: this.state.id + " / wł / " + new Date().getFullYear()
-      })
+  componentWillUnmount() {
+    this.setState({
+      numerKuta: null,
+      id: this.props.karty.length + 1,
+      wykonawca: "",
+      marka: "",
+      nrRej: "",
+      wlasciciel: "",
+      terminWykonania:
+        new Date().getDate() +
+        "/" +
+        (new Date().getMonth() + 1) +
+        "/" +
+        new Date().getFullYear(),
+      zadanie: "",
+      wystawiajacy: "",
+      opis: "",
+      uwagi: "",
+      typ: "",
+      podstawa: "",
+      waznoscKarty: "",
+      pobierajacy: ""
+    });
   }
 
   onClickAction = () => {
     if (!this.state.dodajCzynnosc) {
       this.setState({ dodajCzynnosc: true });
-
     }
+  };
+
+  handleChange  = event => {
+    this.setState({ kartaZdana: event.target.checked });
   };
 
   addWykonawca = e => {
@@ -169,9 +203,9 @@ componentWillUnmount() {
       CzOperacja: e.target.value
     });
   };
-  addCzRgb = e => {
+  addCzRbh = e => {
     this.setState({
-      CzRgb: e.target.value
+      CzRbh: e.target.value
     });
   };
   addCzDataWyk = e => {
@@ -210,61 +244,56 @@ componentWillUnmount() {
     });
   };
   dispatchAndAndResetCzynnosc = () => {
+    let nowyItemCaly = this.state.CzCzynnosci.concat({
+      CzOperacja: this.state.CzOperacja,
+      CzRbh: this.state.CzRbh,
+      CzDataWyk: this.state.CzDataWyk,
+      CzWykonawca: this.state.CzWykonawca,
+      CzWyszczegolnienie: this.state.CzWyszczegolnienie,
+      CzOznaczenie: this.state.CzOznaczenie,
+      CzIlosc: this.state.CzIlosc,
+      CzAsygnata: this.state.CzAsygnata,
+      CzUwagi: this.state.CzUwagi
+    });
 
+    this.setState({
+      CzCzynnosci: [...nowyItemCaly]
+    });
 
-let nowyItemCaly = this.state.CzCzynnosci.concat({
-  CzOperacja: this.state.CzOperacja,
-  CzRgb:    this.state.CzRgb,
-  CzDataWyk:    this.state.CzDataWyk,
-  CzWykonawca:    this.state.CzWykonawca,
-  CzWyszczegolnienie:   this.state.CzWyszczegolnienie,
-  CzOznaczenie:   this.state.CzOznaczenie,
-  CzIlosc:   this.state.CzIlosc,
-  CzAsygnata:    this.state.CzAsygnata,
-  CzUwagi:   this.state.CzUwagi}
-)
+    //     this.props.onAddNewCzynnosc(
+    //     this.state.CzOperacja,
+    //     this.state.CzRbh,
+    //     this.state.CzDataWyk,
+    //     this.state.CzWykonawca,
+    //     this.state.CzWyszczegolnienie,
+    //     this.state.CzOznaczenie,
+    //     this.state.CzIlosc,
+    //     this.state.CzAsygnata,
+    //     this.state.CzUwagi,
+    //     this.state.dodajCzynnosc
+    //  )
 
- this.setState({
-   
-CzCzynnosci: [...nowyItemCaly]
-})
+    setTimeout(() => {
+      this.setState({
+        CzOperacja: "",
+        CzRbh: "",
+        CzDataWyk: new Date().getDate() +
+        "/" +
+        (new Date().getMonth() + 1) +
+        "/" +
+        new Date().getFullYear(),
+        CzWykonawca: "",
+        CzWyszczegolnienie: "",
+        CzOznaczenie: "",
+        CzIlosc: "",
+        CzAsygnata: "",
+        CzUwagi: "",
 
-console.log(this.state.CzCzynnosci)
- 
-  //     this.props.onAddNewCzynnosc(
-  //     this.state.CzOperacja,
-  //     this.state.CzRgb,
-  //     this.state.CzDataWyk,
-  //     this.state.CzWykonawca,
-  //     this.state.CzWyszczegolnienie,
-  //     this.state.CzOznaczenie,
-  //     this.state.CzIlosc,
-  //     this.state.CzAsygnata,
-  //     this.state.CzUwagi,
-  //     this.state.dodajCzynnosc
-  //  )
-      
-setTimeout(() => {
-  this.setState({
-    CzOperacja: '',
-    CzRgb: '',
-    CzDataWyk: '',
-    CzWykonawca: '',
-    CzWyszczegolnienie: '',
-    CzOznaczenie: '',
-    CzIlosc: '',
-    CzAsygnata: '',
-    CzUwagi: '',
-
-   dodajCzynnosc: false,
-    
-
-  })
-}, 500);
-
+        dodajCzynnosc: false
+      });
+    }, 100);
   };
   dispatchAndResetNowaKarta = () => {
-
     this.props.onAddNewKut(
       this.state.numerKuta,
       this.state.id,
@@ -283,18 +312,14 @@ setTimeout(() => {
       this.state.waznoscKarty,
       this.props.buttonIsClicked,
       this.props.buttonDisable,
-      this.state.CzCzynnosci
-    )
-
-
+      this.state.CzCzynnosci,
+      this.state.kartaZdana
+    );
   };
 
-
-
-
   render() {
-
-
+    console.log(this.state.kartaZdana)
+    const { classes } = this.props;
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1; //January is 0!
@@ -309,261 +334,305 @@ setTimeout(() => {
     }
     today = dd + "/" + mm + "/" + yyyy;
 
-
-
     return (
       <Wrapper>
-        <form>
-          <label>
-            Numer Karty Usług Technicznych
-            <input
-              type="text"
-              name="numerKuta"
-              placeholder="numer"
-              defaultValue={this.state.numerKuta}
-              autoComplete="on"
-            />
-          </label>
-          <label>
-            Wykonawca
-            <input
-              type="text"
-              name="wykonawca"
-              defaultValue={this.state.wykonawca}
-              autoComplete="on"
-              onChange={e => this.addWykonawca(e)}
+        <Form>
+        <TextField
+            defaultValue={this.state.numerKuta}
+            label="Numer KUT"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+          />
+        </Form>
+        <Form>
+         
 
-            />
-          </label>
-          <label>
-            Marka i typ sprzętu:
-            <input
-              type="text"
-              name="typ"
-              defaultValue={this.state.marka}
-              autoComplete="on"
-              onChange={e => this.addMarka(e)}
-            />
-          </label>
-          <label>
-            Typ UiSw:
-            <input
-              type="text"
-              name="rodzaj"
-              defaultValue={this.state.typ}
-              autoComplete="on"
-              onChange={e => this.addTyp(e)}
-            />
-          </label>
-          <label>
-            Podstawa wydania:
-            <input
-              type="text"
-              name="podstawa"
-              defaultValue={this.state.podstawa}
-              autoComplete="on"
-              onChange={e => this.addPodstawa(e)}
-            />
-          </label>
-          <label>
-            Nr. rejestracyjny sprzętu:
-            <input
-              type="text"
-              name="rejestracja"
-              defaultValue={this.state.nrRej}
-              autoComplete="on"
-              onChange={e => this.addNrRej(e)}
-            />
-          </label>
-          <label>
-            Sprzęt Należy do:
-            <input
-              type="text"
-              name="wlasciciel"
-              defaultValue={this.state.wlasciciel}
-              autoComplete="on"
-              onChange={e => this.addWlasciciel(e)}
-            />
-          </label>
-          <label>
-            Termin wykonania
-            <input
-              type="text"
-              name="terminwykonania"
-              defaultValue={this.state.terminWykonania}
-              autoComplete="on"
-              onChange={e => this.addTerminWYkonania(e)}
-            />
-          </label>
-          <label>
-            Data ważności karty
-            <input
-              type="text"
-              name="karta"
-              defaultValue={this.state.waznoscKarty}
-              autoComplete="on"
-              onChange={e => this.addWaznoscKarty(e)}
-            />
-          </label>
-          <label>
-            Zadanie:
-            <input
-              type="text"
-              name="zadanie"
-              defaultValue={this.state.zadanie}
-              autoComplete="on"
-              onChange={e => this.addZadanie(e)}
-            />
-          </label>
-          <label>
-            Kartę wystawił
-            <input
-              type="text"
-              name="wystawiajacy"
-              defaultValue={this.state.wystawiajacy}
-              autoComplete="on"
-              onChange={e => this.addWystawiajacy(e)}
-            />
-          </label>
-          <br />
-          <br />
-          <br />
-          <label>
-            W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
-            wykonania następujących prac:
-            <textarea
-              type="text"
-              name="opis"
-              defaultValue={this.state.opis}
-              autoComplete="on"
-              onChange={e => this.addOpis(e)}
-            />
-          </label>
-          <label>
-            UWAGI PRZYJMUJĄCEGO
-            <textarea
-              type="text"
-              name="uwagi"
-              defaultValue={this.state.uwagi}
-              autoComplete="on"
-              onChange={e => this.addUwagi(e)}
-            />
-          </label>
-          <label>
-            Karte Pobrał
-            <input
-              type="text"
-              name="pobierajacy"
-              defaultValue={this.state.pobierajacy}
-              autoComplete="on"
-              onChange={e => this.addPobierajacy(e)}
-            />
-          </label>
-          <br />
-          <br />
-          <br />
-          <h4>Rozliczenie wykonania zadania</h4>
-        </form>
+          <TextField
+            label="Wykonawca"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="wykonawca"
+            defaultValue={this.state.wykonawca}
+            autoComplete="on"
+            onChange={e => this.addWykonawca(e)}
+          />
 
-        <Button val={"Dodaj Czynność"} clicked={this.onClickAction} />
+          <TextField
+            label="Marka i typ sprzętu"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="typ"
+            defaultValue={this.state.marka}
+            autoComplete="on"
+            onChange={e => this.addMarka(e)}
+          />
+
+          <TextField
+            label="Typ UiSw:"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="rodzaj"
+            defaultValue={this.state.typ}
+            autoComplete="on"
+            onChange={e => this.addTyp(e)}
+          />
+          <TextField
+            label="Podstawa wydania"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="podstawa"
+            defaultValue={this.state.podstawa}
+            autoComplete="on"
+            onChange={e => this.addPodstawa(e)}
+          />
+ </Form>
+ <Form>
+          
+
+          <TextField
+            label="Nr. rejestracyjny"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="rejestracja"
+            defaultValue={this.state.nrRej}
+            autoComplete="on"
+            onChange={e => this.addNrRej(e)}
+          />
+
+          <TextField
+            label="  Sprzęt Należy do:"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="wlasciciel"
+            defaultValue={this.state.wlasciciel}
+            autoComplete="on"
+            onChange={e => this.addWlasciciel(e)}
+          />
+
+          <TextField
+            label=" Termin wykonania"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="terminwykonania"
+            defaultValue={this.state.terminWykonania}
+            autoComplete="on"
+            onChange={e => this.addTerminWYkonania(e)}
+          />
+           <TextField
+            label=" Data ważności karty"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="karta"
+            defaultValue={this.state.waznoscKarty}
+            autoComplete="on"
+            onChange={e => this.addWaznoscKarty(e)}
+          />
+</Form>
+<Form>
+         
+
+          <TextField
+            label=" Zadanie:"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="zadanie"
+            defaultValue={this.state.zadanie}
+            autoComplete="on"
+            onChange={e => this.addZadanie(e)}
+          />
+
+          <TextField
+            label="  Kartę wystawił"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="wystawiajacy"
+            defaultValue={this.state.wystawiajacy}
+            autoComplete="on"
+            onChange={e => this.addWystawiajacy(e)}
+          />
+        </Form>
+
+        <TextAr>
+          <TextField
+            style={{ width: 750 }}
+            label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
+              wykonania następujących prac:"
+            type="text"
+            name="opis"
+            multiline={true}
+            defaultValue={this.state.opis}
+            autoComplete="on"
+            onChange={e => this.addOpis(e)}
+          />
+        </TextAr>
+
+        <TextAr>
+          <TextField
+            style={{ width: 750 }}
+            label="  Uwagi przyjmującego"
+            type="text"
+            margin="normal"
+            name="uwagi"
+            defaultValue={this.state.uwagi}
+            autoComplete="on"
+            onChange={e => this.addUwagi(e)}
+          />
+        </TextAr>
+
+        <TextField
+          label=" Karte Pobrał"
+          className={classes.textField}
+          margin="normal"
+          type="text"
+          name="pobierajacy"
+          defaultValue={this.state.pobierajacy}
+          autoComplete="on"
+          onChange={e => this.addPobierajacy(e)}
+        />
+
+        <br />
+        <br />
+        <br />
+        <Typography variant="display1" gutterBottom style={{marginTop: "2px"}}>
+        Rozliczenie wykonania zadania
+          </ Typography>
+      
+
+        {this.state.CzCzynnosci.length > 0 ? (
+          <TabelaCzynnosci zawartosCzynnosci={this.state.CzCzynnosci} />
+        ) : null}
+        <Button
+          variant="contained"
+          className={classes.button}
+          onClick={this.onClickAction}
+        >
+          Dodaj Czynność
+        </Button>
         {this.state.dodajCzynnosc ? (
-          <div>
-            <label>
-              Operacja, czynność
-              <input
+          <Czynnosci>
+            <Container>
+              <TextField
+                label=" Operacja, czynność"
+                className={classes.textField}
+                margin="normal"
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzOperacja}
                 onChange={e => this.addCzOperacja(e)}
-                
               />
-            </label>
-            <label>
-              Zużyto Roboczo Godzin
-              <input
+
+              <TextField
+                label=" Zużyto Roboczo Godzin"
+                className={classes.textField}
+                margin="normal"
                 type="number"
                 name="karta"
-                defaultValue={this.state.CzRgb}
-                onChange={e => this.addCzRgb(e)}
+                defaultValue={this.state.CzRbh}
+                onChange={e => this.addCzRbh(e)}
               />
-            </label>
-            <label>
-              Data Wykonania
-              <input
+
+              <TextField
+                label="Data Wykonania"
+                className={classes.textField}
+                margin="normal"
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzDataWyk}
                 onChange={e => this.addCzDataWyk(e)}
               />
-            </label>
-            <label>
-              Wykonawca Nazwisko
-              <input
+
+              <TextField
+                label=" Wykonawca Nazwisko"
+                className={classes.textField}
+                margin="normal"
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzWykonawca}
                 onChange={e => this.addCzWykonawca(e)}
               />
-            </label>
-            <h5>Zużycie części i materiałów</h5>
-            <label>
-              Wyszczególnienie
-              <input
+            </Container>
+            <Typography variant="display1" gutterBottom style={{marginTop: "22px"}}>
+            Zużycie części i materiałów
+          </ Typography>
+    
+            <Container>
+              <TextField
+                label="Wyszczególnienie"
+                className={classes.textField}
+                margin="normal"
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzWyszczegolnienie}
                 onChange={e => this.addCzWyszczegolnienie(e)}
               />
-            </label>
-            <label>
-              Oznaczenie Katalogowe
-              <input
+
+              <TextField
+                label="    Oznaczenie Katalogowe"
+                className={classes.textField}
+                margin="normal"
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzOznaczenie}
                 onChange={e => this.addCzOznaczenie(e)}
               />
-            </label>
-            <label>
-              Ilość
-              <input
+
+              <TextField
+                label="Ilość"
+                className={classes.textField}
+                margin="normal"
                 type="number"
                 name="karta"
                 defaultValue={this.state.CzIlosc}
                 onChange={e => this.addCzIlosc(e)}
               />
-            </label>
-            <label>
-              Nr. Asygnaty
-              <input
+
+              <TextField
+                label=" Nr. Asygnaty"
+                className={classes.textField}
+                margin="normal"
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzAsygnata}
                 onChange={e => this.addCzAsygnata(e)}
               />
-            </label>
-            <label>
-              Uwagi
-              <input
+
+              <TextField
+                label=" Uwagi"
+                className={classes.textField}
+                margin="normal"
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzUwagi}
                 onChange={e => this.addCzUwagi(e)}
               />
-            </label>
+            </Container>
             <Button
-              val={"Zapisz czynność"}
-              clicked={() => this.dispatchAndAndResetCzynnosc() }
+              variant="fab"
+              color="primary"
+              aria-label="Add"
+              className={classes.button}
+            style={{marginTop: '30px'}}
+              
+            onClick={() => this.dispatchAndAndResetCzynnosc()}
+            >
+              <AddIcon />
+            </Button>
 
-            />
-          </div>
+          </Czynnosci>
         ) : null}
 
-
-
         {
-
-
           // (this.state.wykonawca.length < 2 ||
           // this.state.marka.length < 2 ||
           // this.state.nrRej.length < 2 ||
@@ -574,38 +643,45 @@ setTimeout(() => {
           // this.state.podstawa.length < 2 ||
           // this.state.waznoscKarty.length < 2 ||
           // this.state.pobierajacy.length < 2) ? <h2>Uzupełnij Kartę aby móc ją zapisać</h2>   :
-        
           // <Button
           //         val={"Zapisz Kartę"} typ={'submit'}
           //         clicked={() =>
           //        this.dispatchAndResetNowaKarta() }
           //       />
-        
-        
-        }  
+        }
 
-
-   <Button
-val={"Zapisz Kartę"} typ={'submit'}
-clicked={() =>
-this.dispatchAndResetNowaKarta() }
-
-/>
-   
+ <FormControlLabel
+          style={{ margin: "0", marginTop: '50px', marginBottom: '20px' }}
+          control={
+            <Checkbox
+            checked={this.state.kartaZdana}
+          onChange={e => this.handleChange(e)}
+          value="kartaZdana"
+              color="primary"
+            />
+          }
+          label="Karta Została Zdana"
+        />
+         <Button variant="contained" size="medium" className={classes.button} 
+     style={{ margin: "0", marginTop: '50px', marginBottom: '20px' }}
+ onClick={() => this.dispatchAndResetNowaKarta()}>
+        <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+        Zapisz Kartę
+      </Button>
       </Wrapper>
     );
   }
 }
 
-
 const Wrapper = styled.div`
   margin-top: 40px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 95%;
   min-height: 100%;
-  outline: 1px red solid;
+
   label {
     padding: 5px;
     display: flex;
@@ -616,16 +692,36 @@ const Wrapper = styled.div`
   }
 `;
 
+const Czynnosci = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+`;
+
+const Form = styled.form`
+margin-bottom: 50px;`;
+const TextAr = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const Container = styled.div`
+  display: flex;
+  padding: 10px 0;
+`;
+
 const mapStateToProps = state => {
   return {
     karty: state.karty,
     buttonIsClicked: state.buttonIsClicked,
-buttonDisable: state.buttonDisable
+    buttonDisable: state.buttonDisable
   };
 };
-
-
-
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -647,7 +743,8 @@ const mapDispatchToProps = dispatch => {
       waznoscKarty,
       buttonIsClicked,
       buttonDisable,
-      CzCzynnosci
+      CzCzynnosci,
+      kartaZdana
     ) =>
       dispatch(
         actions.addNewKut(
@@ -668,7 +765,8 @@ const mapDispatchToProps = dispatch => {
           waznoscKarty,
           buttonIsClicked,
           buttonDisable,
-          CzCzynnosci
+          CzCzynnosci,
+          kartaZdana
         )
       ),
     onAddNewCzynnosc: (
@@ -699,7 +797,11 @@ const mapDispatchToProps = dispatch => {
       )
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(DodajKuta);

@@ -2,9 +2,13 @@ import React from 'react';
 import './table.css'
 
 
+
 const TabelaRow = (props) => {
+
    return (
-        <div className="table_row">
+  
+        <div className="table_row"  onClick={props.clicked}>
+
         <div className="table_small">
           <div className="table_cell">Numer Karty</div>
           <div className="table_cell">{props.numerKuta}</div>
@@ -33,8 +37,13 @@ const TabelaRow = (props) => {
           <div className="table_cell">Pobierający</div>
           <div className="table_cell">{props.pobierajacy}</div>
         </div>
+        <div className="table_small">
+          <div className="table_cell">Zdanie Karty</div>
+          <div className="table_cell">{props.kartaZdana ? 'TAK' : 'NIE'}</div>
+        </div>
+
       </div>
      
     )
 }
-export default TabelaRow; 
+export default  TabelaRow; 
