@@ -6,10 +6,12 @@
   border-collapse: separate;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .table_row {
   display: table-row;
+  cursor: pointer;
 }
 
 .theader {

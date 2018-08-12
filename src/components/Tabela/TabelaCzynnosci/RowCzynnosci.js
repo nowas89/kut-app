@@ -4,7 +4,7 @@ import "../table.css"
 
 const RowCzynnosci = (props) => {
    return (
-        <div className="table_row">
+        <div className="table_row" key={props.CzOperacjaId}>
         <div className="table_small">
           <div className="table_cell">Operacja, Czynność</div>
           <div className="table_cell">{props.CzOperacja}</div>

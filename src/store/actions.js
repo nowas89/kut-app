@@ -61,14 +61,14 @@ export const buttonKlicked = (btnIsClicked, btnIsDisabled) => {
 export const openKut = (karta) => {
     return {
         type: actionTypes.OPEN_KUT,
-        
         karta: karta
     }
 }
-export const zamykanieKarty = (zamknij) => {
+export const zamykanieKarty = (zamknij, taKartaJestOtwarta) => {
     return {
         type: actionTypes.ZAMYKANIE_KARTY,
         
-        zamknij: zamknij
+        zamknij: zamknij,
+        taKartaJestOtwarta: taKartaJestOtwarta
     }
 }

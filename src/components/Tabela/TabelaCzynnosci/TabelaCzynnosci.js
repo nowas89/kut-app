@@ -46,11 +46,13 @@ class TabelaCzynnosci extends Component {
 
 
 
-
+{console.log()}
 {
  this.props.zawartosCzynnosci.map(karta => {
+  console.log(karta.CzOperacjaId)
      return (
-    <RowCzynnosci key={karta.CzDataWyk}
+     
+    <RowCzynnosci key={karta.CzOperacjaId}
     CzOperacja={karta.CzOperacja}
     CzRbh={karta.CzRbh}
     CzDataWyk={karta.CzDataWyk}
@@ -60,6 +62,7 @@ class TabelaCzynnosci extends Component {
       CzIlosc={karta.CzIlosc}
       CzAsygnata={karta.CzAsygnata}
       CzUwagi={karta.CzUwagi}
+      CzOperacjaId={karta.CzOperacjaId}
     />)
    })
 

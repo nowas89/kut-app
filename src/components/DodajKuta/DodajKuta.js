@@ -86,7 +86,8 @@ class DodajKuta extends Component {
     CzOznaczenie: "",
     CzIlosc: "",
     CzAsygnata: "",
-    CzUwagi: ""
+    CzUwagi: "",
+    CzOperacjaId: 0
   };
   componentDidMount() {
     this.setState({
@@ -97,7 +98,7 @@ class DodajKuta extends Component {
 
   componentWillUnmount() {
     this.setState({
-      numerKuta: null,
+      numerKuta: 'null',
       id: this.props.karty.length + 1,
       wykonawca: "",
       marka: "",
@@ -245,15 +246,46 @@ class DodajKuta extends Component {
   };
   dispatchAndAndResetCzynnosc = () => {
     let nowyItemCaly = this.state.CzCzynnosci.concat({
-      CzOperacja: this.state.CzOperacja,
-      CzRbh: this.state.CzRbh,
-      CzDataWyk: this.state.CzDataWyk,
-      CzWykonawca: this.state.CzWykonawca,
-      CzWyszczegolnienie: this.state.CzWyszczegolnienie,
-      CzOznaczenie: this.state.CzOznaczenie,
-      CzIlosc: this.state.CzIlosc,
-      CzAsygnata: this.state.CzAsygnata,
-      CzUwagi: this.state.CzUwagi
+     CzOperacja:
+        this.state.CzOperacja === ""
+          ? "----------"
+          : this.state.CzOperacja,
+      CzRbh:
+        this.state.CzRbh === "" ? 
+        "----------"
+         : this.state.CzRbh,
+      CzDataWyk:
+        this.state.CzDataWyk === ""
+          ? "----------"
+          : this.state.CzDataWyk,
+      CzWykonawca:
+        this.state.CzWykonawca === ""
+          ? "----------"
+          : this.state.CzWykonawca,
+      CzWyszczegolnienie:
+        this.state.CzWyszczegolnienie === ""
+          ? "----------"
+          : this.state.CzWyszczegolnienie,
+      CzOznaczenie:
+        this.state.CzOznaczenie === ""
+          ? "----------"
+          : this.state.CzOznaczenie,
+      CzIlosc:
+        this.state.CzIlosc === ""
+          ? "----------"
+          : this.state.CzIlosc,
+      CzAsygnata:
+        this.state.CzAsygnata === ""
+          ? "----------"
+          : this.state.CzAsygnata,
+      CzUwagi:
+        this.state.CzUwagi === ""
+          ? "----------"
+          : this.state.CzUwagi,
+      CzOperacjaId:
+        this.state.CzOperacjaId === ""
+          ? "----------"
+          : this.state.CzOperacjaId
     });
 
     this.setState({
@@ -288,7 +320,7 @@ class DodajKuta extends Component {
         CzIlosc: "",
         CzAsygnata: "",
         CzUwagi: "",
-
+        CzOperacjaId: this.state.CzCzynnosci.length + 1,
         dodajCzynnosc: false
       });
     }, 100);
@@ -318,7 +350,7 @@ class DodajKuta extends Component {
   };
 
   render() {
-    console.log(this.state.kartaZdana)
+
     const { classes } = this.props;
     let today = new Date();
     let dd = today.getDate();

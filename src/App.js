@@ -15,11 +15,11 @@ class App extends Component {
       <Apps>
         <Menu />
         {this.props.kartaJestOtwarta ? null : <Karty />}
-
-     
         {this.props.kartaJestOtwarta ? (
           <OtwartaKarta
+          taKartaJestOtwarta={this.props.otwartaKarta}
             key={this.props.otwartaKarta.id}
+            id={this.props.otwartaKarta.id}
             numerKuta={this.props.otwartaKarta.numerKuta}
             wykonawca={this.props.otwartaKarta.wykonawca}
             marka={this.props.otwartaKarta.marka}
@@ -36,11 +36,10 @@ class App extends Component {
             waznoscKarty={this.props.otwartaKarta.waznoscKarty}
             kartaJestOtwarta={this.props.kartaJestOtwarta}
             dodajCzynnosc={this.props.dodajCzynnosc}
-            CzCzynnosci={this.props.otwartaKarta.CzCzynnosci}
+            CzCzynnosci={this.props.otwartaKarta.CzCzynnosci}         
+            kartaZdana={this.props.otwartaKarta.kartaZdana}         
           />
-        ) : (
-          console.log("nie ma nic do otwarcia")
-        )}
+        ) : console.log('asdasd')}
       </Apps>
     );
   }

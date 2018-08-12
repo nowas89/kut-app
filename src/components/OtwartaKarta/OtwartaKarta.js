@@ -9,16 +9,15 @@ import * as actions from "../../store/actions";
 
 // import { withStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
-import classNames from 'classnames';
+import classNames from "classnames";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import SaveIcon from '@material-ui/icons/Save';
-import TabelaCzynnosci from '../Tabela/TabelaCzynnosci/TabelaCzynnosci'
-
+import SaveIcon from "@material-ui/icons/Save";
+import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 
 const styles = theme => ({
   container: {
@@ -54,7 +53,148 @@ const styles = theme => ({
 
 class OtwartaKarta extends Component {
   state = {
-    dodajCzynosc: false
+    dodajCzynosc: false,
+
+    karta: {
+      kartaZdana: null,
+      numerKuta: "",
+      id: "",
+      dodajCzynnosc: "",
+      CzCzynnosci: [],
+      wykonawca: "",
+      marka: "",
+      nrRej: "",
+      wlasciciel: "",
+      terminWykonania: "",
+      zadanie: "",
+      wystawiajacy: "",
+      opis: "",
+      uwagi: "",
+      typ: "",
+      podstawa: "",
+      waznoscKarty: "",
+      pobierajacy: "",
+
+      CzOperacja: "",
+      CzRbh: "",
+      CzDataWyk:
+        new Date().getDate() +
+        "/" +
+        (new Date().getMonth() + 1) +
+        "/" +
+        new Date().getFullYear(),
+      CzWykonawca: "",
+      CzWyszczegolnienie: "",
+      CzOznaczenie: "",
+      CzIlosc: "",
+      CzAsygnata: "",
+      CzUwagi: "",
+      CzOperacjaId: 0
+    }
+  };
+
+  componentWillMount() {
+    this.setState({
+      dodajCzynnosc: this.props.dodajCzynnosc,
+      karta: {
+        numerKuta: this.props.numerKuta,
+        id: this.props.id,
+        kartaZdana: this.props.kartaZdana,
+        CzCzynnosci: this.props.CzCzynnosci,
+        wykonawca: this.props.wykonawca,
+        marka: this.props.marka,
+        nrRej: this.props.nrRej,
+        wlasciciel: this.props.wlasciciel,
+        terminWykonania: this.props.terminWykonania,
+        zadanie: this.props.zadanie,
+        wystawiajacy: this.props.wystawiajacy,
+        opis: this.props.opis,
+        uwagi: this.props.uwagi,
+        typ: this.props.typ,
+        podstawa: this.props.podstawa,
+        waznoscKarty: this.props.waznoscKarty,
+        pobierajacy: this.props.pobierajacy,
+        CzOperacjaId: this.state.karta.CzCzynnosci.length + 1
+      }
+    });
+  }
+
+  addNewCzynnoscAndReset = () => {
+    let nowyItemCaly = this.state.karta.CzCzynnosci.concat({
+      CzOperacja:
+        this.state.karta.CzOperacja === ""
+          ? "----------"
+          : this.state.karta.CzOperacja,
+      CzRbh:
+        this.state.karta.CzRbh === "" ? 
+        "----------"
+         : this.state.karta.CzRbh,
+      CzDataWyk:
+        this.state.karta.CzDataWyk === ""
+          ? "----------"
+          : this.state.karta.CzDataWyk,
+      CzWykonawca:
+        this.state.karta.CzWykonawca === ""
+          ? "----------"
+          : this.state.karta.CzWykonawca,
+      CzWyszczegolnienie:
+        this.state.karta.CzWyszczegolnienie === ""
+          ? "----------"
+          : this.state.karta.CzWyszczegolnienie,
+      CzOznaczenie:
+        this.state.karta.CzOznaczenie === ""
+          ? "----------"
+          : this.state.karta.CzOznaczenie,
+      CzIlosc:
+        this.state.karta.CzIlosc === ""
+          ? "----------"
+          : this.state.karta.CzIlosc,
+      CzAsygnata:
+        this.state.karta.CzAsygnata === ""
+          ? "----------"
+          : this.state.karta.CzAsygnata,
+      CzUwagi:
+        this.state.karta.CzUwagi === ""
+          ? "----------"
+          : this.state.karta.CzUwagi,
+      CzOperacjaId:
+        this.state.karta.CzOperacjaId === ""
+          ? "----------"
+          : this.state.karta.CzOperacjaId
+    });
+
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzCzynnosci: [...nowyItemCaly]
+      },
+      dodajCzynnosc: false
+    });
+
+    setTimeout(() => {
+      this.setState({
+        karta: {
+          ...this.state.karta,
+          CzOperacja: "",
+          CzRbh: "",
+          CzDataWyk:
+            new Date().getDate() +
+            "/" +
+            (new Date().getMonth() + 1) +
+            "/" +
+            new Date().getFullYear(),
+          CzWykonawca: "",
+          CzWyszczegolnienie: "",
+          CzOznaczenie: "",
+          CzIlosc: "",
+          CzAsygnata: "",
+          CzUwagi: "",
+          CzOperacjaId: this.state.karta.CzCzynnosci.length + 1
+        },
+
+        dodajCzynnosc: false
+      });
+    }, 100);
   };
 
   onClickAction = () => {
@@ -62,25 +202,213 @@ class OtwartaKarta extends Component {
       this.setState({ dodajCzynnosc: true });
     }
   };
+
+  handleChange = event => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        kartaZdana: event.target.checked
+      }
+    });
+  };
+
+  addWykonawca = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        wykonawca: e.target.value
+      }
+    });
+  };
+  addMarka = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        marka: e.target.value
+      }
+    });
+  };
+  addNrRej = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        nrRej: e.target.value
+      }
+    });
+  };
+  addTerminWYkonania = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        terminWykonania: e.target.value
+      }
+    });
+  };
+  addZadanie = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        zadanie: e.target.value
+      }
+    });
+  };
+  addWystawiajacy = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        wystawiajacy: e.target.value
+      }
+    });
+  };
+  addOpis = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        opis: e.target.value
+      }
+    });
+  };
+  addUwagi = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        uwagi: e.target.value
+      }
+    });
+  };
+  addWlasciciel = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        wlasciciel: e.target.value
+      }
+    });
+  };
+  addTyp = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        typ: e.target.value
+      }
+    });
+  };
+  addPodstawa = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        podstawa: e.target.value
+      }
+    });
+  };
+  addWaznoscKarty = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        waznoscKarty: e.target.value
+      }
+    });
+  };
+  addPobierajacy = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        pobierajacy: e.target.value
+      }
+    });
+  };
+
+  // dodaj czynnosc
+
+  addCzOperacja = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzOperacja: e.target.value
+      }
+    });
+  };
+  addCzRbh = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzRbh: e.target.value
+      }
+    });
+  };
+  addCzDataWyk = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzDataWyk: e.target.value
+      }
+    });
+  };
+  addCzWykonawca = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzWykonawca: e.target.value
+      }
+    });
+  };
+  addCzWyszczegolnienie = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzWyszczegolnienie: e.target.value
+      }
+    });
+  };
+  addCzOznaczenie = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzOznaczenie: e.target.value
+      }
+    });
+  };
+  addCzIlosc = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzIlosc: e.target.value
+      }
+    });
+  };
+  addCzAsygnata = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzAsygnata: e.target.value
+      }
+    });
+  };
+  addCzUwagi = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzUwagi: e.target.value
+      }
+    });
+  };
   render() {
     const { classes } = this.props;
-
+    console.log(this.state.karta.CzCzynnosci.length);
     return (
       <Wrapper>
         <Form>
           <Typography variant="display1" gutterBottom>
-            Edytujesz Kartę Nr. {this.props.numerKuta}
+            Edytujesz Kartę Nr. {this.state.karta.numerKuta}
           </Typography>
         </Form>
         <Form>
           <TextField
-          
             label="Wykonawca"
             className={classes.textField}
             margin="normal"
             type="text"
             name="wykonawca"
-            defaultValue={this.props.wykonawca}
+            defaultValue={this.state.karta.wykonawca}
             autoComplete="on"
             onChange={e => this.addWykonawca(e)}
           />
@@ -91,7 +419,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="typ"
-            defaultValue={this.props.marka}
+            defaultValue={this.state.karta.marka}
             autoComplete="on"
             onChange={e => this.addMarka(e)}
           />
@@ -102,7 +430,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="rodzaj"
-            defaultValue={this.props.typ}
+            defaultValue={this.state.karta.typ}
             autoComplete="on"
             onChange={e => this.addTyp(e)}
           />
@@ -112,7 +440,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="podstawa"
-            defaultValue={this.props.podstawa}
+            defaultValue={this.state.karta.podstawa}
             autoComplete="on"
             onChange={e => this.addPodstawa(e)}
           />
@@ -124,7 +452,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="rejestracja"
-            defaultValue={this.props.nrRej}
+            defaultValue={this.state.karta.nrRej}
             autoComplete="on"
             onChange={e => this.addNrRej(e)}
           />
@@ -135,7 +463,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="wlasciciel"
-            defaultValue={this.props.wlasciciel}
+            defaultValue={this.state.karta.wlasciciel}
             autoComplete="on"
             onChange={e => this.addWlasciciel(e)}
           />
@@ -146,7 +474,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="terminwykonania"
-            defaultValue={this.props.terminWykonania}
+            defaultValue={this.state.karta.terminWykonania}
             autoComplete="on"
             onChange={e => this.addTerminWYkonania(e)}
           />
@@ -156,7 +484,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="karta"
-            defaultValue={this.props.waznoscKarty}
+            defaultValue={this.state.karta.waznoscKarty}
             autoComplete="on"
             onChange={e => this.addWaznoscKarty(e)}
           />
@@ -168,7 +496,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="zadanie"
-            defaultValue={this.props.zadanie}
+            defaultValue={this.state.karta.zadanie}
             autoComplete="on"
             onChange={e => this.addZadanie(e)}
           />
@@ -179,7 +507,7 @@ class OtwartaKarta extends Component {
             margin="normal"
             type="text"
             name="wystawiajacy"
-            defaultValue={this.props.wystawiajacy}
+            defaultValue={this.state.karta.wystawiajacy}
             autoComplete="on"
             onChange={e => this.addWystawiajacy(e)}
           />
@@ -193,7 +521,7 @@ class OtwartaKarta extends Component {
             type="text"
             name="opis"
             multiline={true}
-            defaultValue={this.props.opis}
+            defaultValue={this.state.karta.opis}
             autoComplete="on"
             onChange={e => this.addOpis(e)}
           />
@@ -206,7 +534,7 @@ class OtwartaKarta extends Component {
             type="text"
             margin="normal"
             name="uwagi"
-            defaultValue={this.props.uwagi}
+            defaultValue={this.state.karta.uwagi}
             autoComplete="on"
             onChange={e => this.addUwagi(e)}
           />
@@ -214,12 +542,11 @@ class OtwartaKarta extends Component {
 
         <TextField
           label=" Karte Pobrał"
-          
           className={classes.textField}
           margin="normal"
           type="text"
           name="pobierajacy"
-          defaultValue={this.props.pobierajacy}
+          defaultValue={this.state.karta.pobierajacy}
           autoComplete="on"
           onChange={e => this.addPobierajacy(e)}
         />
@@ -231,9 +558,10 @@ class OtwartaKarta extends Component {
         <Typography variant="display1" gutterBottom>
           Rozliczenie wykonania zadania
         </Typography>
-{this.props.CzCzynnosci.length > 0 ? (
-    <TabelaCzynnosci zawartosCzynnosci={this.props.CzCzynnosci} />
-  ) : null}
+        {this.state.karta.CzCzynnosci.length > 0 ? (
+          <TabelaCzynnosci zawartosCzynnosci={this.state.karta.CzCzynnosci} />
+        ) : null}
+
         <Button
           variant="contained"
           className={classes.button2}
@@ -250,7 +578,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="text"
                 name="karta"
-                defaultValue={this.props.CzOperacja}
+                defaultValue={this.state.karta.CzOperacja}
                 onChange={e => this.addCzOperacja(e)}
               />
 
@@ -260,7 +588,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="number"
                 name="karta"
-                defaultValue={this.props.CzRbh}
+                defaultValue={this.state.karta.CzRbh}
                 onChange={e => this.addCzRbh(e)}
               />
 
@@ -270,7 +598,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="text"
                 name="karta"
-                defaultValue={this.props.CzDataWyk}
+                defaultValue={this.state.karta.CzDataWyk}
                 onChange={e => this.addCzDataWyk(e)}
               />
 
@@ -280,7 +608,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="text"
                 name="karta"
-                defaultValue={this.props.CzWykonawca}
+                defaultValue={this.state.karta.CzWykonawca}
                 onChange={e => this.addCzWykonawca(e)}
               />
             </Container>
@@ -292,7 +620,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="text"
                 name="karta"
-                defaultValue={this.props.CzWyszczegolnienie}
+                defaultValue={this.state.karta.CzWyszczegolnienie}
                 onChange={e => this.addCzWyszczegolnienie(e)}
               />
 
@@ -302,7 +630,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="text"
                 name="karta"
-                defaultValue={this.props.CzOznaczenie}
+                defaultValue={this.state.karta.CzOznaczenie}
                 onChange={e => this.addCzOznaczenie(e)}
               />
 
@@ -312,7 +640,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="number"
                 name="karta"
-                defaultValue={this.props.CzIlosc}
+                defaultValue={this.state.karta.CzIlosc}
                 onChange={e => this.addCzIlosc(e)}
               />
 
@@ -322,7 +650,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="text"
                 name="karta"
-                defaultValue={this.props.CzAsygnata}
+                defaultValue={this.state.karta.CzAsygnata}
                 onChange={e => this.addCzAsygnata(e)}
               />
 
@@ -332,7 +660,7 @@ class OtwartaKarta extends Component {
                 margin="normal"
                 type="text"
                 name="karta"
-                defaultValue={this.props.CzUwagi}
+                defaultValue={this.state.karta.CzUwagi}
                 onChange={e => this.addCzUwagi(e)}
               />
             </Container>
@@ -342,41 +670,43 @@ class OtwartaKarta extends Component {
               color="primary"
               aria-label="Add"
               className={classes.button}
-            style={{marginTop: '30px'}}
-              
-              onClick={console.log("dodaj czynnosc")}
+              style={{ marginTop: "30px" }}
+              onClick={() => this.addNewCzynnoscAndReset()}
             >
               <AddIcon />
             </Button>
           </Czynnosci>
         ) : null}
         <FormControlLabel
-          style={{ margin: "0", marginTop: '50px', marginBottom: '20px' }}
+          style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
           control={
             <Checkbox
-              //   checked={this.state.checkedB}
-              //   onChange={this.handleChange('checkedB')}
-              //   value="checkedB"
+              checked={this.state.karta.kartaZdana}
+              onChange={e => this.handleChange(e)}
+              value="kartaZdana"
               color="primary"
             />
           }
           label="Karta Została Zdana"
         />
 
-     
-
- <Button variant="contained" size="medium" className={classes.button} 
-     style={{ margin: "0", marginTop: '50px', marginBottom: '20px' }}
- onClick={() =>
-            this.props.onZamykanieKarty(this.props.kartaJestOtwarta)
-      
-
-            
-          }>
-        <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-        Zapisz Kartę
-      </Button>
-
+        <Button
+          variant="contained"
+          size="medium"
+          className={classes.button}
+          style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
+          onClick={() =>
+            this.props.onZamykanieKarty(
+              this.props.kartaJestOtwarta,
+              this.state.karta
+            )
+          }
+        >
+          <SaveIcon
+            className={classNames(classes.leftIcon, classes.iconSmall)}
+          />
+          Zapisz Kartę
+        </Button>
       </Wrapper>
     );
   }
@@ -435,7 +765,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onZamykanieKarty: a => dispatch(actions.zamykanieKarty(a))
+    onZamykanieKarty: (a, b) => dispatch(actions.zamykanieKarty(a, b))
   };
 };
 
