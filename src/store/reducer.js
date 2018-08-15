@@ -6,7 +6,8 @@ const initialState = {
   buttonDisable: false,
   otwartakarta: {},
   kartaJestOtwarta: false,
-  wersja: "0.0.1"
+  wersja: "0.1.2",
+  akronim: ''
 };
 
 export const addNewKut = (state, action) => {
@@ -143,6 +144,33 @@ export const zamykanieKarty = (state, action) => {
   };
 };
 
+export const usuwanieKarty = (state, action) => {
+
+console.log(action.karta.numerKuta)
+let arrayAfterDelete = state.karty.filter(item => item.numerKuta !== action.karta.numerKuta)
+
+console.log(arrayAfterDelete)
+
+return{
+  ...state,
+  karty: arrayAfterDelete,
+  kartaJestOtwarta: false
+  };
+};
+
+
+export const saveAcronim = (state, action) => {
+
+console.log(action.akronim)
+
+
+return{
+  ...state,
+  akronim: action.akronim,
+  kartaJestOtwarta: false
+
+};
+}
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_KUT:
@@ -155,6 +183,10 @@ const reducer = (state = initialState, action) => {
       return openKut(state, action);
     case actionTypes.ZAMYKANIE_KARTY:
       return zamykanieKarty(state, action);
+    case actionTypes.USUWANIE_KARTY:
+      return usuwanieKarty(state, action);
+    case actionTypes.ZAPISZ_AKRONIM:
+      return saveAcronim(state, action);
     default:
       return state;
   }

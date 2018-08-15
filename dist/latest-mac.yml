@@ -1,10 +1,10 @@
 version: 0.1.0
 files:
   - url: menager-kart-uslug-technicznych-0.1.0-mac.zip
-    sha512: 3ga2kQt2cGen+xqMPBt7nAf2MzeQt52VacYpMCWOMgcBp+F3f1ecSuhnwrb/jHu4MHYdPPauqRBATZpI7mpfsw==
+    sha512: tN9xmFNmKXrfdih/LHWtT4DltzVbnQ3sqRAT6en6nRNMxUoSpOHAHfNy9rD3ODdsF8uF7XkKsLaYxXc0dpjEOA==
   - url: menager-kart-uslug-technicznych-0.1.0.dmg
-    sha512: ODfYyJet7vwcTa0qVIOeMQ8k8oybuVi0FcY4zjiEw3YwMCjpDjglKmT18aA2wMCYi3gi2EPmhb94q+dFi5Bwrg==
-    size: 63979065
+    sha512: 1tbK9/0OxQMhztfS/bpsDSvagtmiBCcxFSijqb7aSXLi9pmHxxIOpxsGDKyMR1FSYwFVMdUPa4CagbOxHLs87g==
+    size: 64088825
 path: menager-kart-uslug-technicznych-0.1.0-mac.zip
-sha512: 3ga2kQt2cGen+xqMPBt7nAf2MzeQt52VacYpMCWOMgcBp+F3f1ecSuhnwrb/jHu4MHYdPPauqRBATZpI7mpfsw==
-releaseDate: '2018-08-15T12:28:56.406Z'
+sha512: tN9xmFNmKXrfdih/LHWtT4DltzVbnQ3sqRAT6en6nRNMxUoSpOHAHfNy9rD3ODdsF8uF7XkKsLaYxXc0dpjEOA==
+releaseDate: '2018-08-15T19:24:55.278Z'

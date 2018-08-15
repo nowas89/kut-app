@@ -46,7 +46,7 @@ class Karty extends Component {
       <Wrapper>
         {!this.props.buttonDisable ? (
          <Button
-         variant="contained"
+         variant="outlined"
          className={classes.button}
          style={{marginTop: "70px"}}
             onClick={(a, b) =>
@@ -65,9 +65,10 @@ class Karty extends Component {
         )}
         {this.props.buttonIsClicked ? <DodajKuta /> : null}
 
-        {!this.props.buttonIsClicked && this.props.karty.length > 0 ? (
+       {!this.props.buttonIsClicked && this.props.karty.length > 0 ? (
           <Tabela />
         ) : null}
+    
       </Wrapper>
     );
   }
@@ -76,7 +77,7 @@ class Karty extends Component {
 const Wrapper = styled.div`
   margin-left: 250px;
   min-height: 100vh;
-
+position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -21,6 +21,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 
+
 const styles = theme => ({
   container: {
     display: "flex",
@@ -61,7 +62,7 @@ const styles = theme => ({
 class OtwartaKarta extends Component {
   state = {
     dodajCzynosc: false,
-
+drukowanie: false,
     karta: {
       kartaZdana: null,
       numerKuta: "",
@@ -210,6 +211,14 @@ class OtwartaKarta extends Component {
     }
   };
 
+  drukuj = e => {
+    this.setState({
+      
+drukowanie: !e.target.value
+     
+      
+    })
+  };
   handleChange = event => {
     this.setState({
       karta: {
@@ -560,9 +569,10 @@ class OtwartaKarta extends Component {
 
         <br />
         <br />
+
         <br />
 
-        <Typography variant="display1" gutterBottom>
+        <Typography variant="headline" gutterBottom>
           Rozliczenie wykonania zadania
         </Typography>
         {this.state.karta.CzCzynnosci.length > 0 ? (
@@ -570,7 +580,7 @@ class OtwartaKarta extends Component {
         ) : null}
 
         <Button
-          variant="contained"
+          variant="outlined"
           
           className={classes.button2}
           style={{marginTop: "50px"}}
@@ -621,7 +631,10 @@ class OtwartaKarta extends Component {
                 onChange={e => this.addCzWykonawca(e)}
               />
             </Container>
-            <h5>Zużycie części i materiałów</h5>
+            <Typography variant="headline" gutterBottom>
+            Zużycie części i materiałów
+        </Typography>
+           
             <Container>
               <TextField
                 label="Wyszczególnienie"
@@ -676,10 +689,10 @@ class OtwartaKarta extends Component {
 
             <Button
               variant="fab"
-              color="primary"
+              color="default"
               aria-label="Add"
               className={classes.button}
-              style={{ marginTop: "30px" }}
+              style={{ marginTop: "30px", bottom: '10px' }}
               onClick={() => this.addNewCzynnoscAndReset()}
             >
               <AddIcon />
@@ -722,6 +735,7 @@ class OtwartaKarta extends Component {
           variant="contained"
           color="secondary"
           size="medium"
+          onClick={() => this.props.onUsuwanie(this.state.karta)}
           className={classes.button}
           style={{ margin: "0", marginTop: "50px", marginBottom: "20px", marginLeft: "40px"  }}
           
@@ -729,10 +743,23 @@ class OtwartaKarta extends Component {
            <DeleteOutlinedIcon className={classes.icon} />
           Usuń Kartę
         </Button>
+      
         </div>
 
+  {
+  this.state.drukowanie ? 
+  <WygenerowanyKut kartaDoDruku={this.state.karta} style={{left: '200px'}}/>
 
-        <WygenerowanyKut kartaDoDruku={this.state.karta} style={{left: '200px'}}/>
+  : <Button   style={{ marginTop: "150px", marginBottom: "20px"  }}
+variant="outlined"
+className={classes.button}
+
+   onClick={e =>
+     this.drukuj(e)
+   }
+ >Drukuj
+ </Button>  
+}
       </Wrapper>
     );
   }
@@ -751,6 +778,7 @@ overflow: hidden;
   justify-content: center;
   min-height: 100%;
   width: calc(100% - 250px);
+  z-index: 1;
   label {
     padding: 5px;
     display: flex;
@@ -762,12 +790,14 @@ overflow: hidden;
 `;
 
 const Czynnosci = styled.div`
+background: rgba(211,211,211, 0.1);
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2 5);
+  box-shadow:         inset 0 0 10px rgba(0, 0, 0, 0.2);
+
 `;
 
 const Form = styled.form`
@@ -792,7 +822,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onZamykanieKarty: (a, b) => dispatch(actions.zamykanieKarty(a, b))
+    onZamykanieKarty: (a, b) => dispatch(actions.zamykanieKarty(a, b)),
+    onUsuwanie: a => dispatch(actions.usuwanieKarty(a))
   };
 };
 

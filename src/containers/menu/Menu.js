@@ -1,19 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import compose from "recompose/compose";
-import * as actions from "../../store/actions";
 import { Switch, Route, NavLink } from "react-router-dom";
-
-
-
 import Karty from "../Karty/Karty";
 import Image from './niepodlegla.jpg'
 import TabelaEwidencyjna from '../../components/Tabela/TabelaEwidencyjna/TabelaEwidencyjna';
-// import WygenerowanyKut from '../../components/WygenerowanyKut/WygenerowanyKut'
+
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import Settings from '../Settings/Settings'
 
 const styles = theme => ({
   button: {
@@ -35,28 +29,28 @@ class Menu extends Component {
             <Nav>
               <ul>
                 <li >
-                  <NavLink  to="/karty" >Karty Usług Technicznych</NavLink>
+                  <NavLink  to="/karty">Karty Usług Technicznych</NavLink>
                 </li>
                 <li>
                   <NavLink to="/ewidencja">Ewidencja Kart</NavLink>
                 </li>
-                <li>
-                  <a href="#two">Ewidencja Roboczo Godzin</a>
-                </li>
+           
               </ul>
             </Nav>    
           </div>         
-          <Settings> 
+          <DOlnyDiv> 
             <Img src={Image} role='presentation'/>
-            <Button><svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+            <NavLink to="/ustawienia" activeClassName='none'>    <Button>  <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
     <path fill="none" d="M0 0h20v20H0V0z"/>
     <path d="M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/>
 </svg>
-</Button></Settings>
+</Button></NavLink></DOlnyDiv>
         </MenuWrap>
         <Switch>
         <Route   exact path="/karty"  component={Karty} />
           <Route  exact  path="/ewidencja" component={TabelaEwidencyjna} />
+          <Route  exact  path="/ustawienia" component={Settings} />
+ 
         </Switch>
       </div>
     );
@@ -67,7 +61,7 @@ width: 230px;
 left: -84px;
 position: relative;`
 
-const Settings = styled.div`
+const DOlnyDiv = styled.div`
 position: absolute;
 bottom: 20px;
 left 80px;
@@ -135,19 +129,5 @@ const Nav = styled.nav`
 margin-top: 100px;
 `
 
-const mapStateToProps = state => {
-  return {};
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    // onZamykanieKarty: (a, b) => dispatch(actions.zamykanieKarty(a, b))
-  };
-};
-
-export default compose(
-  withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ))(Menu);
+export default withStyles(styles)(Menu);

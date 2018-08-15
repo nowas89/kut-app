@@ -6,8 +6,8 @@ import './kut.css'
  
 class KutToPrint extends Component {
   render() {
-console.log(this.props.kartaDoDruku)
-const {numerKuta, wykonawca, marka,nrRej,wlasciciel,terminWykonania,zadanie,wystawiajacy, opis, uwagi} = this.props.kartaDoDruku;
+    const {numerKuta, wykonawca, marka,nrRej,wlasciciel,terminWykonania,zadanie,wystawiajacy, opis, uwagi} = this.props.kartaDoDruku;
+
     return (
 
      <div className='wrapper'>
@@ -17,19 +17,22 @@ const {numerKuta, wykonawca, marka,nrRej,wlasciciel,terminWykonania,zadanie,wyst
         </div>
         <div className="main">
             <div className="first-row">
-                <div className="first"><h1>{wykonawca}</h1></div>
-                <div className="second"><h1>{marka}</h1></div>
-                <div className="third"><h1>{nrRej}</h1></div>
-                <div className="four"><h1>{wlasciciel}</h1></div>
-                <div className="five"><h1>{terminWykonania}</h1></div>
+                <div className="first"><h3>WYKONAWCA:</h3><h1>{wykonawca}</h1></div>
+                <div className="second"><h3>MARKA I TYP SPRZĘTU:</h3><h1>{marka}</h1></div>
+                <div className="third"><h3>MER:</h3><h1>{nrRej}</h1></div>
+                <div className="four"><h3>SPRZĘT NALEŻY DO:</h3><h1>{wlasciciel}</h1></div>
+                <div className="five"><h3>TERMIN WYKONANIA:</h3><h1>{terminWykonania}</h1></div>
             </div>
             <div className="second-row">
-                <div className="first"><h1>{zadanie}</h1></div>
-                <div className="second"><h1>{ wystawiajacy}</h1> <h1>{terminWykonania}</h1></div>
+                <div className="first"><h3>ZADANIE:</h3><h1>{zadanie}</h1></div>
+                <div className="second"><h4 style={{left: '65px', bottom: "1px"}}>(stopień, nazwisko)</h4><h4 style={{right: '85px', bottom: "1px"}}>(podpis, data))</h4><h1>{ wystawiajacy}</h1> <h1>{terminWykonania}</h1></div>
             </div>
             <div className="third-row">
-                <div className="first"><h2>{opis}</h2></div>
-                <div className="second"><h2>{uwagi}</h2></div>
+                <div className="first"><h3>W CZASIE DEFEKTACJI (BADAŃ DIAGNOSTYCZNYCH) STWIERDZONO KONIECZNOŚĆ WYKONIANIA NASTĘUJĄCYCH PRAC:</h3>
+                <h1 style={{paddingTop: '10px'}}>{opis}</h1></div>
+                <div className="second">
+                <h3>UWAGI PRZYJMUJĄCEGO:</h3>
+                <h1 style={{paddingTop: '10px'}}>{uwagi}</h1></div>
 
             </div>
             <h1>ROZLICZENIE WYKONANIA ZADANIA</h1>

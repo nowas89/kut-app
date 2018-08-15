@@ -41,8 +41,9 @@ const styles = theme => ({
 
 class DodajKuta extends Component {
   state = {
-    numerKuta:
-      this.props.karty.length + 1 + " / wł / " + new Date().getFullYear(),
+    
+    numerKuta:  this.props.karty.length + 1 + " / " + this.props.akronim + " / " + new Date().getFullYear()
+     ,
     id: this.props.karty.length + 1,
     dodajCzynnosc: false,
     kartaZdana: false,
@@ -96,7 +97,7 @@ class DodajKuta extends Component {
 
   componentWillUnmount() {
     this.setState({
-      numerKuta: "null",
+      numerKuta: "",
       id: this.props.karty.length + 1,
       wykonawca: "",
       marka: "",
@@ -129,6 +130,11 @@ class DodajKuta extends Component {
     this.setState({ kartaZdana: event.target.checked });
   };
 
+  addNumerKuta = e => {
+    this.setState({
+      numerKuta: e.target.value
+    });
+  };
   addWykonawca = e => {
     this.setState({
       wykonawca: e.target.value
@@ -352,6 +358,7 @@ class DodajKuta extends Component {
             className={classes.textField}
             margin="normal"
             type="text"
+            onChange={e => this.addNumerKuta(e)}
           />
         </Form>
         <Form>
@@ -508,7 +515,7 @@ class DodajKuta extends Component {
         <br />
         <br />
         <Typography
-          variant="display1"
+          variant="headline"
           gutterBottom
           style={{ marginTop: "2px" }}
         >
@@ -569,7 +576,7 @@ class DodajKuta extends Component {
               />
             </Container>
             <Typography
-              variant="display1"
+              variant="headline"
               gutterBottom
               style={{ marginTop: "22px" }}
             >
@@ -632,7 +639,7 @@ class DodajKuta extends Component {
               color="primary"
               aria-label="Add"
               className={classes.button}
-              style={{ marginTop: "30px" }}
+              style={{ marginTop: "30px", marginBottom: '10px' }}
               onClick={() => this.dispatchAndAndResetCzynnosc()}
             >
               <AddIcon />
@@ -714,7 +721,10 @@ const Czynnosci = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  // box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow:         inset 0 0 10px rgba(0, 0, 0, 0.2);
+background: rgba(211,211,211, 0.1);
+  
 `;
 
 const Form = styled.form`
@@ -736,7 +746,8 @@ const mapStateToProps = state => {
   return {
     karty: state.karty,
     buttonIsClicked: state.buttonIsClicked,
-    buttonDisable: state.buttonDisable
+    buttonDisable: state.buttonDisable,
+    akronim: state.akronim
   };
 };
 

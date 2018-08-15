@@ -6,7 +6,7 @@ import {BrowserRouter} from 'react-router-dom'
 
 
 import Menu from "./containers/menu/Menu";
-import Karty from "./containers/Karty/Karty";
+
 import OtwartaKarta from "./components/OtwartaKarta/OtwartaKarta";
 
 

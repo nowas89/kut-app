@@ -72,3 +72,17 @@ export const zamykanieKarty = (zamknij, taKartaJestOtwarta) => {
         taKartaJestOtwarta: taKartaJestOtwarta
     }
 }
+export const usuwanieKarty = (karta) => {
+    return {
+        type: actionTypes.USUWANIE_KARTY,
+        
+       karta: karta
+    }
+}
+export const saveAcronim = (akronim) => {
+    return {
+        type: actionTypes.ZAPISZ_AKRONIM,
+        
+       akronim: akronim
+    }
+}
