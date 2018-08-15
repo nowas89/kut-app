@@ -48,7 +48,7 @@ class Karty extends Component {
          <Button
          variant="contained"
          className={classes.button}
-      
+         style={{marginTop: "70px"}}
             onClick={(a, b) =>
               this.props.onAddingKut(
                 this.props.buttonDisable,

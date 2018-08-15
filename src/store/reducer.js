@@ -5,7 +5,8 @@ const initialState = {
   buttonIsClicked: false,
   buttonDisable: false,
   otwartakarta: {},
-  kartaJestOtwarta: false
+  kartaJestOtwarta: false,
+  wersja: "0.0.1"
 };
 
 export const addNewKut = (state, action) => {
@@ -14,21 +15,47 @@ export const addNewKut = (state, action) => {
   console.log(action.CzCzynnosci);
   nowaKarta.push(
     (action.id = {
-      numerKuta: action.numerKuta,
+      numerKuta: action.numerKuta  === ""
+      ? "----------"
+      : action.numerKuta ,
       id: action.id,
-      wykonawca: action.wykonawca,
-      marka: action.marka,
-      nrRej: action.nrRej,
-      wlasciciel: action.wlasciciel,
-      terminWykonania: action.terminWykonania,
-      zadanie: action.zadanie,
-      wystawiajacy: action.wystawiajacy,
-      opis: action.opis,
-      uwagi: action.uwagi,
-      typ: action.typ,
-      podstawa: action.podstawa,
-      pobierajacy: action.pobierajacy,
-      waznoscKarty: action.waznoscKarty,
+      wykonawca: action.wykonawca  === ""
+      ? "----------"
+      :action.wykonawca,
+      marka: action.marka  === ""
+      ? "----------"
+      : action.marka,
+      nrRej: action.nrRej  === ""
+      ? "----------"
+      :action.nrRej,
+      wlasciciel: action.wlasciciel  === ""
+      ? "----------"
+      :action.wlasciciel ,
+      terminWykonania: action.terminWykonania  === ""
+      ? "----------"
+      : action.terminWykonania ,
+      zadanie: action.zadanie  === ""
+      ? "----------"
+      : action.zadanie,
+      wystawiajacy: action.wystawiajacy  === ""
+      ? "----------"
+      : action.wystawiajacy,
+      opis: action.opis  === ""
+      ? "----------"
+      : action.opis,
+      uwagi: action.uwagi  === ""
+      ? "----------"
+      : action.uwagi,
+      typ: action.typ  === ""
+      ? "----------"
+      : action.typ,
+      podstawa: action.podstawa  === ""
+      ? "----------"
+      : action.podstawa,
+      pobierajacy: action.pobierajacy  === ""
+      ? "----------"
+      : action.pobierajacy,
+      waznoscKarty: action.waznoscKarty ,
       CzCzynnosci: action.CzCzynnosci,
       kartaZdana: action.kartaZdana
     })

@@ -6,6 +6,7 @@ import compose from "recompose/compose";
 import styled from "styled-components";
 
 import * as actions from "../../store/actions";
+import WygenerowanyKut from '../WygenerowanyKut/WygenerowanyKut';
 
 // import { withStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
@@ -17,6 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 
 const styles = theme => ({
@@ -47,7 +49,12 @@ const styles = theme => ({
     height: 40
   },
   sizeIcon: {
+    marginRight: 5,
     fontSize: 20
+  },
+  icon: {
+    marginRight: 5,
+    fontSize: 24,
   }
 });
 
@@ -393,7 +400,7 @@ class OtwartaKarta extends Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(this.state.karta.CzCzynnosci.length);
+
     return (
       <Wrapper>
         <Form>
@@ -564,7 +571,9 @@ class OtwartaKarta extends Component {
 
         <Button
           variant="contained"
+          
           className={classes.button2}
+          style={{marginTop: "50px"}}
           onClick={this.onClickAction}
         >
           Dodaj Czynność
@@ -687,14 +696,16 @@ class OtwartaKarta extends Component {
               color="primary"
             />
           }
-          label="Karta Została Zdana"
+          label={this.state.karta.kartaZdana ? "karta zostala zdana" : 'karta nie została zdana'}
         />
 
+        <div style={{display: 'flex'}}>
         <Button
           variant="contained"
+          color="primary"
           size="medium"
           className={classes.button}
-          style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
+          style={{ margin: "0", marginTop: "50px", marginBottom: "20px", marginRight: "40px" }}
           onClick={() =>
             this.props.onZamykanieKarty(
               this.props.kartaJestOtwarta,
@@ -703,16 +714,32 @@ class OtwartaKarta extends Component {
           }
         >
           <SaveIcon
-            className={classNames(classes.leftIcon, classes.iconSmall)}
+            className={classNames(classes.leftIcon, classes.iconSmall, classes.icon)}
           />
           Zapisz Kartę
         </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          size="medium"
+          className={classes.button}
+          style={{ margin: "0", marginTop: "50px", marginBottom: "20px", marginLeft: "40px"  }}
+          
+        >
+           <DeleteOutlinedIcon className={classes.icon} />
+          Usuń Kartę
+        </Button>
+        </div>
+
+
+        <WygenerowanyKut kartaDoDruku={this.state.karta} style={{left: '200px'}}/>
       </Wrapper>
     );
   }
 }
 
 const Wrapper = styled.div`
+overflow: hidden;
   position: absolute;
   padding-top: 20px;
   top: 0;

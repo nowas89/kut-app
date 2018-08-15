@@ -1,0 +1,10 @@
+version: 0.1.0
+files:
+  - url: menager-kart-uslug-technicznych-0.1.0-mac.zip
+    sha512: 3ga2kQt2cGen+xqMPBt7nAf2MzeQt52VacYpMCWOMgcBp+F3f1ecSuhnwrb/jHu4MHYdPPauqRBATZpI7mpfsw==
+  - url: menager-kart-uslug-technicznych-0.1.0.dmg
+    sha512: ODfYyJet7vwcTa0qVIOeMQ8k8oybuVi0FcY4zjiEw3YwMCjpDjglKmT18aA2wMCYi3gi2EPmhb94q+dFi5Bwrg==
+    size: 63979065
+path: menager-kart-uslug-technicznych-0.1.0-mac.zip
+sha512: 3ga2kQt2cGen+xqMPBt7nAf2MzeQt52VacYpMCWOMgcBp+F3f1ecSuhnwrb/jHu4MHYdPPauqRBATZpI7mpfsw==
+releaseDate: '2018-08-15T12:28:56.406Z'

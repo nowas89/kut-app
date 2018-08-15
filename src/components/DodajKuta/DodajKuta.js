@@ -8,12 +8,11 @@ import styled from "styled-components";
 
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import SaveIcon from '@material-ui/icons/Save';
+import SaveIcon from "@material-ui/icons/Save";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-
-import classNames from 'classnames';
+import classNames from "classnames";
 
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 // import DodajCzynnosc from "../DodajCzynnosc/DodajCzynnosc"
@@ -23,7 +22,6 @@ import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
-
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -34,11 +32,11 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   input: {
-    display: 'none',
-  },
+    display: "none"
+  }
 });
 
 class DodajKuta extends Component {
@@ -98,7 +96,7 @@ class DodajKuta extends Component {
 
   componentWillUnmount() {
     this.setState({
-      numerKuta: 'null',
+      numerKuta: "null",
       id: this.props.karty.length + 1,
       wykonawca: "",
       marka: "",
@@ -127,7 +125,7 @@ class DodajKuta extends Component {
     }
   };
 
-  handleChange  = event => {
+  handleChange = event => {
     this.setState({ kartaZdana: event.target.checked });
   };
 
@@ -246,46 +244,25 @@ class DodajKuta extends Component {
   };
   dispatchAndAndResetCzynnosc = () => {
     let nowyItemCaly = this.state.CzCzynnosci.concat({
-     CzOperacja:
-        this.state.CzOperacja === ""
-          ? "----------"
-          : this.state.CzOperacja,
-      CzRbh:
-        this.state.CzRbh === "" ? 
-        "----------"
-         : this.state.CzRbh,
+      CzOperacja:
+        this.state.CzOperacja === "" ? "----------" : this.state.CzOperacja,
+      CzRbh: this.state.CzRbh === "" ? "----------" : this.state.CzRbh,
       CzDataWyk:
-        this.state.CzDataWyk === ""
-          ? "----------"
-          : this.state.CzDataWyk,
+        this.state.CzDataWyk === "" ? "----------" : this.state.CzDataWyk,
       CzWykonawca:
-        this.state.CzWykonawca === ""
-          ? "----------"
-          : this.state.CzWykonawca,
+        this.state.CzWykonawca === "" ? "----------" : this.state.CzWykonawca,
       CzWyszczegolnienie:
         this.state.CzWyszczegolnienie === ""
           ? "----------"
           : this.state.CzWyszczegolnienie,
       CzOznaczenie:
-        this.state.CzOznaczenie === ""
-          ? "----------"
-          : this.state.CzOznaczenie,
-      CzIlosc:
-        this.state.CzIlosc === ""
-          ? "----------"
-          : this.state.CzIlosc,
+        this.state.CzOznaczenie === "" ? "----------" : this.state.CzOznaczenie,
+      CzIlosc: this.state.CzIlosc === "" ? "----------" : this.state.CzIlosc,
       CzAsygnata:
-        this.state.CzAsygnata === ""
-          ? "----------"
-          : this.state.CzAsygnata,
-      CzUwagi:
-        this.state.CzUwagi === ""
-          ? "----------"
-          : this.state.CzUwagi,
+        this.state.CzAsygnata === "" ? "----------" : this.state.CzAsygnata,
+      CzUwagi: this.state.CzUwagi === "" ? "----------" : this.state.CzUwagi,
       CzOperacjaId:
-        this.state.CzOperacjaId === ""
-          ? "----------"
-          : this.state.CzOperacjaId
+        this.state.CzOperacjaId === "" ? "----------" : this.state.CzOperacjaId
     });
 
     this.setState({
@@ -309,11 +286,12 @@ class DodajKuta extends Component {
       this.setState({
         CzOperacja: "",
         CzRbh: "",
-        CzDataWyk: new Date().getDate() +
-        "/" +
-        (new Date().getMonth() + 1) +
-        "/" +
-        new Date().getFullYear(),
+        CzDataWyk:
+          new Date().getDate() +
+          "/" +
+          (new Date().getMonth() + 1) +
+          "/" +
+          new Date().getFullYear(),
         CzWykonawca: "",
         CzWyszczegolnienie: "",
         CzOznaczenie: "",
@@ -350,7 +328,6 @@ class DodajKuta extends Component {
   };
 
   render() {
-
     const { classes } = this.props;
     let today = new Date();
     let dd = today.getDate();
@@ -369,7 +346,7 @@ class DodajKuta extends Component {
     return (
       <Wrapper>
         <Form>
-        <TextField
+          <TextField
             defaultValue={this.state.numerKuta}
             label="Numer KUT"
             className={classes.textField}
@@ -378,8 +355,6 @@ class DodajKuta extends Component {
           />
         </Form>
         <Form>
-         
-
           <TextField
             label="Wykonawca"
             className={classes.textField}
@@ -422,10 +397,8 @@ class DodajKuta extends Component {
             autoComplete="on"
             onChange={e => this.addPodstawa(e)}
           />
- </Form>
- <Form>
-          
-
+        </Form>
+        <Form>
           <TextField
             label="Nr. rejestracyjny"
             className={classes.textField}
@@ -458,7 +431,7 @@ class DodajKuta extends Component {
             autoComplete="on"
             onChange={e => this.addTerminWYkonania(e)}
           />
-           <TextField
+          <TextField
             label=" Data ważności karty"
             className={classes.textField}
             margin="normal"
@@ -468,10 +441,8 @@ class DodajKuta extends Component {
             autoComplete="on"
             onChange={e => this.addWaznoscKarty(e)}
           />
-</Form>
-<Form>
-         
-
+        </Form>
+        <Form>
           <TextField
             label=" Zadanie:"
             className={classes.textField}
@@ -536,10 +507,13 @@ class DodajKuta extends Component {
         <br />
         <br />
         <br />
-        <Typography variant="display1" gutterBottom style={{marginTop: "2px"}}>
-        Rozliczenie wykonania zadania
-          </ Typography>
-      
+        <Typography
+          variant="display1"
+          gutterBottom
+          style={{ marginTop: "2px" }}
+        >
+          Rozliczenie wykonania zadania
+        </Typography>
 
         {this.state.CzCzynnosci.length > 0 ? (
           <TabelaCzynnosci zawartosCzynnosci={this.state.CzCzynnosci} />
@@ -594,10 +568,14 @@ class DodajKuta extends Component {
                 onChange={e => this.addCzWykonawca(e)}
               />
             </Container>
-            <Typography variant="display1" gutterBottom style={{marginTop: "22px"}}>
-            Zużycie części i materiałów
-          </ Typography>
-    
+            <Typography
+              variant="display1"
+              gutterBottom
+              style={{ marginTop: "22px" }}
+            >
+              Zużycie części i materiałów
+            </Typography>
+
             <Container>
               <TextField
                 label="Wyszczególnienie"
@@ -654,13 +632,11 @@ class DodajKuta extends Component {
               color="primary"
               aria-label="Add"
               className={classes.button}
-            style={{marginTop: '30px'}}
-              
-            onClick={() => this.dispatchAndAndResetCzynnosc()}
+              style={{ marginTop: "30px" }}
+              onClick={() => this.dispatchAndAndResetCzynnosc()}
             >
               <AddIcon />
             </Button>
-
           </Czynnosci>
         ) : null}
 
@@ -682,32 +658,40 @@ class DodajKuta extends Component {
           //       />
         }
 
- <FormControlLabel
-          style={{ margin: "0", marginTop: '50px', marginBottom: '20px' }}
+        <FormControlLabel
+          style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
           control={
             <Checkbox
-            checked={this.state.kartaZdana}
-          onChange={e => this.handleChange(e)}
-          value="kartaZdana"
+              checked={this.state.kartaZdana}
+              onChange={e => this.handleChange(e)}
+              value="kartaZdana"
               color="primary"
             />
           }
-          label="Karta Została Zdana"
+          label={
+            this.state.kartaZdana
+              ? "karta zostala zdana"
+              : "karta nie została zdana"
+          }
         />
-         <Button variant="contained" size="medium" className={classes.button} 
-     style={{ margin: "0", marginTop: '50px', marginBottom: '20px' }}
- onClick={() => this.dispatchAndResetNowaKarta()}>
-        <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-        Zapisz Kartę
-      </Button>
+        <Button
+          variant="contained"
+          size="medium"
+          className={classes.button}
+          style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
+          onClick={() => this.dispatchAndResetNowaKarta()}
+        >
+          <SaveIcon
+            className={classNames(classes.leftIcon, classes.iconSmall)}
+          />
+          Zapisz Kartę
+        </Button>
       </Wrapper>
     );
   }
 }
 
 const Wrapper = styled.div`
-  margin-top: 40px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -734,7 +718,8 @@ const Czynnosci = styled.div`
 `;
 
 const Form = styled.form`
-margin-bottom: 50px;`;
+  margin-bottom: 50px;
+`;
 const TextAr = styled.div`
   margin-top: 30px;
   display: flex;
