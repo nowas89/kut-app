@@ -3,11 +3,16 @@ import styled from "styled-components";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Karty from "../Karty/Karty";
 import Image from './niepodlegla.jpg'
-import TabelaEwidencyjna from '../../components/Tabela/TabelaEwidencyjna/TabelaEwidencyjna';
+// import TabelaEwidencyjna from '../../components/Tabela/TabelaEwidencyjna/TabelaEwidencyjna';
 
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Settings from '../Settings/Settings'
+
+
+
+import TabelaEwidencyjna from "../../components/Tabela/TabelaEwidencyjna/TabelaEwidencyjna";
+import EwidencjaPracy from "../../components/Tabela/EwidencjaPracy/EwidencjaPracy";
 
 const styles = theme => ({
   button: {
@@ -29,10 +34,13 @@ class Menu extends Component {
             <Nav>
               <ul>
                 <li >
-                  <NavLink  to="/karty">Karty Usług Technicznych</NavLink>
+                  <NavLink  to="/karty"    style={{fontFamily: 'Helvetica'}} >Karty Usług Technicznych</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/ewidencja">Ewidencja Kart</NavLink>
+                  <NavLink to="/ewidencja"    style={{fontFamily: 'Helvetica'}}>Ewidencja Kart</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/ewidencjaPracy"    style={{fontFamily: 'Helvetica'}}>Ewidencja Pracy Warsztatu</NavLink>
                 </li>
            
               </ul>
@@ -49,6 +57,7 @@ class Menu extends Component {
         <Switch>
         <Route   exact path="/karty"  component={Karty} />
           <Route  exact  path="/ewidencja" component={TabelaEwidencyjna} />
+          <Route  exact  path="/ewidencjaPracy" component={EwidencjaPracy} />
           <Route  exact  path="/ustawienia" component={Settings} />
  
         </Switch>
@@ -88,6 +97,7 @@ overflow:hidden;
 border-left: 6px solid #743ee8;
 font-weight: 500;
 box-shadow:         inset 0 0 10px rgba(0, 0 ,0 , 0.1);
+overflow: hidden;
 }
   ul {
     padding: 0;

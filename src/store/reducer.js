@@ -56,6 +56,9 @@ export const addNewKut = (state, action) => {
       pobierajacy: action.pobierajacy  === ""
       ? "----------"
       : action.pobierajacy,
+      dataZdania: action.dataZdania  === ""
+      ? "----------"
+      : action.dataZdania,
       waznoscKarty: action.waznoscKarty ,
       CzCzynnosci: action.CzCzynnosci,
       kartaZdana: action.kartaZdana
@@ -103,7 +106,8 @@ export const openKut = (state, action) => {
     pobierajacy: action.karta.pobierajacy,
     waznoscKarty: action.karta.waznoscKarty,
     CzCzynnosci: action.karta.CzCzynnosci,
-    kartaZdana: action.karta.kartaZdana
+    kartaZdana: action.karta.kartaZdana,
+    dataZdania: action.karta.dataZdania
     
   }
 

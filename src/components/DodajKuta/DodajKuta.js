@@ -24,15 +24,18 @@ import TextField from "@material-ui/core/TextField";
 const styles = theme => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    fontFamily: 'Open Sans'
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 200,
+    fontFamily: 'Arial'
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    fontFamily: 'Helvetica'
   },
   input: {
     display: "none"
@@ -42,8 +45,9 @@ const styles = theme => ({
 class DodajKuta extends Component {
   state = {
     
-    numerKuta:  this.props.karty.length + 1 + " / " + this.props.akronim + " / " + new Date().getFullYear()
-     ,
+
+    numerKuta:    this.props.akronim === '' ?  (this.props.karty.length + 1 ) +  this.props.akronim  + " / " + new Date().getFullYear() :
+    (this.props.karty.length + 1 ) + " / " + this.props.akronim + " / " + new Date().getFullYear(),
     id: this.props.karty.length + 1,
     dodajCzynnosc: false,
     kartaZdana: false,
@@ -61,6 +65,7 @@ class DodajKuta extends Component {
     zadanie: "",
     wystawiajacy: "",
     opis: "",
+    dataZdania: '',
     uwagi: "",
     typ: "",
     podstawa: "",
@@ -116,7 +121,8 @@ class DodajKuta extends Component {
       typ: "",
       podstawa: "",
       waznoscKarty: "",
-      pobierajacy: ""
+      pobierajacy: "",
+      dataZdania: ''
     });
   }
 
@@ -142,12 +148,12 @@ class DodajKuta extends Component {
   };
   addMarka = e => {
     this.setState({
-      marka: e.target.value
+      marka: e.target.value.toUpperCase()
     });
   };
   addNrRej = e => {
     this.setState({
-      nrRej: e.target.value
+      nrRej: e.target.value.toUpperCase()
     });
   };
   addTerminWYkonania = e => {
@@ -157,12 +163,12 @@ class DodajKuta extends Component {
   };
   addZadanie = e => {
     this.setState({
-      zadanie: e.target.value
+      zadanie: e.target.value.toUpperCase()
     });
   };
   addWystawiajacy = e => {
     this.setState({
-      wystawiajacy: e.target.value
+      wystawiajacy: e.target.value.toUpperCase()
     });
   };
   addOpis = e => {
@@ -177,7 +183,7 @@ class DodajKuta extends Component {
   };
   addWlasciciel = e => {
     this.setState({
-      wlasciciel: e.target.value
+      wlasciciel: e.target.value.toUpperCase()
     });
   };
   addTyp = e => {
@@ -197,7 +203,15 @@ class DodajKuta extends Component {
   };
   addPobierajacy = e => {
     this.setState({
-      pobierajacy: e.target.value
+      pobierajacy: e.target.value.toUpperCase()
+    });
+  };
+  addDataZdania = e => {
+    this.setState({
+
+
+        dataZdania: e.target.value
+      
     });
   };
 
@@ -326,6 +340,7 @@ class DodajKuta extends Component {
       this.state.podstawa,
       this.state.pobierajacy,
       this.state.waznoscKarty,
+      this.state.dataZdania,
       this.props.buttonIsClicked,
       this.props.buttonDisable,
       this.state.CzCzynnosci,
@@ -353,8 +368,9 @@ class DodajKuta extends Component {
       <Wrapper>
         <Form>
           <TextField
-            defaultValue={this.state.numerKuta}
             label="Numer KUT"
+          
+            defaultValue={this.state.numerKuta}
             className={classes.textField}
             margin="normal"
             type="text"
@@ -369,6 +385,7 @@ class DodajKuta extends Component {
             type="text"
             name="wykonawca"
             defaultValue={this.state.wykonawca}
+
             autoComplete="on"
             onChange={e => this.addWykonawca(e)}
           />
@@ -376,11 +393,14 @@ class DodajKuta extends Component {
           <TextField
             label="Marka i typ sprzętu"
             className={classes.textField}
+     
             margin="normal"
             type="text"
             name="typ"
             defaultValue={this.state.marka}
             autoComplete="on"
+
+            
             onChange={e => this.addMarka(e)}
           />
 
@@ -392,6 +412,8 @@ class DodajKuta extends Component {
             name="rodzaj"
             defaultValue={this.state.typ}
             autoComplete="on"
+
+            
             onChange={e => this.addTyp(e)}
           />
           <TextField
@@ -402,20 +424,23 @@ class DodajKuta extends Component {
             name="podstawa"
             defaultValue={this.state.podstawa}
             autoComplete="on"
-            onChange={e => this.addPodstawa(e)}
+
           />
-        </Form>
-        <Form>
-          <TextField
+             <TextField
             label="Nr. rejestracyjny"
             className={classes.textField}
             margin="normal"
             type="text"
             name="rejestracja"
             defaultValue={this.state.nrRej}
+
+            
             autoComplete="on"
             onChange={e => this.addNrRej(e)}
           />
+        </Form>
+        <Form>
+       
 
           <TextField
             label="  Sprzęt Należy do:"
@@ -447,6 +472,17 @@ class DodajKuta extends Component {
             defaultValue={this.state.waznoscKarty}
             autoComplete="on"
             onChange={e => this.addWaznoscKarty(e)}
+          />
+          <TextField
+            label=" Data zdania karty"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="karta"
+            defaultValue={this.state.dataZdania}
+            autoComplete="on"
+            onChange={e => this.addDataZdania(e)}
+
           />
         </Form>
         <Form>
@@ -724,7 +760,10 @@ const Czynnosci = styled.div`
   // box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   box-shadow:         inset 0 0 10px rgba(0, 0, 0, 0.2);
 background: rgba(211,211,211, 0.1);
-  
+h1{
+  font-family: "Helvetica";
+  font-weight: 400;
+}
 `;
 
 const Form = styled.form`

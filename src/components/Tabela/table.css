@@ -4,7 +4,7 @@
   width: 90%;
   margin: 10% auto 0;
   border-collapse: separate;
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica";
   font-weight: 400;
   cursor: pointer;
 }
@@ -26,7 +26,9 @@
   color: white;
   padding-top: 10px;
   padding-bottom: 10px;
-  font-weight: 700;
+  font-size: 14px;
+
+  font-weight: 300;
 }
 
 .table_header:first-child {
@@ -57,6 +59,7 @@
   color: #5b5b5b;
   border-bottom: #ccc 1px solid;
   font-size: 14px;
+  font-weight: 300;
 }
 
 .table_row > .table_small:first-child > .table_cell {
@@ -76,7 +79,7 @@
 }
 
 .table_row:nth-child(2n + 3) {
-  background: #e9e9e9;
+  background: #f5f4f4;
 }
 
 @media screen and (max-width: 900px) {

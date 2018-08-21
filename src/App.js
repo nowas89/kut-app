@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "./store/actions";
 import "typeface-roboto";
+import 'typeface-open-sans';
 import {BrowserRouter} from 'react-router-dom'
 
 

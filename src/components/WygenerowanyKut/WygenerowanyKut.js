@@ -25,7 +25,7 @@ const Wrap = style.div`
 
 width: 1000px;
 margin-top: 100px;
-margin-left: -50px;
+
 box-sizing: border-box;
 display: flex;
 justify-content: center;

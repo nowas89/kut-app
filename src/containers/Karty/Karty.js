@@ -11,7 +11,8 @@ import Typography from "@material-ui/core/Typography";
 
 
 import DodajKuta from "../../components/DodajKuta/DodajKuta";
-import Tabela from "../../components/Tabela/Tabela";
+
+import TabelaGlowna from "../../components/Tabela/TabelaGlowna";
 
 const styles = theme => ({
   container: {
@@ -66,9 +67,9 @@ class Karty extends Component {
         {this.props.buttonIsClicked ? <DodajKuta /> : null}
 
        {!this.props.buttonIsClicked && this.props.karty.length > 0 ? (
-          <Tabela />
+ <TabelaGlowna />
         ) : null}
-    
+   
       </Wrapper>
     );
   }

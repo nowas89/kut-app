@@ -53,7 +53,9 @@ class Settings extends Component {
           </Typography>
  <Typography variant="subheading" gutterBottom>
             Ustaw Akronim który będzie wyświetlany w numerze Kart np 
-            " 12 / WŁ / 2018" (gdzie WŁ oznacza Warsztat Remontu Sprzętu Łączności i Informatyki)
+            " 12 / WŁ / 2018" (gdzie WŁ oznacza Warsztat Remontu Sprzętu Łączności i Informatyki),
+            w sytuacji gdy akronim nie zostanie podany numer karty będzie wyglądał następująco
+            " 12 / 2018"
           </Typography>
             <TextField
                 label=" Ustaw Akronim Kart"
@@ -86,7 +88,8 @@ position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  font-family: "Helvetica";
+  font-weight: 400;
 
 `;
 

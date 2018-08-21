@@ -20,6 +20,7 @@ import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
+import WygenerowanyKut2 from "../WygenerowanyKut/WygenerowanyKut2";
 
 
 const styles = theme => ({
@@ -30,10 +31,13 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 200,
+    fontFamily: 'Arial'
   },
   button: {
     margin: theme.spacing.unit
+    ,
+    fontFamily: 'Arial'
   },
   extendedIcon: {
     marginRight: theme.spacing.unit
@@ -41,7 +45,8 @@ const styles = theme => ({
   button2: {
     margin: theme.spacing.unit,
     width: 160,
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'Arial'
   },
 
   checked: {},
@@ -73,6 +78,7 @@ drukowanie: false,
       marka: "",
       nrRej: "",
       wlasciciel: "",
+      dataZdania: '',
       terminWykonania: "",
       zadanie: "",
       wystawiajacy: "",
@@ -122,7 +128,8 @@ drukowanie: false,
         podstawa: this.props.podstawa,
         waznoscKarty: this.props.waznoscKarty,
         pobierajacy: this.props.pobierajacy,
-        CzOperacjaId: this.state.karta.CzCzynnosci.length + 1
+        CzOperacjaId: this.state.karta.CzCzynnosci.length + 1,
+        dataZdania: this.props.dataZdania
       }
     });
   }
@@ -240,7 +247,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        marka: e.target.value
+        marka: e.target.value.toUpperCase()
       }
     });
   };
@@ -248,7 +255,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        nrRej: e.target.value
+        nrRej: e.target.value.toUpperCase()
       }
     });
   };
@@ -264,7 +271,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        zadanie: e.target.value
+        zadanie: e.target.value.toUpperCase()
       }
     });
   };
@@ -272,7 +279,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        wystawiajacy: e.target.value
+        wystawiajacy: e.target.value.toUpperCase()
       }
     });
   };
@@ -296,7 +303,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        wlasciciel: e.target.value
+        wlasciciel: e.target.value.toUpperCase()
       }
     });
   };
@@ -328,7 +335,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        pobierajacy: e.target.value
+        pobierajacy: e.target.value.toUpperCase()
       }
     });
   };
@@ -407,13 +414,21 @@ drukowanie: !e.target.value
       }
     });
   };
+  addDataZdania = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        dataZdania: e.target.value
+      }
+    });
+  };
   render() {
     const { classes } = this.props;
 
     return (
       <Wrapper>
         <Form>
-          <Typography variant="display1" gutterBottom>
+          <Typography variant="display1" gutterBottom  style={{fontFamily: 'Arial'}}>
             Edytujesz Kartę Nr. {this.state.karta.numerKuta}
           </Typography>
         </Form>
@@ -460,9 +475,7 @@ drukowanie: !e.target.value
             autoComplete="on"
             onChange={e => this.addPodstawa(e)}
           />
-        </Form>
-        <Form>
-          <TextField
+             <TextField
             label="Nr. rejestracyjny"
             className={classes.textField}
             margin="normal"
@@ -472,6 +485,9 @@ drukowanie: !e.target.value
             autoComplete="on"
             onChange={e => this.addNrRej(e)}
           />
+        </Form>
+        <Form>
+       
 
           <TextField
             label="  Sprzęt Należy do:"
@@ -503,6 +519,16 @@ drukowanie: !e.target.value
             defaultValue={this.state.karta.waznoscKarty}
             autoComplete="on"
             onChange={e => this.addWaznoscKarty(e)}
+          />
+             <TextField
+            label=" Data zdania karty"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="karta"
+            defaultValue={this.state.karta.dataZdania}
+            autoComplete="on"
+            onChange={e => this.addDataZdania(e)}
           />
         </Form>
         <Form>
@@ -572,7 +598,7 @@ drukowanie: !e.target.value
 
         <br />
 
-        <Typography variant="headline" gutterBottom>
+        <Typography variant="headline" gutterBottom style={{fontFamily: 'Arial'}}>
           Rozliczenie wykonania zadania
         </Typography>
         {this.state.karta.CzCzynnosci.length > 0 ? (
@@ -585,6 +611,7 @@ drukowanie: !e.target.value
           className={classes.button2}
           style={{marginTop: "50px"}}
           onClick={this.onClickAction}
+       
         >
           Dodaj Czynność
         </Button>
@@ -735,7 +762,7 @@ drukowanie: !e.target.value
           variant="contained"
           color="secondary"
           size="medium"
-          onClick={() => this.props.onUsuwanie(this.state.karta)}
+          onClick={() => window.confirm('Napewno chcesz usunąć kartę') ? this.props.onUsuwanie(this.state.karta) : null}
           className={classes.button}
           style={{ margin: "0", marginTop: "50px", marginBottom: "20px", marginLeft: "40px"  }}
           
@@ -748,7 +775,11 @@ drukowanie: !e.target.value
 
   {
   this.state.drukowanie ? 
-  <WygenerowanyKut kartaDoDruku={this.state.karta} style={{left: '200px'}}/>
+ <WrapPrint>
+    <WygenerowanyKut kartaDoDruku={this.state.karta} style={{left: '200px'}}/> 
+  <WygenerowanyKut2 />
+ </WrapPrint>
+  
 
   : <Button   style={{ marginTop: "150px", marginBottom: "20px"  }}
 variant="outlined"
@@ -765,19 +796,27 @@ className={classes.button}
   }
 }
 
+const WrapPrint = styled.div`
+
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
 const Wrapper = styled.div`
 overflow: hidden;
   position: absolute;
   padding-top: 20px;
   top: 0;
   background: white;
-  margin-left: 250px;
+margin-left: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100%;
-  width: calc(100% - 250px);
+  width: calc(100% - 240px);
   z-index: 1;
   label {
     padding: 5px;
@@ -797,7 +836,7 @@ background: rgba(211,211,211, 0.1);
   justify-content: center;
   align-items: center;
   box-shadow:         inset 0 0 10px rgba(0, 0, 0, 0.2);
-
+  font-family: 'Open Sans';
 `;
 
 const Form = styled.form`

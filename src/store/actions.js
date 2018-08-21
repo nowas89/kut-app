@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 
-export const addNewKut = (numerKuta, id, wykonawca, marka, nrRej, wlasciciel, terminWykonania, zadanie,wystawiajacy,opis,uwagi, typ, podstawa, pobierajacy, waznoscKarty, buttonIsClicked,
+export const addNewKut = (numerKuta, id, wykonawca, marka, nrRej, wlasciciel, terminWykonania, zadanie,wystawiajacy,opis,uwagi, typ, podstawa, pobierajacy, waznoscKarty,dataZdania, buttonIsClicked,
     buttonDisable, CzCzynnosci, kartaZdana) => {
     return {
         type: actionTypes.ADD_KUT,
@@ -19,6 +19,7 @@ export const addNewKut = (numerKuta, id, wykonawca, marka, nrRej, wlasciciel, te
         podstawa: podstawa, 
         pobierajacy: pobierajacy, 
         waznoscKarty: waznoscKarty,
+        dataZdania: dataZdania,
         buttonIsClicked: buttonIsClicked,
     buttonDisable: buttonDisable,
     CzCzynnosci: CzCzynnosci,
