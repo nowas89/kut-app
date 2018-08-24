@@ -1,57 +1,11 @@
 import * as actionTypes from "./actionTypes";
 
 export const addNewKut = (
-  numerKuta,
-  id,
-  wykonawca,
-  marka,
-  nrRej,
-  wlasciciel,
-  terminWykonania,
-  zadanie,
-  wystawiajacy,
-  opis,
-  uwagi,
-  typ,
-  podstawa,
-  pobierajacy,
-  waznoscKarty,
-  dataZdania,
-  buttonIsClicked,
-  buttonDisable,
-  CzCzynnosci,
-  kartaZdana,
-  rodzajRBH,
-  iloscRBH,
-  iloscSprzetuRBH,
-  RBH
+  state
 ) => {
-  console.log(rodzajRBH, iloscRBH, iloscSprzetuRBH);
   return {
     type: actionTypes.ADD_KUT,
-    numerKuta: numerKuta,
-    id: id,
-    wykonawca: wykonawca,
-    marka: marka,
-    nrRej: nrRej,
-    wlasciciel: wlasciciel,
-    terminWykonania: terminWykonania,
-    zadanie: zadanie,
-    wystawiajacy: wystawiajacy,
-    opis: opis,
-    uwagi: uwagi,
-    typ: typ,
-    podstawa: podstawa,
-    pobierajacy: pobierajacy,
-    waznoscKarty: waznoscKarty,
-    dataZdania: dataZdania,
-    buttonIsClicked: buttonIsClicked,
-    buttonDisable: buttonDisable,
-    CzCzynnosci: CzCzynnosci,
-    kartaZdana: kartaZdana,
-    rodzajRBH: rodzajRBH,
-    iloscRBH: iloscRBH,
-    iloscSprzetuRBH: iloscSprzetuRBH
+  state: state
   };
 };
 export const addNewCzynnosc = (
@@ -88,11 +42,15 @@ export const buttonKlicked = (btnIsClicked, btnIsDisabled) => {
 };
 
 export const openKut = karta => {
+  console.log(karta);
+    
   return {
     type: actionTypes.OPEN_KUT,
     karta: karta
   };
 };
+
+
 export const zamykanieKarty = (zamknij, taKartaJestOtwarta) => {
   return {
     type: actionTypes.ZAMYKANIE_KARTY,

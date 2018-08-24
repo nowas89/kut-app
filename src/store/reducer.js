@@ -15,36 +15,36 @@ export const addNewKut = (state, action) => {
   const nowaKarta = [...state.karty];
 
   nowaKarta.push(
-    (action.id = {
-      numerKuta: action.numerKuta === "" ? "----------" : action.numerKuta,
-      id: action.id,
-      wykonawca: action.wykonawca === "" ? "----------" : action.wykonawca,
-      marka: action.marka === "" ? "----------" : action.marka,
-      nrRej: action.nrRej === "" ? "----------" : action.nrRej,
-      wlasciciel: action.wlasciciel === "" ? "----------" : action.wlasciciel,
+    (action.state.id = {
+      numerKuta: action.state.numerKuta === "" ? "----------" : action.state.numerKuta,
+      id: action.state.id,
+      wykonawca: action.state.wykonawca === "" ? "----------" : action.state.wykonawca,
+      marka: action.state.marka === "" ? "----------" : action.state.marka,
+      nrRej: action.state.nrRej === "" ? "----------" : action.state.nrRej,
+      wlasciciel: action.state.wlasciciel === "" ? "----------" : action.state.wlasciciel,
       terminWykonania:
-        action.terminWykonania === "" ? "----------" : action.terminWykonania,
-      zadanie: action.zadanie === "" ? "----------" : action.zadanie,
+        action.state.terminWykonania === "" ? "----------" : action.state.terminWykonania,
+      zadanie: action.state.zadanie === "" ? "----------" : action.state.zadanie,
       wystawiajacy:
-        action.wystawiajacy === "" ? "----------" : action.wystawiajacy,
-      opis: action.opis === "" ? "----------" : action.opis,
-      uwagi: action.uwagi === "" ? "----------" : action.uwagi,
-      typ: action.typ === "" ? "----------" : action.typ,
-      podstawa: action.podstawa === "" ? "----------" : action.podstawa,
+        action.state.wystawiajacy === "" ? "----------" : action.state.wystawiajacy,
+      opis: action.state.opis === "" ? "----------" : action.state.opis,
+      uwagi: action.state.uwagi === "" ? "----------" : action.state.uwagi,
+      typ: action.state.typ === "" ? "----------" : action.state.typ,
+      podstawa: action.state.podstawa === "" ? "----------" : action.state.podstawa,
       pobierajacy:
-        action.pobierajacy === "" ? "----------" : action.pobierajacy,
-      dataZdania: action.dataZdania === "" ? "----------" : action.dataZdania,
-      waznoscKarty: action.waznoscKarty,
-      CzCzynnosci: action.CzCzynnosci,
-      kartaZdana: action.kartaZdana,
-        rodzajRBH: action.rodzajRBH,
-        iloscRBH: action.iloscRBH,
-        iloscSprzetuRBH: action.iloscSprzetuRBH
+        action.state.pobierajacy === "" ? "----------" : action.state.pobierajacy,
+      dataZdania: action.state.dataZdania === "" ? "----------" : action.state.dataZdania,
+      waznoscKarty: action.state.waznoscKarty,
+      CzCzynnosci: action.state.CzCzynnosci,
+      kartaZdana: action.state.kartaZdana,
+        rodzajRBH: action.state.rodzajRBH,
+        iloscRBH: action.state.iloscRBH,
+        iloscSprzetuRBH: action.state.iloscSprzetuRBH
       
     })
   );
 
-  console.log("ADD NEW KUT", nowaKarta);
+
   return {
     ...state,
     karty: nowaKarta,
@@ -70,7 +70,8 @@ export const buttonKlicked = (state, action) => {
 
 export const openKut = (state, action) => {
 
-
+console.log( action)
+console.log( action.karta)
   const nowOtwartaKarta = {
     numerKuta: action.karta.numerKuta,
     id: action.karta.id,
@@ -90,9 +91,9 @@ export const openKut = (state, action) => {
     CzCzynnosci: action.karta.CzCzynnosci,
     kartaZdana: action.karta.kartaZdana,
     dataZdania: action.karta.dataZdania,
-      iloscRBH: action.karta.iloscRBH,
-      iloscSprzetuRBH: action.karta.iloscSprzetuRBH,
-      rodzajRBH: action.karta.rodzajRBH
+    iloscRBH: action.karta.iloscRBH,
+    iloscSprzetuRBH: action.karta.iloscSprzetuRBH,
+    rodzajRBH: action.karta.rodzajRBH
     
   };
 

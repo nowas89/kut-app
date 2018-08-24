@@ -389,29 +389,7 @@ class DodajKuta extends Component {
   };
   dispatchAndResetNowaKarta = () => {
     this.props.onAddNewKut(
-      this.state.numerKuta,
-      this.state.id,
-      this.state.wykonawca,
-      this.state.marka,
-      this.state.nrRej,
-      this.state.wlasciciel,
-      this.state.terminWykonania,
-      this.state.zadanie,
-      this.state.wystawiajacy,
-      this.state.opis,
-      this.state.uwagi,
-      this.state.typ,
-      this.state.podstawa,
-      this.state.pobierajacy,
-      this.state.waznoscKarty,
-      this.state.dataZdania,
-      this.props.buttonIsClicked,
-      this.props.buttonDisable,
-      this.state.CzCzynnosci,
-      this.state.kartaZdana,
-      this.state.rodzajRBH,
-      this.state.iloscRBH,
-      this.state.iloscSprzetuRBH
+      this.state
    
     );
   };
@@ -915,54 +893,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAddNewKut: (
-      numerKuta,
-      id,
-      wykonawca,
-      marka,
-      nrRej,
-      wlasciciel,
-      terminWykonania,
-      zadanie,
-      wystawiajacy,
-      opis,
-      uwagi,
-      typ,
-      podstawa,
-      pobierajacy,
-      waznoscKarty,
-      buttonIsClicked,
-      buttonDisable,
-      CzCzynnosci,
-      kartaZdana,
-      rodzajRBH,
-      iloscRBH,
-      iloscSprzetuRBH
+      state
     
     ) =>
       dispatch(
         actions.addNewKut(
-          numerKuta,
-          id,
-          wykonawca,
-          marka,
-          nrRej,
-          wlasciciel,
-          terminWykonania,
-          zadanie,
-          wystawiajacy,
-          opis,
-          uwagi,
-          typ,
-          podstawa,
-          pobierajacy,
-          waznoscKarty,
-          buttonIsClicked,
-          buttonDisable,
-          CzCzynnosci,
-          kartaZdana,
-          rodzajRBH,
-          iloscRBH,
-          iloscSprzetuRBH
+         state
         )
       ),
     onAddNewCzynnosc: (

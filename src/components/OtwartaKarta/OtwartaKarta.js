@@ -19,7 +19,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
+
 import WygenerowanyKut2 from "../WygenerowanyKut/WygenerowanyKut2";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -28,6 +28,13 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
 const styles = theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
+  },
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -99,7 +106,6 @@ drukowanie: false,
       podstawa: "",
       waznoscKarty: "",
       pobierajacy: "",
-
       CzOperacja: "",
       CzRbh: "",
       CzDataWyk:
@@ -115,41 +121,40 @@ drukowanie: false,
       CzAsygnata: "",
       CzUwagi: "",
       CzOperacjaId: 0,
-      RBH: {
         rodzajRBH: "",
         iloscSprzetuRBH: "",
         iloscRBH: ""
-      }
+      
     }
   };
 
   componentWillMount() {
-    this.setState({
-      dodajCzynnosc: this.props.dodajCzynnosc,
-      karta: {
-        numerKuta: this.props.numerKuta,
-        id: this.props.id,
-        kartaZdana: this.props.kartaZdana,
-        CzCzynnosci: this.props.CzCzynnosci,
-        wykonawca: this.props.wykonawca,
-        marka: this.props.marka,
-        nrRej: this.props.nrRej,
-        wlasciciel: this.props.wlasciciel,
-        terminWykonania: this.props.terminWykonania,
-        zadanie: this.props.zadanie,
-        wystawiajacy: this.props.wystawiajacy,
-        opis: this.props.opis,
-        uwagi: this.props.uwagi,
-        typ: this.props.typ,
-        podstawa: this.props.podstawa,
-        waznoscKarty: this.props.waznoscKarty,
-        pobierajacy: this.props.pobierajacy,
-        CzOperacjaId: this.state.karta.CzCzynnosci.length + 1,
-        dataZdania: this.props.dataZdania,
 
-          rodzajRBH: this.props.rodzajRBH,
-          iloscSprzetuRBH: this.props.rodzajRBH,
-          iloscRBH: this.props.rodzajRBH
+    this.setState({
+      dodajCzynnosc: this.props.taKartaJestOtwarta.dodajCzynnosc,
+      karta: {
+        numerKuta: this.props.taKartaJestOtwarta.numerKuta,
+        id: this.props.taKartaJestOtwarta.id,
+        kartaZdana: this.props.taKartaJestOtwarta.kartaZdana,
+        CzCzynnosci: this.props.taKartaJestOtwarta.CzCzynnosci,
+        wykonawca: this.props.taKartaJestOtwarta.wykonawca,
+        marka: this.props.taKartaJestOtwarta.marka,
+        nrRej: this.props.taKartaJestOtwarta.nrRej,
+        wlasciciel: this.props.taKartaJestOtwarta.wlasciciel,
+        terminWykonania: this.props.taKartaJestOtwarta.terminWykonania,
+        zadanie: this.props.taKartaJestOtwarta.zadanie,
+        wystawiajacy: this.props.taKartaJestOtwarta.wystawiajacy,
+        opis: this.props.taKartaJestOtwarta.opis,
+        uwagi: this.props.taKartaJestOtwarta.uwagi,
+        typ: this.props.taKartaJestOtwarta.typ,
+        podstawa: this.props.taKartaJestOtwarta.podstawa,
+        waznoscKarty: this.props.taKartaJestOtwarta.waznoscKarty,
+        pobierajacy: this.props.taKartaJestOtwarta.pobierajacy,
+        CzOperacjaId: this.state.karta.CzCzynnosci.length + 1,
+        dataZdania: this.props.taKartaJestOtwarta.dataZdania,
+        rodzajRBH: this.props.taKartaJestOtwarta.rodzajRBH,
+        iloscSprzetuRBH: this.props.taKartaJestOtwarta.iloscSprzetuRBH,
+        iloscRBH: this.props.taKartaJestOtwarta.iloscRBH
         
       }
     });
@@ -479,7 +484,7 @@ drukowanie: !e.target.value
   };
   render() {
     const { classes } = this.props;
-console.log(this.state.karta, '[otwarta karta]')
+
     return (
       <Wrapper>
         <Form>
@@ -707,9 +712,9 @@ console.log(this.state.karta, '[otwarta karta]')
           </div>
         </Paper>
 
-        {this.state.karta.CzCzynnosci.length > 0 ? (
+        {/* {this.state.karta.CzCzynnosci.length > 0 ? (
           <TabelaCzynnosci zawartosCzynnosci={this.state.karta.CzCzynnosci} />
-        ) : null}
+        ) : null} */}
 
         <Button
           variant="outlined"

@@ -42,6 +42,7 @@ class TabelaGlowna extends Component {
 
   render() {
     const { classes } = this.props;
+    console.log(this.props.karty)
     return (
       <div style={{width: '95%', textAlign: 'center'}}>
        
@@ -90,6 +91,7 @@ class TabelaGlowna extends Component {
         <TableBody>
      
         {this.props.karty.map((karta, i) => (
+    
          <TableRow 
          key={i+1}
          className={classes.row}
