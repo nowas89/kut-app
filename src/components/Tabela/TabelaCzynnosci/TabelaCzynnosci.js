@@ -23,7 +23,7 @@ class TabelaCzynnosci extends Component {
         </div>
 
         {this.props.zawartosCzynnosci.map(karta => {
-          console.log(karta.CzOperacjaId);
+
           return (
             <RowCzynnosci
               key={karta.CzOperacjaId}

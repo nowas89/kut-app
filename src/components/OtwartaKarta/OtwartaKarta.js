@@ -21,7 +21,11 @@ import SaveIcon from "@material-ui/icons/Save";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 import WygenerowanyKut2 from "../WygenerowanyKut/WygenerowanyKut2";
-
+import Paper from "@material-ui/core/Paper";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const styles = theme => ({
   container: {
@@ -61,6 +65,13 @@ const styles = theme => ({
   icon: {
     marginRight: 5,
     fontSize: 24,
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
   }
 });
 
@@ -103,7 +114,12 @@ drukowanie: false,
       CzIlosc: "",
       CzAsygnata: "",
       CzUwagi: "",
-      CzOperacjaId: 0
+      CzOperacjaId: 0,
+      RBH: {
+        rodzajRBH: "",
+        iloscSprzetuRBH: "",
+        iloscRBH: ""
+      }
     }
   };
 
@@ -129,7 +145,12 @@ drukowanie: false,
         waznoscKarty: this.props.waznoscKarty,
         pobierajacy: this.props.pobierajacy,
         CzOperacjaId: this.state.karta.CzCzynnosci.length + 1,
-        dataZdania: this.props.dataZdania
+        dataZdania: this.props.dataZdania,
+
+          rodzajRBH: this.props.rodzajRBH,
+          iloscSprzetuRBH: this.props.rodzajRBH,
+          iloscRBH: this.props.rodzajRBH
+        
       }
     });
   }
@@ -226,6 +247,40 @@ drukowanie: !e.target.value
       
     })
   };
+
+  zmianaSelecta = e => {
+    this.setState({
+   karta: {
+    ...this.state.karta,
+  
+      rodzajRBH: e.target.value
+    
+   }
+    });
+  };
+  addIloscSprzetuRBH = e => {
+    this.setState({
+      karta: {
+
+        ...this.state.karta,
+
+          iloscSprzetuRBH: e.target.value
+        
+      }
+    });
+  };
+  addIloscRBH = e => {
+    this.setState({
+     karta: {
+      ...this.state.karta,
+
+
+        iloscRBH: e.target.value
+      
+     }
+    });
+  };
+
   handleChange = event => {
     this.setState({
       karta: {
@@ -424,7 +479,7 @@ drukowanie: !e.target.value
   };
   render() {
     const { classes } = this.props;
-
+console.log(this.state.karta, '[otwarta karta]')
     return (
       <Wrapper>
         <Form>
@@ -593,14 +648,65 @@ drukowanie: !e.target.value
           onChange={e => this.addPobierajacy(e)}
         />
 
-        <br />
-        <br />
-
-        <br />
-
-        <Typography variant="headline" gutterBottom style={{fontFamily: 'Arial'}}>
-          Rozliczenie wykonania zadania
+        <Typography
+          variant="headline"
+          gutterBottom
+          style={{ marginTop: "52px" }}
+        >
+          Rozliczenie Wykonania Zadania
         </Typography>
+        <Paper
+          className={classes.root}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "50px"
+          }}
+        >
+          <Typography variant="subheading" gutterBottom>
+            Rozliczenie Godzin Pracy
+          </Typography>
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="age-simple">Rodzaj</InputLabel>
+              <Select
+                onChange={this.zmianaSelecta}
+                value={this.state.karta.rodzajRBH}
+              >
+                {this.props.rbhState.length > 0
+                  ? this.props.rbhState.map((rodzaj, i) => (
+                      <MenuItem key={i} value={rodzaj}>
+                        {rodzaj}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </FormControl>
+            <TextField
+              label="Ilość Godzin"
+              className={classes.textField}
+              style={{ width: "100px" }}
+              margin="normal"
+              type="text"
+              defaultValue={this.state.karta.iloscRBH}
+              name="iloscGodzin"
+              onChange={e => this.addIloscRBH(e)}
+            />
+            <TextField
+              label="Ilość Sprzętu"
+              className={classes.textField}
+              style={{ width: "110px" }}
+              margin="normal"
+              type="text"
+              name="ilość sprzętu"
+              onChange={e => this.addIloscSprzetuRBH(e)}
+              defaultValue={this.state.karta.iloscSprzetuRBH}
+            />
+          </div>
+        </Paper>
+
         {this.state.karta.CzCzynnosci.length > 0 ? (
           <TabelaCzynnosci zawartosCzynnosci={this.state.karta.CzCzynnosci} />
         ) : null}
@@ -609,7 +715,9 @@ drukowanie: !e.target.value
           variant="outlined"
           
           className={classes.button2}
-          style={{marginTop: "50px"}}
+          style={{marginTop: "50px", fontSize: '13px'}}
+
+          
           onClick={this.onClickAction}
        
         >
@@ -856,7 +964,9 @@ const Container = styled.div`
 `;
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    rbhState: state.rodzajRBH
+  };
 };
 
 const mapDispatchToProps = dispatch => {

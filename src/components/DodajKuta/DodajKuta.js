@@ -11,6 +11,12 @@ import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Paper from "@material-ui/core/Paper";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 import classNames from "classnames";
 
@@ -22,32 +28,55 @@ import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
+  },
   container: {
     display: "flex",
     flexWrap: "wrap",
-    fontFamily: 'Open Sans'
+    fontFamily: "Open Sans"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
-    fontFamily: 'Arial'
+    width: 170,
+    fontFamily: "Arial"
   },
   button: {
     margin: theme.spacing.unit,
-    fontFamily: 'Helvetica'
+    fontFamily: "Helvetica"
   },
   input: {
     display: "none"
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
   }
 });
 
 class DodajKuta extends Component {
   state = {
-    
-
-    numerKuta:    this.props.akronim === '' ?  (this.props.karty.length + 1 ) +  this.props.akronim  + " / " + new Date().getFullYear() :
-    (this.props.karty.length + 1 ) + " / " + this.props.akronim + " / " + new Date().getFullYear(),
+    numerKuta:
+      this.props.akronim === ""
+        ? this.props.karty.length +
+          1 +
+          this.props.akronim +
+          " / " +
+          new Date().getFullYear()
+        : this.props.karty.length +
+          1 +
+          " / " +
+          this.props.akronim +
+          " / " +
+          new Date().getFullYear(),
     id: this.props.karty.length + 1,
     dodajCzynnosc: false,
     kartaZdana: false,
@@ -65,7 +94,7 @@ class DodajKuta extends Component {
     zadanie: "",
     wystawiajacy: "",
     opis: "",
-    dataZdania: '',
+    dataZdania: "",
     uwagi: "",
     typ: "",
     podstawa: "",
@@ -91,7 +120,13 @@ class DodajKuta extends Component {
     CzIlosc: "",
     CzAsygnata: "",
     CzUwagi: "",
-    CzOperacjaId: 0
+    CzOperacjaId: 0,
+
+   
+      rodzajRBH: "",
+      iloscRBH: "",
+      iloscSprzetuRBH: ""
+    
   };
   componentDidMount() {
     this.setState({
@@ -122,7 +157,12 @@ class DodajKuta extends Component {
       podstawa: "",
       waznoscKarty: "",
       pobierajacy: "",
-      dataZdania: ''
+      dataZdania: "",
+    
+        rodzajRBH: "",
+        iloscSprzetuRBH: "",
+        iloscRBH: ""
+      
     });
   }
 
@@ -132,15 +172,42 @@ class DodajKuta extends Component {
     }
   };
 
-  handleChange = event => {
-    this.setState({ kartaZdana: event.target.checked });
-  };
-
   addNumerKuta = e => {
     this.setState({
       numerKuta: e.target.value
     });
   };
+
+  zmianaSelecta = e => {
+    this.setState({
+
+
+        rodzajRBH: e.target.value
+      
+    });
+  };
+  addIloscSprzetuRBH = e => {
+    this.setState({
+
+        
+        iloscSprzetuRBH: e.target.value
+      
+    });
+  };
+  addIloscRBH = e => {
+    this.setState({
+
+   
+
+        iloscRBH: e.target.value
+      
+    });
+  };
+
+  handleChange = event => {
+    this.setState({ kartaZdana: event.target.checked });
+  };
+
   addWykonawca = e => {
     this.setState({
       wykonawca: e.target.value
@@ -208,10 +275,7 @@ class DodajKuta extends Component {
   };
   addDataZdania = e => {
     this.setState({
-
-
-        dataZdania: e.target.value
-      
+      dataZdania: e.target.value
     });
   };
 
@@ -344,11 +408,16 @@ class DodajKuta extends Component {
       this.props.buttonIsClicked,
       this.props.buttonDisable,
       this.state.CzCzynnosci,
-      this.state.kartaZdana
+      this.state.kartaZdana,
+      this.state.rodzajRBH,
+      this.state.iloscRBH,
+      this.state.iloscSprzetuRBH
+   
     );
   };
 
   render() {
+
     const { classes } = this.props;
     let today = new Date();
     let dd = today.getDate();
@@ -366,197 +435,243 @@ class DodajKuta extends Component {
 
     return (
       <Wrapper>
-        <Form>
-          <TextField
-            label="Numer KUT"
-          
-            defaultValue={this.state.numerKuta}
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            onChange={e => this.addNumerKuta(e)}
-          />
-        </Form>
-        <Form>
-          <TextField
-            label="Wykonawca"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="wykonawca"
-            defaultValue={this.state.wykonawca}
+        <Paper
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "95%",
+            paddingTop: "50px",
+            paddingBottom: "50px",
+            marginTop: "52px"
+          }}
+        >
+          <Form>
+            <TextField
+              label="Numer KUT"
+              defaultValue={this.state.numerKuta}
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              onChange={e => this.addNumerKuta(e)}
+            />
+          </Form>
+          <Form>
+            <TextField
+              label="Wykonawca"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="wykonawca"
+              defaultValue={this.state.wykonawca}
+              autoComplete="on"
+              onChange={e => this.addWykonawca(e)}
+            />
 
-            autoComplete="on"
-            onChange={e => this.addWykonawca(e)}
-          />
+            <TextField
+              label="Marka i typ sprzętu"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="typ"
+              defaultValue={this.state.marka}
+              autoComplete="on"
+              onChange={e => this.addMarka(e)}
+            />
 
-          <TextField
-            label="Marka i typ sprzętu"
-            className={classes.textField}
-     
-            margin="normal"
-            type="text"
-            name="typ"
-            defaultValue={this.state.marka}
-            autoComplete="on"
+            <TextField
+              label="Typ UiSw:"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="rodzaj"
+              defaultValue={this.state.typ}
+              autoComplete="on"
+              onChange={e => this.addTyp(e)}
+            />
+            <TextField
+              label="Podstawa wydania"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="podstawa"
+              defaultValue={this.state.podstawa}
+              autoComplete="on"
+            />
+            <TextField
+              label="Nr. rejestracyjny"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="rejestracja"
+              defaultValue={this.state.nrRej}
+              autoComplete="on"
+              onChange={e => this.addNrRej(e)}
+            />
+          </Form>
+          <Form>
+            <TextField
+              label="  Sprzęt Należy do:"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="wlasciciel"
+              defaultValue={this.state.wlasciciel}
+              autoComplete="on"
+              onChange={e => this.addWlasciciel(e)}
+            />
 
-            
-            onChange={e => this.addMarka(e)}
-          />
+            <TextField
+              label=" Termin wykonania"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="terminwykonania"
+              defaultValue={this.state.terminWykonania}
+              autoComplete="on"
+              onChange={e => this.addTerminWYkonania(e)}
+            />
+            <TextField
+              label=" Data ważności karty"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="karta"
+              defaultValue={this.state.waznoscKarty}
+              autoComplete="on"
+              onChange={e => this.addWaznoscKarty(e)}
+            />
+            <TextField
+              label=" Data zdania karty"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="karta"
+              defaultValue={this.state.dataZdania}
+              autoComplete="on"
+              onChange={e => this.addDataZdania(e)}
+            />
+          </Form>
+          <Form>
+            <TextField
+              label=" Zadanie:"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="zadanie"
+              defaultValue={this.state.zadanie}
+              autoComplete="on"
+              onChange={e => this.addZadanie(e)}
+            />
 
-          <TextField
-            label="Typ UiSw:"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="rodzaj"
-            defaultValue={this.state.typ}
-            autoComplete="on"
+            <TextField
+              label="  Kartę wystawił"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="wystawiajacy"
+              defaultValue={this.state.wystawiajacy}
+              autoComplete="on"
+              onChange={e => this.addWystawiajacy(e)}
+            />
+          </Form>
 
-            
-            onChange={e => this.addTyp(e)}
-          />
-          <TextField
-            label="Podstawa wydania"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="podstawa"
-            defaultValue={this.state.podstawa}
-            autoComplete="on"
-
-          />
-             <TextField
-            label="Nr. rejestracyjny"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="rejestracja"
-            defaultValue={this.state.nrRej}
-
-            
-            autoComplete="on"
-            onChange={e => this.addNrRej(e)}
-          />
-        </Form>
-        <Form>
-       
-
-          <TextField
-            label="  Sprzęt Należy do:"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="wlasciciel"
-            defaultValue={this.state.wlasciciel}
-            autoComplete="on"
-            onChange={e => this.addWlasciciel(e)}
-          />
-
-          <TextField
-            label=" Termin wykonania"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="terminwykonania"
-            defaultValue={this.state.terminWykonania}
-            autoComplete="on"
-            onChange={e => this.addTerminWYkonania(e)}
-          />
-          <TextField
-            label=" Data ważności karty"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="karta"
-            defaultValue={this.state.waznoscKarty}
-            autoComplete="on"
-            onChange={e => this.addWaznoscKarty(e)}
-          />
-          <TextField
-            label=" Data zdania karty"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="karta"
-            defaultValue={this.state.dataZdania}
-            autoComplete="on"
-            onChange={e => this.addDataZdania(e)}
-
-          />
-        </Form>
-        <Form>
-          <TextField
-            label=" Zadanie:"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="zadanie"
-            defaultValue={this.state.zadanie}
-            autoComplete="on"
-            onChange={e => this.addZadanie(e)}
-          />
-
-          <TextField
-            label="  Kartę wystawił"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="wystawiajacy"
-            defaultValue={this.state.wystawiajacy}
-            autoComplete="on"
-            onChange={e => this.addWystawiajacy(e)}
-          />
-        </Form>
-
-        <TextAr>
-          <TextField
-            style={{ width: 750 }}
-            label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
+          <TextAr>
+            <TextField
+              style={{ width: 750 }}
+              label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
               wykonania następujących prac:"
-            type="text"
-            name="opis"
-            multiline={true}
-            defaultValue={this.state.opis}
-            autoComplete="on"
-            onChange={e => this.addOpis(e)}
-          />
-        </TextAr>
+              type="text"
+              name="opis"
+              multiline={true}
+              defaultValue={this.state.opis}
+              autoComplete="on"
+              onChange={e => this.addOpis(e)}
+            />
+          </TextAr>
 
-        <TextAr>
+          <TextAr>
+            <TextField
+              style={{ width: 750 }}
+              label="  Uwagi przyjmującego"
+              type="text"
+              margin="normal"
+              name="uwagi"
+              defaultValue={this.state.uwagi}
+              autoComplete="on"
+              onChange={e => this.addUwagi(e)}
+            />
+          </TextAr>
+
           <TextField
-            style={{ width: 750 }}
-            label="  Uwagi przyjmującego"
-            type="text"
+            label=" Karte Pobrał"
+            className={classes.textField}
             margin="normal"
-            name="uwagi"
-            defaultValue={this.state.uwagi}
+            type="text"
+            name="pobierajacy"
+            defaultValue={this.state.pobierajacy}
             autoComplete="on"
-            onChange={e => this.addUwagi(e)}
+            onChange={e => this.addPobierajacy(e)}
           />
-        </TextAr>
-
-        <TextField
-          label=" Karte Pobrał"
-          className={classes.textField}
-          margin="normal"
-          type="text"
-          name="pobierajacy"
-          defaultValue={this.state.pobierajacy}
-          autoComplete="on"
-          onChange={e => this.addPobierajacy(e)}
-        />
-
-        <br />
-        <br />
-        <br />
+        </Paper>
         <Typography
           variant="headline"
           gutterBottom
-          style={{ marginTop: "2px" }}
+          style={{ marginTop: "52px" }}
         >
-          Rozliczenie wykonania zadania
+          Rozliczenie Wykonania Zadania
         </Typography>
+        <Paper
+          className={classes.root}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "50px"
+          }}
+        >
+          <Typography variant="subheading" gutterBottom>
+            Rozliczenie Godzin Pracy
+          </Typography>
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="age-simple">Rodzaj</InputLabel>
+              <Select
+                onChange={this.zmianaSelecta}
+                value={this.state.rodzajRBH}
+              >
+                {this.props.rbhState.length > 0
+                  ? this.props.rbhState.map((rodzaj, i) => (
+                      <MenuItem key={i} value={rodzaj}>
+                        {rodzaj}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </FormControl>
+            <TextField
+              label="Ilość Godzin"
+              className={classes.textField}
+              style={{ width: "100px" }}
+              margin="normal"
+              type="text"
+              defaultValue={this.state.iloscRBH}
+              name="iloscGodzin"
+              onChange={e => this.addIloscRBH(e)}
+            />
+            <TextField
+              label="Ilość Sprzętu"
+              className={classes.textField}
+              style={{ width: "110px" }}
+              margin="normal"
+              type="text"
+              name="ilość sprzętu"
+              onChange={e => this.addIloscSprzetuRBH(e)}
+              defaultValue={this.state.iloscSprzetuRBH}
+            />
+          </div>
+        </Paper>
 
         {this.state.CzCzynnosci.length > 0 ? (
           <TabelaCzynnosci zawartosCzynnosci={this.state.CzCzynnosci} />
@@ -564,6 +679,7 @@ class DodajKuta extends Component {
         <Button
           variant="contained"
           className={classes.button}
+          style={{ fontSize: "14px" }}
           onClick={this.onClickAction}
         >
           Dodaj Czynność
@@ -584,6 +700,7 @@ class DodajKuta extends Component {
               <TextField
                 label=" Zużyto Roboczo Godzin"
                 className={classes.textField}
+                style={{ width: "200px" }}
                 margin="normal"
                 type="number"
                 name="karta"
@@ -612,7 +729,7 @@ class DodajKuta extends Component {
               />
             </Container>
             <Typography
-              variant="headline"
+              variant="subheading"
               gutterBottom
               style={{ marginTop: "22px" }}
             >
@@ -633,6 +750,7 @@ class DodajKuta extends Component {
               <TextField
                 label="    Oznaczenie Katalogowe"
                 className={classes.textField}
+                style={{ width: "200px" }}
                 margin="normal"
                 type="text"
                 name="karta"
@@ -675,7 +793,7 @@ class DodajKuta extends Component {
               color="primary"
               aria-label="Add"
               className={classes.button}
-              style={{ marginTop: "30px", marginBottom: '10px' }}
+              style={{ marginTop: "30px", marginBottom: "10px" }}
               onClick={() => this.dispatchAndAndResetCzynnosc()}
             >
               <AddIcon />
@@ -734,6 +852,8 @@ class DodajKuta extends Component {
   }
 }
 
+
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -757,13 +877,14 @@ const Czynnosci = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  box-shadow:         inset 0 0 10px rgba(0, 0, 0, 0.2);
-background: rgba(211,211,211, 0.1);
-h1{
-  font-family: "Helvetica";
-  font-weight: 400;
-}
+
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+
+  h1 {
+    font-family: "Helvetica";
+    font-weight: 400;
+  }
 `;
 
 const Form = styled.form`
@@ -786,7 +907,8 @@ const mapStateToProps = state => {
     karty: state.karty,
     buttonIsClicked: state.buttonIsClicked,
     buttonDisable: state.buttonDisable,
-    akronim: state.akronim
+    akronim: state.akronim,
+    rbhState: state.rodzajRBH
   };
 };
 
@@ -811,7 +933,11 @@ const mapDispatchToProps = dispatch => {
       buttonIsClicked,
       buttonDisable,
       CzCzynnosci,
-      kartaZdana
+      kartaZdana,
+      rodzajRBH,
+      iloscRBH,
+      iloscSprzetuRBH
+    
     ) =>
       dispatch(
         actions.addNewKut(
@@ -833,7 +959,10 @@ const mapDispatchToProps = dispatch => {
           buttonIsClicked,
           buttonDisable,
           CzCzynnosci,
-          kartaZdana
+          kartaZdana,
+          rodzajRBH,
+          iloscRBH,
+          iloscSprzetuRBH
         )
       ),
     onAddNewCzynnosc: (
