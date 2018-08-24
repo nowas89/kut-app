@@ -44,7 +44,7 @@ class TabelaEwidencyjna extends Component {
           gutterBottom
           style={{ marginTop: "40px" }}
         >
-          Lista ewidencyjna Kart Usług Technicznych
+          Lista Ewidencyjna Kart Usług Technicznych
         </Typography>
         <Paper className={classes.root}>
           <Table className={classes.table} id="tabela">

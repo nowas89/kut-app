@@ -429,6 +429,9 @@ class DodajKuta extends Component {
               label="Numer KUT"
               defaultValue={this.state.numerKuta}
               className={classes.textField}
+              inputProps={{
+                style: { textAlign: "center" }
+              }}
               margin="normal"
               type="text"
               onChange={e => this.addNumerKuta(e)}
@@ -629,22 +632,30 @@ class DodajKuta extends Component {
               </Select>
             </FormControl>
             <TextField
+             inputProps={{
+              style: { textAlign: "center" }
+            }}
               label="Ilość Godzin"
               className={classes.textField}
               style={{ width: "100px" }}
               margin="normal"
               type="text"
               defaultValue={this.state.iloscRBH}
-              name="iloscGodzin"
+
               onChange={e => this.addIloscRBH(e)}
             />
             <TextField
-              label="Ilość Sprzętu"
+             inputProps={{
+              style: { textAlign: "center" }
+            }}
+              label="Jednostek Sprzętu"
+
               className={classes.textField}
-              style={{ width: "110px" }}
+              style={{ width: "150px" }}
               margin="normal"
               type="text"
-              name="ilość sprzętu"
+
+
               onChange={e => this.addIloscSprzetuRBH(e)}
               defaultValue={this.state.iloscSprzetuRBH}
             />
@@ -768,7 +779,7 @@ class DodajKuta extends Component {
             </Container>
             <Button
               variant="fab"
-              color="primary"
+              color="default"
               aria-label="Add"
               className={classes.button}
               style={{ marginTop: "30px", marginBottom: "10px" }}
@@ -858,7 +869,7 @@ const Czynnosci = styled.div`
 
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-
+padding: 15px;
   h1 {
     font-family: "Helvetica";
     font-weight: 400;

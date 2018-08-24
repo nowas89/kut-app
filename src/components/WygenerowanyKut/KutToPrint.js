@@ -28,7 +28,7 @@ class KutToPrint extends Component {
                 <div className="second"><h4 style={{left: '65px', bottom: "1px"}}>(stopień, nazwisko)</h4><h4 style={{right: '85px', bottom: "1px"}}>(podpis, data))</h4><h1>{ wystawiajacy}</h1> <h1>{terminWykonania}</h1></div>
             </div>
             <div className="third-row">
-                <div className="first"><h3>W CZASIE DEFEKTACJI (BADAŃ DIAGNOSTYCZNYCH) STWIERDZONO KONIECZNOŚĆ WYKONIANIA NASTĘUJĄCYCH PRAC:</h3>
+                <div className="first"><h3>W CZASIE DEFEKTACJI (BADAŃ DIAGNOSTYCZNYCH) STWIERDZONO KONIECZNOŚĆ WYKONIANIA NASTĘPUJĄCYCH PRAC:</h3>
                 <h1 style={{paddingTop: '10px'}}>{opis}</h1></div>
                 <div className="second">
                 <h3>UWAGI PRZYJMUJĄCEGO:</h3>

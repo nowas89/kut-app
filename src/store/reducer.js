@@ -161,6 +161,20 @@ export const saveRodzajRBH = (state, action) => {
     rodzajRBH: addRbhTyp
   };
 };
+export const deleteRodzajRBH = (state, action) => {
+
+  let deleteTyp = state.rodzajRBH.filter(
+    item => item !== action.typRBH
+  );
+  console.log(deleteTyp)
+
+
+
+  return {
+    ...state,
+    rodzajRBH: deleteTyp
+  };
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_KUT:
@@ -179,6 +193,8 @@ const reducer = (state = initialState, action) => {
       return saveAcronim(state, action);
     case actionTypes.ZAPISZ_TYP:
       return saveRodzajRBH(state, action);
+    case actionTypes.USUN_TYP:
+      return deleteRodzajRBH(state, action);
     default:
       return state;
   }

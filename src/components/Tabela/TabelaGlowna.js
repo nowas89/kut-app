@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import styled from "styled-components";
 import compose from "recompose/compose";
 
 
@@ -18,6 +19,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 // import Typography from "@material-ui/core/Typography";
 import './TabelaEwidencyjna/style.css'
+import TextField from "@material-ui/core/TextField";
+
 
 
 // import styled from "styled-components";
@@ -35,16 +38,54 @@ const styles = theme => ({
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.background.default
     }
-  }
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
 });
 class TabelaGlowna extends Component {
+state = {
+  
+    searchString: ""
+}
+  przeszukajKarty = e => {
+    this.setState({ searchString: e.target.value.toLowerCase() });
+  };
+
+
+  resetState = (e) => {
+
+    setTimeout(() => {
+      this.setState({searchString: ''})
+    }, 50);
+    }
+  
 
 
   render() {
     const { classes } = this.props;
-    console.log(this.props.karty)
+    let newArray = this.props.karty
+    let searchString = this.state.searchString.trim().toLowerCase();
+
+    if (searchString.length > 0) {
+         newArray =   newArray.filter(karta => {
+           return (
+             karta.numerKuta.toLowerCase().includes(this.state.searchString) ||
+             karta.pobierajacy.toLowerCase().includes(this.state.searchString) ||
+             karta.marka.toLowerCase().includes(this.state.searchString) ||
+             karta.nrRej.toLowerCase().includes(this.state.searchString) ||
+             karta.wlasciciel.toLowerCase().includes(this.state.searchString) ||
+             karta.wystawiajacy.toLowerCase().includes(this.state.searchString) 
+           );
+         });
+
+       }
+       console.log(newArray)
+
     return (
-      <div style={{width: '95%', textAlign: 'center'}}>
+      <Wrapper >
        
        <Paper className={classes.root}>
       <Table className={classes.table} id="tabelaKart">
@@ -90,56 +131,110 @@ class TabelaGlowna extends Component {
         </TableHead>
         <TableBody>
      
-        {this.props.karty.map((karta, i) => (
+        {
+         this.state.searchString !== ''?
+
+            newArray.map((karta, i) => (
     
-         <TableRow 
-         key={i+1}
-         className={classes.row}
-          onClick={() => this.props.onOpeningKut(karta)}>
-
-
-          <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>  {i+1}  </TableCell>
-          <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>    {karta.numerKuta} </TableCell>
-          <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>   {karta.marka} </TableCell>
-           <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>   {karta.nrRej} </TableCell>
-           <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>  {karta.wlasciciel} </TableCell>
-           <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>  {karta.terminWykonania} </TableCell>
-           <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>   {karta.zadanie} </TableCell>
-            <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>  {karta.pobierajacy} </TableCell>
-            <TableCell  style={{
-                      textAlign: "center",
-                      padding: "4px 10px 4px 24px"
-                    }}>  {karta.kartaZdana ? 'TAK' : 'NIE'} </TableCell>
-            </TableRow>
+              <TableRow 
+              key={i+1}
+              className={classes.row}
+               onClick={() => this.props.onOpeningKut(karta)}>
+     
+     
+               <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {i+1}  </TableCell>
+               <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>    {karta.numerKuta} </TableCell>
+               <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>   {karta.marka} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>   {karta.nrRej} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.wlasciciel} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.terminWykonania} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>   {karta.zadanie} </TableCell>
+                 <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.pobierajacy} </TableCell>
+                 <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.kartaZdana ? 'TAK' : 'NIE'} </TableCell>
+                 </TableRow>))
+               
+           :
+            this.props.karty.map((karta, i) => (
+    
+              <TableRow 
+              key={i+1}
+              className={classes.row}
+               onClick={() => this.props.onOpeningKut(karta)}>
+     
+     
+               <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {i+1}  </TableCell>
+               <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>    {karta.numerKuta} </TableCell>
+               <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>   {karta.marka} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>   {karta.nrRej} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.wlasciciel} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.terminWykonania} </TableCell>
+                <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>   {karta.zadanie} </TableCell>
+                 <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.pobierajacy} </TableCell>
+                 <TableCell  style={{
+                           textAlign: "center",
+                           padding: "4px 10px 4px 24px"
+                         }}>  {karta.kartaZdana ? 'TAK' : 'NIE'} </TableCell>
+                 </TableRow>
+               
+         
+          
           
         ))}
 
            </TableBody>
       </Table>
+ 
     </Paper>
                 <ReactHTMLTableToExcel
                     id="test-table-xls-button"
@@ -148,10 +243,36 @@ class TabelaGlowna extends Component {
                     filename="Tabela Kart Usług Technicznych"
                     sheet="tablexls"
                     buttonText="Eksportuj Listę do XML"/>
-      </div>
+                         <TextField
+          label="Przeszukaj Karty"
+          className={classes.textField}
+          style={{position: 'absolute', bottom: '0px'}}
+          margin="normal"
+          type="text"
+
+          defaultValue={this.state.searchString}
+          autoComplete="on"
+          onChange={e => this.przeszukajKarty(e)}
+
+        />
+      </Wrapper>
     );
   }
 }
+
+
+const Wrapper = styled.div`
+width: '95%'; text-align: 'center';
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Helvetica";
+  font-weight: 400;
+  min-height: 740px;
+  
+
+`;
 
 const mapStateToProps = state => {
   return {

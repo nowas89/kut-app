@@ -80,3 +80,10 @@ export const saveRodzajRBH = typRBH => {
     typRBH: typRBH
   };
 };
+export const deleteRodzajRBH = typRBH => {
+  return {
+    type: actionTypes.USUN_TYP,
+
+    typRBH: typRBH
+  };
+};

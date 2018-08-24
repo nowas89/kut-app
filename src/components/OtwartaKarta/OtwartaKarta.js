@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 import * as actions from "../../store/actions";
 import WygenerowanyKut from '../WygenerowanyKut/WygenerowanyKut';
+import TabelaCzynnosci from '../Tabela/TabelaCzynnosci/TabelaCzynnosci'
 
 // import { withStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
@@ -487,6 +488,17 @@ drukowanie: !e.target.value
 
     return (
       <Wrapper>
+         <Paper
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "95%",
+            paddingTop: "50px",
+            paddingBottom: "50px",
+            marginTop: "52px"
+          }}
+        >
         <Form>
           <Typography variant="display1" gutterBottom  style={{fontFamily: 'Arial'}}>
             Edytujesz Kartę Nr. {this.state.karta.numerKuta}
@@ -652,7 +664,7 @@ drukowanie: !e.target.value
           autoComplete="on"
           onChange={e => this.addPobierajacy(e)}
         />
-
+</Paper>
         <Typography
           variant="headline"
           gutterBottom
@@ -700,21 +712,22 @@ drukowanie: !e.target.value
               onChange={e => this.addIloscRBH(e)}
             />
             <TextField
-              label="Ilość Sprzętu"
+              label="Jednostek Sprzętu"
               className={classes.textField}
-              style={{ width: "110px" }}
+              style={{ width: "150px" }}
+
               margin="normal"
               type="text"
-              name="ilość sprzętu"
+              name=""
               onChange={e => this.addIloscSprzetuRBH(e)}
               defaultValue={this.state.karta.iloscSprzetuRBH}
             />
           </div>
         </Paper>
 
-        {/* {this.state.karta.CzCzynnosci.length > 0 ? (
+        {this.state.karta.CzCzynnosci.length > 0 ? (
           <TabelaCzynnosci zawartosCzynnosci={this.state.karta.CzCzynnosci} />
-        ) : null} */}
+        ) : null}
 
         <Button
           variant="outlined"
@@ -942,13 +955,14 @@ margin-left: 240px;
 `;
 
 const Czynnosci = styled.div`
-background: rgba(211,211,211, 0.1);
+
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow:         inset 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+  0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
   font-family: 'Open Sans';
 `;
 

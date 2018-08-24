@@ -33,6 +33,7 @@ class Karty extends Component {
   state = {
     buttonIsClicked: false,
     buttonDisable: false
+    
   };
 
   // onClickAction = () => {
@@ -40,9 +41,18 @@ class Karty extends Component {
   //   !this.props.buttonIsClicked  ?  this.setState({ buttonIsClicked: true, buttonDisable: true }) : this.setState({  buttonIsClicked: false, buttonDisable: false})
 
   // }
+
+
+
+
+    
   render() {
     const { classes } = this.props;
     
+    
+
+  
+  
     return (
       <Wrapper>
         {!this.props.buttonDisable ? (
@@ -70,6 +80,9 @@ class Karty extends Component {
  <TabelaGlowna />
         ) : null}
    
+
+  
+
       </Wrapper>
     );
   }

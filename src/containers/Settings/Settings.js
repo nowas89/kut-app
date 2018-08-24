@@ -8,9 +8,11 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import compose from "recompose/compose";
 import SaveIcon from "@material-ui/icons/Save";
-import Chip from "@material-ui/core/Chip";
+// import Chip from "@material-ui/core/Chip";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+
 
 const styles = theme => ({
   root: {
@@ -90,8 +92,8 @@ class Settings extends Component {
           elevation={1}
         >
           <Typography variant="subheading" gutterBottom>
-            W tym miejscu skonfigurujesz typ / kategorie lub rodzaj
-            Roboczogodzin
+            W tym miejscu skonfigurujesz typ, kategorie lub rodzaj
+           godzin pracy Warsztatu obowiązujących do prowadzenia Ewidencji Godzin Pracy
           </Typography>
           <TextField
             label="typ, kategoria lub rodzaj "
@@ -105,10 +107,13 @@ class Settings extends Component {
           </span>
           {this.props.rbhState.length > 0
             ? this.props.rbhState.map((rodzaj, i) => (
-                <List key={i}>
-                  <ListItem 
-          style={{ fontSize: '12px'}}
-          >{rodzaj}</ListItem>
+                <List key={i}
+          style={{ width: '220px', position: 'relative' }}
+          >
+                  <ListItem  
+          style={{ fontSize: '12px', boxShadow: '0px 1px 14px 0px rgba(0, 0, 0, 0.12)', textAlign: 'center',
+          borderRadius: '50px',}}
+          >{rodzaj} <DeleteOutlinedIcon className={classes.icon} style={{position: 'absolute', right: '10px', bottom: '8px', color: "rgba(0, 0 ,0 , 0.3)" }} onClick={() => this.props.onDeleteRBH(rodzaj)}/></ListItem>
                 </List>
               ))
             : null}
@@ -150,7 +155,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onSaveAcronim: a => dispatch(actions.saveAcronim(a)),
-    onSaveRBH: a => dispatch(actions.saveRodzajRBH(a))
+    onSaveRBH: a => dispatch(actions.saveRodzajRBH(a)),
+    onDeleteRBH: a => dispatch(actions.deleteRodzajRBH(a))
   };
 };
 export default compose(
