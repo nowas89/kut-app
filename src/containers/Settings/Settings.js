@@ -55,17 +55,16 @@ class Settings extends Component {
     console.log(this.props.rbhState);
     return (
       <Wrapper>
-        <Typography variant="display1" gutterBottom>
-          Wersja programu: {this.props.wersja}
-        </Typography>
+    
+        <Typography variant="headline" gutterBottom>
+            Ustawienia Programu
+          </Typography>
         <Paper
           className={classes.root}
           style={{ marginTop: "50px", width: "900px" }}
           elevation={1}
         >
-          <Typography variant="display1" gutterBottom>
-            Ustawienia Programu
-          </Typography>
+         
           <Typography variant="subheading" gutterBottom>
             Ustaw Akronim który będzie wyświetlany w numerze Kart np " 12 / WŁ /
             2018" (gdzie WŁ oznacza Warsztat Remontu Sprzętu Łączności i
@@ -126,6 +125,11 @@ class Settings extends Component {
         >
           wszystkie prawa zastrzeżone - Paweł Naworol @ pawel.naworol@icloud.com
         </Typography>
+        <Typography variant="caption" gutterBottom 
+          style={{ position: "absolute", bottom: "-50px" }}
+          >
+          Wersja programu: {this.props.wersja}
+        </Typography>
       </Wrapper>
     );
   }
@@ -134,7 +138,7 @@ class Settings extends Component {
 const Wrapper = styled.div`
   margin-top: 40px;
   margin-left: 250px;
-  min-height: 120%;
+  min-height: 750px;
   position: relative;
   display: flex;
   flex-direction: column;
