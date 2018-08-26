@@ -262,14 +262,15 @@ state = {
 
 
 const Wrapper = styled.div`
-width: '95%'; text-align: 'center';
+ text-align: center;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Helvetica";
+  font-family: "Arial";
   font-weight: 400;
   min-height: 740px;
+width: 95%;
   
 
 `;

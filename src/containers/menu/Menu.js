@@ -20,6 +20,7 @@ const styles = theme => ({
   },
   input: {
     display: 'none',
+    fontFamily: "Arial"
   },
 });
 class Menu extends Component {
@@ -34,15 +35,14 @@ class Menu extends Component {
             <Nav>
               <ul>
                 <li >
-                  <NavLink  to="/karty"    style={{fontFamily: 'Helvetica'}} >Karty Usług Technicznych</NavLink>
+                  <NavLink  to="/karty"    style={{fontFamily: 'Arial'}} >Karty Usług Technicznych</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/ewidencja"    style={{fontFamily: 'Helvetica'}}>Ewidencja Kart</NavLink>
+                  <NavLink to="/ewidencja"    style={{fontFamily: 'Arial'}}>Ewidencja Kart</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/ewidencjaPracy"    style={{fontFamily: 'Helvetica'}}>Ewidencja Pracy Warsztatu</NavLink>
+                  <NavLink to="/ewidencjaPracy"    style={{fontFamily: 'Arial'}}>Ewidencja Pracy Warsztatu</NavLink>
                 </li>
-           
               </ul>
             </Nav>    
           </div>         

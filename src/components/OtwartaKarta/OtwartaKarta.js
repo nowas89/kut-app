@@ -9,7 +9,7 @@ import * as actions from "../../store/actions";
 import WygenerowanyKut from '../WygenerowanyKut/WygenerowanyKut';
 import TabelaCzynnosci from '../Tabela/TabelaCzynnosci/TabelaCzynnosci'
 
-// import { withStyles } from '@material-ui/core/styles';
+
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import TextField from "@material-ui/core/TextField";
@@ -517,7 +517,7 @@ drukowanie: !e.target.value
         </Form>
         <Form>
           <TextField
-            label="Wykonawca"
+            label="Wykonawca *"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -528,7 +528,7 @@ drukowanie: !e.target.value
           />
 
           <TextField
-            label="Marka i typ sprzętu"
+            label="Marka i typ sprzętu *"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -559,7 +559,7 @@ drukowanie: !e.target.value
             onChange={e => this.addPodstawa(e)}
           />
              <TextField
-            label="Nr. rejestracyjny"
+            label="Nr. rejestracyjny *"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -573,7 +573,7 @@ drukowanie: !e.target.value
        
 
           <TextField
-            label="  Sprzęt Należy do:"
+            label="  Sprzęt Należy do: *"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -616,7 +616,7 @@ drukowanie: !e.target.value
         </Form>
         <Form>
           <TextField
-            label=" Zadanie:"
+            label=" Zadanie: *"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -627,7 +627,7 @@ drukowanie: !e.target.value
           />
 
           <TextField
-            label="  Kartę wystawił"
+            label="  Kartę wystawił *"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -666,7 +666,7 @@ drukowanie: !e.target.value
         </TextAr>
 
         <TextField
-          label=" Karte Pobrał"
+          label=" Karte Pobrał *"
           className={classes.textField}
           margin="normal"
           type="text"
@@ -698,7 +698,7 @@ drukowanie: !e.target.value
           </Typography>
           <div>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-simple">Rodzaj</InputLabel>
+              <InputLabel htmlFor="age-simple">Rodzaj *</InputLabel>
               <Select
                 onChange={this.zmianaSelecta}
                 value={this.state.karta.rodzajRBH}
@@ -713,7 +713,7 @@ drukowanie: !e.target.value
               </Select>
             </FormControl>
             <TextField
-              label="Ilość Godzin"
+              label="Ilość Godzin *"
               className={classes.textField}
               style={{ width: "100px" }}
               margin="normal"
@@ -723,7 +723,7 @@ drukowanie: !e.target.value
               onChange={e => this.addIloscRBH(e)}
             />
             <TextField
-              label="Jednostek Sprzętu"
+              label="Jednostek Sprzętu *"
               className={classes.textField}
               style={{ width: "150px" }}
 

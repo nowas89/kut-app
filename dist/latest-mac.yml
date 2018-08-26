@@ -1,10 +1,10 @@
 version: 0.1.0
 files:
-  - url: menager-kart-uslug-technicznych-0.1.0-mac.zip
-    sha512: EOfjzFDgVWtMAVNKORaIvVLU+MEGRJpqplWZ+2cr3Bz4GG9hNliaNHHVnWvnkbMdVaPxBp9fODuzyl6MGsnPtw==
-  - url: menager-kart-uslug-technicznych-0.1.0.dmg
-    sha512: U38RuZorgp07pB4vWFYOJMCW21s/+YbFHhnpM1uPTMHdfg6KaDH+PTycpBo+WiJac96w8jDp3wg9YbfCVgeTMQ==
-    size: 64771829
-path: menager-kart-uslug-technicznych-0.1.0-mac.zip
-sha512: EOfjzFDgVWtMAVNKORaIvVLU+MEGRJpqplWZ+2cr3Bz4GG9hNliaNHHVnWvnkbMdVaPxBp9fODuzyl6MGsnPtw==
-releaseDate: '2018-08-26T12:18:38.860Z'
+  - url: ewidencja-pracy-warsztatu-0.1.0-mac.zip
+    sha512: YCp2BxLMEnderf/FN0+zDOzbnirXnUiDm4892JePrDnHxEWlMkX97Xcw45QMvJTP7gesn8Q9HEUc3AJL0+FvPQ==
+  - url: ewidencja-pracy-warsztatu-0.1.0.dmg
+    sha512: mR2uymUf3LKJBaFT5QGPppsZO+pwj+LGIwnyiDyg0ptfyyJRi27Gi4J1YgVfMQ2E02GcMtqmAytM3l9ntkqVlw==
+    size: 64771114
+path: ewidencja-pracy-warsztatu-0.1.0-mac.zip
+sha512: YCp2BxLMEnderf/FN0+zDOzbnirXnUiDm4892JePrDnHxEWlMkX97Xcw45QMvJTP7gesn8Q9HEUc3AJL0+FvPQ==
+releaseDate: '2018-08-26T16:37:35.297Z'

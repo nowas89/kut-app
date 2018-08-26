@@ -21,7 +21,7 @@ import Select from "@material-ui/core/Select";
 import classNames from "classnames";
 
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
-// import DodajCzynnosc from "../DodajCzynnosc/DodajCzynnosc"
+
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -38,7 +38,7 @@ const styles = theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    fontFamily: "Open Sans"
+    fontFamily: "Arial"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -48,7 +48,7 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
-    fontFamily: "Helvetica"
+    fontFamily: "Arial"
   },
   input: {
     display: "none"
@@ -439,7 +439,9 @@ class DodajKuta extends Component {
           </Form>
           <Form>
             <TextField
-              label="Wykonawca"
+       
+              label="Wykonawca *"
+             
               className={classes.textField}
               margin="normal"
               type="text"
@@ -450,7 +452,7 @@ class DodajKuta extends Component {
             />
 
             <TextField
-              label="Marka i typ sprzętu"
+              label="Marka i typ sprzętu *"
               className={classes.textField}
               margin="normal"
               type="text"
@@ -480,7 +482,7 @@ class DodajKuta extends Component {
               autoComplete="on"
             />
             <TextField
-              label="Nr. rejestracyjny"
+              label="Nr. rejestracyjny *"
               className={classes.textField}
               margin="normal"
               type="text"
@@ -492,7 +494,7 @@ class DodajKuta extends Component {
           </Form>
           <Form>
             <TextField
-              label="  Sprzęt Należy do:"
+              label="  Sprzęt Należy do: *"
               className={classes.textField}
               margin="normal"
               type="text"
@@ -535,7 +537,7 @@ class DodajKuta extends Component {
           </Form>
           <Form>
             <TextField
-              label=" Zadanie:"
+              label=" Zadanie: *"
               className={classes.textField}
               margin="normal"
               type="text"
@@ -546,7 +548,7 @@ class DodajKuta extends Component {
             />
 
             <TextField
-              label="  Kartę wystawił"
+              label="  Kartę wystawił *"
               className={classes.textField}
               margin="normal"
               type="text"
@@ -561,7 +563,7 @@ class DodajKuta extends Component {
             <TextField
               style={{ width: 750 }}
               label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
-              wykonania następujących prac:"
+              wykonania następujących prac: "
               type="text"
               name="opis"
               multiline={true}
@@ -585,7 +587,7 @@ class DodajKuta extends Component {
           </TextAr>
 
           <TextField
-            label=" Karte Pobrał"
+            label=" Karte Pobrał *"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -617,7 +619,7 @@ class DodajKuta extends Component {
           </Typography>
           <div>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-simple">Rodzaj</InputLabel>
+              <InputLabel htmlFor="age-simple">Rodzaj *</InputLabel>
               <Select
                 onChange={this.zmianaSelecta}
                 value={this.state.rodzajRBH}
@@ -635,9 +637,9 @@ class DodajKuta extends Component {
              inputProps={{
               style: { textAlign: "center" }
             }}
-              label="Ilość Godzin"
+              label="Ilość Godzin *"
               className={classes.textField}
-              style={{ width: "100px" }}
+              style={{ width: "120px" }}
               margin="normal"
               type="text"
               defaultValue={this.state.iloscRBH}
@@ -648,10 +650,10 @@ class DodajKuta extends Component {
              inputProps={{
               style: { textAlign: "center" }
             }}
-              label="Jednostek Sprzętu"
+              label="Jednostek Sprzętu *"
 
               className={classes.textField}
-              style={{ width: "150px" }}
+              style={{ width: "160px" }}
               margin="normal"
               type="text"
 
@@ -785,28 +787,12 @@ class DodajKuta extends Component {
               style={{ marginTop: "30px", marginBottom: "10px" }}
               onClick={() => this.dispatchAndAndResetCzynnosc()}
             >
-              <AddIcon />
+              <AddIcon  />
             </Button>
           </Czynnosci>
         ) : null}
 
-        {
-          // (this.state.wykonawca.length < 2 ||
-          // this.state.marka.length < 2 ||
-          // this.state.nrRej.length < 2 ||
-          // this.state.wlasciciel.length < 2 ||
-          // this.state.zadanie.length < 2 ||
-          // this.state.wystawiajacy.length < 2 ||
-          // this.state.typ.length < 2 ||
-          // this.state.podstawa.length < 2 ||
-          // this.state.waznoscKarty.length < 2 ||
-          // this.state.pobierajacy.length < 2) ? <h2>Uzupełnij Kartę aby móc ją zapisać</h2>   :
-          // <Button
-          //         val={"Zapisz Kartę"} typ={'submit'}
-          //         clicked={() =>
-          //        this.dispatchAndResetNowaKarta() }
-          //       />
-        }
+       
 
         <FormControlLabel
           style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
@@ -824,7 +810,25 @@ class DodajKuta extends Component {
               : "karta nie została zdana"
           }
         />
-        <Button
+      {
+          (this.state.wykonawca.length < 2 ||
+          this.state.marka.length < 2 ||
+          this.state.nrRej.length < 2 ||
+          this.state.wlasciciel.length < 2 ||
+          this.state.zadanie.length < 2 ||
+          this.state.wystawiajacy.length < 2 ||
+          this.state.rodzajRBH.length < 1 ||
+          this.state.iloscRBH.length < 1 ||
+          this.state.iloscSprzetuRBH.length < 1 ||
+          this.state.zadanie.length < 2 ||
+          this.state.pobierajacy.length < 2) ?  <Typography
+          variant="subheading"
+          gutterBottom
+          style={{ marginTop: "52px",marginBottom: "52px", color: 'red' }}
+        >
+          Aby dodać kartę uzupełnij wszystkie pola tekstowe oznaczone *
+        </Typography>  :
+          <Button
           variant="contained"
           size="medium"
           className={classes.button}
@@ -832,10 +836,12 @@ class DodajKuta extends Component {
           onClick={() => this.dispatchAndResetNowaKarta()}
         >
           <SaveIcon
-            className={classNames(classes.leftIcon, classes.iconSmall)}
+            className={classNames(classes.leftIcon, classes.iconSmall) }
+            style={{ marginRight: "5px" }}
           />
-          Zapisz Kartę
+          Dodaj Kartę
         </Button>
+        }
       </Wrapper>
     );
   }
@@ -847,8 +853,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95%;
   min-height: 100%;
+  width: 95%;
+  position: relative;
+  overflow: hidden;
 
   label {
     padding: 5px;
@@ -871,7 +879,7 @@ const Czynnosci = styled.div`
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
 padding: 15px;
   h1 {
-    font-family: "Helvetica";
+    font-family: "Arial";
     font-weight: 400;
   }
 `;

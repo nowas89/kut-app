@@ -17,12 +17,14 @@ import TabelaGlowna from "../../components/Tabela/TabelaGlowna";
 const styles = theme => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    fontFamily: "Arial"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 200,
+    fontFamily: "Arial"
   },
   button: {
     margin: theme.spacing.unit
@@ -95,6 +97,7 @@ position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: calc(100% - 240px);
 
   button {
     margin-top: 30px;
