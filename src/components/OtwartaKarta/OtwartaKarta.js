@@ -155,7 +155,21 @@ drukowanie: false,
         dataZdania: this.props.taKartaJestOtwarta.dataZdania,
         rodzajRBH: this.props.taKartaJestOtwarta.rodzajRBH,
         iloscSprzetuRBH: this.props.taKartaJestOtwarta.iloscSprzetuRBH,
-        iloscRBH: this.props.taKartaJestOtwarta.iloscRBH
+        iloscRBH: this.props.taKartaJestOtwarta.iloscRBH,
+        CzDataWyk:  new Date().getDate() +
+        "/" +
+        (new Date().getMonth() + 1) +
+        "/" +
+        new Date().getFullYear(),
+        CzOperacja: "",
+        CzRbh: "",
+        CzWykonawca: "",
+        CzWyszczegolnienie: "",
+        CzOznaczenie: "",
+        CzIlosc: "",
+        CzAsygnata: "",
+        CzUwagi: ""
+      
         
       }
     });
@@ -199,10 +213,7 @@ drukowanie: false,
         this.state.karta.CzUwagi === ""
           ? "----------"
           : this.state.karta.CzUwagi,
-      CzOperacjaId:
-        this.state.karta.CzOperacjaId === ""
-          ? "----------"
-          : this.state.karta.CzOperacjaId
+          CzOperacjaId: this.state.karta.CzCzynnosci.length + 1
     });
 
     this.setState({
@@ -396,7 +407,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        pobierajacy: e.target.value.toUpperCase()
+        pobierajacy: e.target.value
       }
     });
   };
@@ -407,7 +418,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        CzOperacja: e.target.value
+        CzOperacja: e.target.value.toUpperCase()
       }
     });
   };
@@ -431,7 +442,7 @@ drukowanie: !e.target.value
     this.setState({
       karta: {
         ...this.state.karta,
-        CzWykonawca: e.target.value
+        CzWykonawca: e.target.value.toUpperCase()
       }
     });
   };

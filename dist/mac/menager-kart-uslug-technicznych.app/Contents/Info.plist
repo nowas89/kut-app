@@ -45,6 +45,6 @@
     <key>NSHumanReadableCopyright</key>
     <string>Copyright © 2018 Pawel Naworol</string>
     <key>AsarIntegrity</key>
-    <string>{"checksums":{"app.asar":"iN6izpdGl7/hWBNSkLHQYkjaeJxqxjKMZj0wU5hnJ+JdK8dY5x0MWdpwlR5PSl4WzowQtNuGNk6AvAJC9nZYCQ==","electron.asar":"G6CeEr2Mc2A4mUGGXftYgaVopyl4gOfGAooF6M5tgQd9yZsAK/3gSNKSOLtXa/OpN/fSavzmtnW6/aLgmmAjAg=="}}</string>
+    <string>{"checksums":{"app.asar":"tOT5IhrCTime/tHvORPZHrpbbGyuL1+6aSJFnCnpnDjGUjOa6PrVXOP5x9Yeiw+YTXJJhr+vFAKuen83JBfbqQ==","electron.asar":"G6CeEr2Mc2A4mUGGXftYgaVopyl4gOfGAooF6M5tgQd9yZsAK/3gSNKSOLtXa/OpN/fSavzmtnW6/aLgmmAjAg=="}}</string>
   </dict>
 </plist>

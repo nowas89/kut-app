@@ -270,7 +270,7 @@ class DodajKuta extends Component {
   };
   addPobierajacy = e => {
     this.setState({
-      pobierajacy: e.target.value.toUpperCase()
+      pobierajacy: e.target.value
     });
   };
   addDataZdania = e => {
@@ -283,7 +283,7 @@ class DodajKuta extends Component {
 
   addCzOperacja = e => {
     this.setState({
-      CzOperacja: e.target.value
+      CzOperacja: e.target.value.toUpperCase()
     });
   };
   addCzRbh = e => {
@@ -298,7 +298,7 @@ class DodajKuta extends Component {
   };
   addCzWykonawca = e => {
     this.setState({
-      CzWykonawca: e.target.value
+      CzWykonawca: e.target.value.toUpperCase()
     });
   };
   addCzWyszczegolnienie = e => {

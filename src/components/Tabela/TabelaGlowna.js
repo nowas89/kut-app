@@ -82,7 +82,7 @@ state = {
          });
 
        }
-       console.log(newArray)
+
 
     return (
       <Wrapper >
