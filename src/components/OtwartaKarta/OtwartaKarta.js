@@ -43,7 +43,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 170,
     fontFamily: 'Arial'
   },
   button: {
@@ -757,6 +757,8 @@ drukowanie: !e.target.value
               <TextField
                 label=" Zużyto Roboczo Godzin"
                 className={classes.textField}
+                style={{ width: "200px" }}
+                
                 margin="normal"
                 type="number"
                 name="karta"
@@ -802,6 +804,8 @@ drukowanie: !e.target.value
               <TextField
                 label="    Oznaczenie Katalogowe"
                 className={classes.textField}
+                style={{ width: "200px" }}
+                
                 margin="normal"
                 type="text"
                 name="karta"

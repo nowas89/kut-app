@@ -91,7 +91,7 @@ class Settings extends Component {
           elevation={1}
         >
           <Typography variant="subheading" gutterBottom>
-            W tym miejscu skonfigurujesz typ, kategorie lub rodzaj
+           Skonfiguruj  typ, kategorie lub rodzaj
            godzin pracy Warsztatu obowiązujących do prowadzenia Ewidencji Godzin Pracy
           </Typography>
           <TextField

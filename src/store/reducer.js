@@ -6,7 +6,7 @@ const initialState = {
   buttonDisable: false,
   otwartakarta: {},
   kartaJestOtwarta: false,
-  wersja: "0.1.4",
+  wersja: "1.0.1",
   akronim: "",
   rodzajRBH: []
 };
