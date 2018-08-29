@@ -17,11 +17,13 @@ import EwidencjaPracy from "../../components/Tabela/EwidencjaPracy/EwidencjaPrac
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    
+    fontFamily: "Arial"
   },
   input: {
     display: 'none',
     fontFamily: "Arial"
-  },
+  }
 });
 class Menu extends Component {
   render() {

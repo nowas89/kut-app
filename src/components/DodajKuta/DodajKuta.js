@@ -22,7 +22,6 @@ import classNames from "classnames";
 
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 
-
 import { withStyles } from "@material-ui/core/styles";
 
 import TextField from "@material-ui/core/TextField";
@@ -44,14 +43,31 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 170,
-    fontFamily: "Arial"
+    fontFamily: "Arial",
+    [theme.breakpoints.down('md')]: {
+    width: 120,
+    fontSize: 7,
+    },
   },
+    textFieldAr: {
+      width: 750, 
+      [theme.breakpoints.down('md')]: {
+       width: 420,
+    fontSize: 3,
+       
+ 
+     },
+ 
+   
+  },
+  
   button: {
     margin: theme.spacing.unit,
     fontFamily: "Arial"
   },
   input: {
-    display: "none"
+    display: "none",
+    fontFamily: "Arial"
   },
   formControl: {
     margin: theme.spacing.unit,
@@ -122,11 +138,9 @@ class DodajKuta extends Component {
     CzUwagi: "",
     CzOperacjaId: 0,
 
-   
-      rodzajRBH: "",
-      iloscRBH: "",
-      iloscSprzetuRBH: ""
-    
+    rodzajRBH: "",
+    iloscRBH: "",
+    iloscSprzetuRBH: ""
   };
   componentDidMount() {
     this.setState({
@@ -158,11 +172,10 @@ class DodajKuta extends Component {
       waznoscKarty: "",
       pobierajacy: "",
       dataZdania: "",
-    
-        rodzajRBH: "",
-        iloscSprzetuRBH: "",
-        iloscRBH: ""
-      
+
+      rodzajRBH: "",
+      iloscSprzetuRBH: "",
+      iloscRBH: ""
     });
   }
 
@@ -180,27 +193,17 @@ class DodajKuta extends Component {
 
   zmianaSelecta = e => {
     this.setState({
-
-
-        rodzajRBH: e.target.value
-      
+      rodzajRBH: e.target.value
     });
   };
   addIloscSprzetuRBH = e => {
     this.setState({
-
-        
-        iloscSprzetuRBH: e.target.value
-      
+      iloscSprzetuRBH: e.target.value
     });
   };
   addIloscRBH = e => {
     this.setState({
-
-   
-
-        iloscRBH: e.target.value
-      
+      iloscRBH: e.target.value
     });
   };
 
@@ -388,14 +391,10 @@ class DodajKuta extends Component {
     }, 100);
   };
   dispatchAndResetNowaKarta = () => {
-    this.props.onAddNewKut(
-      this.state
-   
-    );
+    this.props.onAddNewKut(this.state);
   };
 
   render() {
-
     const { classes } = this.props;
     let today = new Date();
     let dd = today.getDate();
@@ -439,9 +438,7 @@ class DodajKuta extends Component {
           </Form>
           <Form>
             <TextField
-       
               label="Wykonawca *"
-             
               className={classes.textField}
               margin="normal"
               type="text"
@@ -561,7 +558,7 @@ class DodajKuta extends Component {
 
           <TextAr>
             <TextField
-              style={{ width: 750 }}
+             className={classes.textFieldAr}
               label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
               wykonania następujących prac: "
               type="text"
@@ -575,7 +572,8 @@ class DodajKuta extends Component {
 
           <TextAr>
             <TextField
-              style={{ width: 750 }}
+             className={classes.textFieldAr}
+        
               label="  Uwagi przyjmującego"
               type="text"
               margin="normal"
@@ -634,30 +632,26 @@ class DodajKuta extends Component {
               </Select>
             </FormControl>
             <TextField
-             inputProps={{
-              style: { textAlign: "center" }
-            }}
+              inputProps={{
+                style: { textAlign: "center" }
+              }}
               label="Ilość Godzin *"
               className={classes.textField}
               style={{ width: "120px" }}
               margin="normal"
               type="text"
               defaultValue={this.state.iloscRBH}
-
               onChange={e => this.addIloscRBH(e)}
             />
             <TextField
-             inputProps={{
-              style: { textAlign: "center" }
-            }}
+              inputProps={{
+                style: { textAlign: "center" }
+              }}
               label="Jednostek Sprzętu *"
-
               className={classes.textField}
               style={{ width: "160px" }}
               margin="normal"
               type="text"
-
-
               onChange={e => this.addIloscSprzetuRBH(e)}
               defaultValue={this.state.iloscSprzetuRBH}
             />
@@ -787,12 +781,10 @@ class DodajKuta extends Component {
               style={{ marginTop: "30px", marginBottom: "10px" }}
               onClick={() => this.dispatchAndAndResetCzynnosc()}
             >
-              <AddIcon  />
+              <AddIcon />
             </Button>
           </Czynnosci>
         ) : null}
-
-       
 
         <FormControlLabel
           style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
@@ -810,44 +802,63 @@ class DodajKuta extends Component {
               : "karta nie została zdana"
           }
         />
-      {
-          (this.state.wykonawca.length < 2 ||
-          this.state.marka.length < 2 ||
-          this.state.nrRej.length < 2 ||
-          this.state.wlasciciel.length < 2 ||
-          this.state.zadanie.length < 2 ||
-          this.state.wystawiajacy.length < 2 ||
-          this.state.rodzajRBH.length < 1 ||
-          this.state.iloscRBH.length < 1 ||
-          this.state.iloscSprzetuRBH.length < 1 ||
-          this.state.zadanie.length < 2 ||
-          this.state.pobierajacy.length < 2) ?  <Typography
-          variant="subheading"
-          gutterBottom
-          style={{ marginTop: "52px",marginBottom: "52px", color: 'red' }}
-        >
-          Aby dodać kartę uzupełnij wszystkie pola tekstowe oznaczone *
-        </Typography>  :
+        {this.state.wykonawca.length < 2 ||
+        this.state.marka.length < 2 ||
+        this.state.nrRej.length < 2 ||
+        this.state.wlasciciel.length < 2 ||
+        this.state.zadanie.length < 2 ||
+        this.state.wystawiajacy.length < 2 ||
+        this.state.rodzajRBH.length < 1 ||
+        this.state.iloscRBH.length < 1 ||
+        this.state.iloscSprzetuRBH.length < 1 ||
+        this.state.zadanie.length < 2 ||
+        this.state.pobierajacy.length < 2 ? (
+          <Typography
+            variant="subheading"
+            gutterBottom
+            style={{ marginTop: "52px", marginBottom: "52px", color: "red" }}
+          >
+            Aby dodać kartę uzupełnij wszystkie pola tekstowe oznaczone *
+          </Typography>
+        ) : (
           <Button
+            variant="contained"
+            size="medium"
+            className={classes.button}
+            style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
+            onClick={() => this.dispatchAndResetNowaKarta()}
+          >
+            <SaveIcon
+              className={classNames(classes.leftIcon, classes.iconSmall)}
+              style={{ marginRight: "5px" }}
+            />
+            Dodaj Kartę
+          </Button>
+        )}
+
+        <Button
           variant="contained"
+          color="secondary"
           size="medium"
+          onClick={() =>
+            window.confirm("Napewno chcesz anulować dodawanie karty ? ")
+              ? this.props.onAnulowanie()
+              : null
+          }
           className={classes.button}
-          style={{ margin: "0", marginTop: "50px", marginBottom: "20px" }}
-          onClick={() => this.dispatchAndResetNowaKarta()}
+          style={{
+            margin: "0",
+            marginTop: "50px",
+            marginBottom: "20px",
+
+          }}
         >
-          <SaveIcon
-            className={classNames(classes.leftIcon, classes.iconSmall) }
-            style={{ marginRight: "5px" }}
-          />
-          Dodaj Kartę
+          Anuluj Dodawanie Karty
         </Button>
-        }
       </Wrapper>
     );
   }
 }
-
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -877,7 +888,7 @@ const Czynnosci = styled.div`
 
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-padding: 15px;
+  padding: 15px;
   h1 {
     font-family: "Arial";
     font-weight: 400;
@@ -911,15 +922,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddNewKut: (
-      state
-    
-    ) =>
-      dispatch(
-        actions.addNewKut(
-         state
-        )
-      ),
+    onAddNewKut: state => dispatch(actions.addNewKut(state)),
+    onAnulowanie: () => dispatch(actions.Anulowanie()),
     onAddNewCzynnosc: (
       operacja,
       rbg,

@@ -44,6 +44,10 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 200
   },
+  button: {
+    margin: theme.spacing.unit,
+    fontFamily: "Arial"
+  }
 });
 class TabelaGlowna extends Component {
 state = {

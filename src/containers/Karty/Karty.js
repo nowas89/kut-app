@@ -27,7 +27,9 @@ const styles = theme => ({
     fontFamily: "Arial"
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    fontFamily: "Arial"
+    
   }
 })
 
@@ -97,7 +99,7 @@ position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(100% - 240px);
+  width: calc(100% - 250px);
 
   button {
     margin-top: 30px;

@@ -40,7 +40,7 @@
 }
 
 .kut-info {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,6 +64,7 @@
   box-sizing: border-box;
 }
 .main {
+  /* transform: scale(1.4); */
   width: 792px;
   box-sizing: border-box;
   height: 520px;
@@ -198,7 +199,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 195px;
+  height: 215px;
   width: 792px;
 }
 
@@ -630,6 +631,10 @@
   @page {
     size: A4, landspace;
   }
+  body {
+    zoom: 163%;
+    transform: rotate(-90deg);
+  }
   .wrapper {
     position: relative;
     box-sizing: border-box;
@@ -658,7 +663,7 @@
   }
 
   .kut-info {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
     display: flex;
     justify-content: center;
     align-items: center;

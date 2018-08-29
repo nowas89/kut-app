@@ -107,7 +107,7 @@
     },
     "win": {
       "target": "squirrel",
-      "icon": "build/favicon.ico"
+      "icon": "build/icon.ico"
     },
     "directories": {
       "buildResources": "assets"

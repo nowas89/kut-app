@@ -87,3 +87,8 @@ export const deleteRodzajRBH = typRBH => {
     typRBH: typRBH
   };
 };
+export const Anulowanie = () => {
+  return {
+    type: actionTypes.ANULOWANIE
+  };
+};

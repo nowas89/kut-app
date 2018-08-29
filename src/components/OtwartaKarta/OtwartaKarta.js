@@ -44,7 +44,22 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 170,
-    fontFamily: 'Arial'
+    fontFamily: "Arial",
+    [theme.breakpoints.down('md')]: {
+    width: 120,
+    fontSize: 7,
+    },
+  },
+    textFieldAr: {
+      width: 750, 
+      [theme.breakpoints.down('md')]: {
+       width: 420,
+    fontSize: 3,
+       
+ 
+     },
+ 
+   
   },
   button: {
     margin: theme.spacing.unit
@@ -58,7 +73,6 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     width: 160,
     fontSize: 14,
-    fontFamily: 'Arial'
   },
 
   checked: {},
@@ -640,7 +654,8 @@ drukowanie: !e.target.value
 
         <TextAr>
           <TextField
-            style={{ width: 750 }}
+             className={classes.textFieldAr}
+         
             label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
              wykonania następujących prac:"
             type="text"
@@ -654,7 +669,8 @@ drukowanie: !e.target.value
 
         <TextAr>
           <TextField
-            style={{ width: 750 }}
+             className={classes.textFieldAr}
+         
             label="  Uwagi przyjmującego"
             type="text"
             margin="normal"

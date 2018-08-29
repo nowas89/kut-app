@@ -19,5 +19,5 @@ linux:
     - deb
 win:
   target: squirrel
-  icon: build/favicon.ico
+  icon: build/icon.ico
 electronVersion: 2.0.7

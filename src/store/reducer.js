@@ -175,6 +175,17 @@ export const deleteRodzajRBH = (state, action) => {
     rodzajRBH: deleteTyp
   };
 };
+export const Anulowanie = (state, action) => {
+
+
+
+
+  return {
+    ...state,
+    buttonIsClicked: false,
+    buttonDisable: false
+  };
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_KUT:
@@ -195,6 +206,8 @@ const reducer = (state = initialState, action) => {
       return saveRodzajRBH(state, action);
     case actionTypes.USUN_TYP:
       return deleteRodzajRBH(state, action);
+    case actionTypes.ANULOWANIE:
+      return Anulowanie(state, action);
     default:
       return state;
   }

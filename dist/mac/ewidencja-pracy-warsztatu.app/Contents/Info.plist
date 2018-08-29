@@ -9,7 +9,7 @@
     <key>CFBundleExecutable</key>
     <string>ewidencja-pracy-warsztatu</string>
     <key>CFBundleIconFile</key>
-    <string>electron.icns</string>
+    <string>ewidencja-pracy-warsztatu.icns</string>
     <key>CFBundleIdentifier</key>
     <string>oneoften</string>
     <key>CFBundleInfoDictionaryVersion</key>
@@ -45,6 +45,6 @@
     <key>NSHumanReadableCopyright</key>
     <string>Copyright © 2018 Pawel Naworol</string>
     <key>AsarIntegrity</key>
-    <string>{"checksums":{"app.asar":"MdEFHLSRnDFRyUXOQSP4btPCidcw4ft87XiZmgA76uP0P8ILH+JYfP7xZB8qACAnIkn5VNE9u9fd9sxNToxEkQ==","electron.asar":"G6CeEr2Mc2A4mUGGXftYgaVopyl4gOfGAooF6M5tgQd9yZsAK/3gSNKSOLtXa/OpN/fSavzmtnW6/aLgmmAjAg=="}}</string>
+    <string>{"checksums":{"app.asar":"0EfdlrBvWZ5npgoWStVfHKQYYn7JrU7Sy+SKZztHbjfGcJGejRxgRtVjvUf2Xnk+V+5Cv4GW9UKKxFz1QcK5Uw==","electron.asar":"G6CeEr2Mc2A4mUGGXftYgaVopyl4gOfGAooF6M5tgQd9yZsAK/3gSNKSOLtXa/OpN/fSavzmtnW6/aLgmmAjAg=="}}</string>
   </dict>
 </plist>
