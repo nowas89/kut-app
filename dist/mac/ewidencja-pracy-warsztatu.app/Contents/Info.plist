@@ -19,9 +19,9 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>0.1.0</string>
+    <string>1.0.2</string>
     <key>CFBundleVersion</key>
-    <string>0.1.0</string>
+    <string>1.0.2</string>
     <key>DTSDKBuild</key>
     <string>14D125</string>
     <key>DTSDKName</key>
@@ -45,6 +45,6 @@
     <key>NSHumanReadableCopyright</key>
     <string>Copyright © 2018 Pawel Naworol</string>
     <key>AsarIntegrity</key>
-    <string>{"checksums":{"app.asar":"0EfdlrBvWZ5npgoWStVfHKQYYn7JrU7Sy+SKZztHbjfGcJGejRxgRtVjvUf2Xnk+V+5Cv4GW9UKKxFz1QcK5Uw==","electron.asar":"G6CeEr2Mc2A4mUGGXftYgaVopyl4gOfGAooF6M5tgQd9yZsAK/3gSNKSOLtXa/OpN/fSavzmtnW6/aLgmmAjAg=="}}</string>
+    <string>{"checksums":{"app.asar":"CCe7tr77/AVRhogU6JQDiDOQ3U6/BhpccR902pBkmpAWowV2e74JLeI5iwBCvMhZRl+VNw/o3y0/KglYZFkl/g==","electron.asar":"G6CeEr2Mc2A4mUGGXftYgaVopyl4gOfGAooF6M5tgQd9yZsAK/3gSNKSOLtXa/OpN/fSavzmtnW6/aLgmmAjAg=="}}</string>
   </dict>
 </plist>

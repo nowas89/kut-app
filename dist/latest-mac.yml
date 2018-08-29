@@ -1,10 +1,10 @@
-version: 0.1.0
+version: 1.0.2
 files:
-  - url: ewidencja-pracy-warsztatu-0.1.0-mac.zip
-    sha512: s9FAgTxkuUy59IUvvNt/R6OLw6k1rKKJ6IW2486Jfzn1oKRKWcounAkFoEvZtl60VtQT6sBftwwstBcqiKt9mw==
-  - url: ewidencja-pracy-warsztatu-0.1.0.dmg
-    sha512: FPcZtaDuHp2PaA9QwfnRvn2aWCaF/3XN+9OR1mZ0OqGIZs0mzoDjLYOz89Aef1ZlSG/7E9egTdMqjxNTqSUt1A==
-    size: 64746297
-path: ewidencja-pracy-warsztatu-0.1.0-mac.zip
-sha512: s9FAgTxkuUy59IUvvNt/R6OLw6k1rKKJ6IW2486Jfzn1oKRKWcounAkFoEvZtl60VtQT6sBftwwstBcqiKt9mw==
-releaseDate: '2018-08-29T12:48:51.262Z'
+  - url: ewidencja-pracy-warsztatu-1.0.2-mac.zip
+    sha512: zb3YivK2wbaIZwtfFTcIXRXPjSE8eWy5Ng7CwQur+1go73WMSL1c8ejACgN/I1wIPyWC6WYuuCrERrgCA9D6Nw==
+  - url: ewidencja-pracy-warsztatu-1.0.2.dmg
+    sha512: Cp96RMrDfyM8nCU+yf5WbW54Wo2nmQ9F6uZF0OrT/sQll7EGz2Z0vW5MnNczGUKEzga4eVeS91PU/RQcAk5x/A==
+    size: 64746406
+path: ewidencja-pracy-warsztatu-1.0.2-mac.zip
+sha512: zb3YivK2wbaIZwtfFTcIXRXPjSE8eWy5Ng7CwQur+1go73WMSL1c8ejACgN/I1wIPyWC6WYuuCrERrgCA9D6Nw==
+releaseDate: '2018-08-29T19:29:57.130Z'
