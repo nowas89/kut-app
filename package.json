@@ -1,7 +1,10 @@
 {
-  "name": "electron-with-create-react-app",
-  "version": "0.1.0",
+  "name": "ewidencja-pracy-warsztatu",
+  "version": "1.0.2",
   "private": true,
+  "author": "Pawel Naworol",
+  "nodeGypRebuild": "true",
+  "description": "Aplikacja systemowa zarządzająca Ewidencją pracy warsztatu",
   "devDependencies": {
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
@@ -16,8 +19,11 @@
     "css-loader": "^0.26.4",
     "detect-port": "1.0.1",
     "dotenv": "2.0.0",
-    "electron": "^1.7.9",
+    "electron": "^2.0.7",
+    "electron-builder": "^20.28.2",
     "electron-devtools-installer": "^2.2.4",
+    "electron-is-dev": "^0.3.0",
+    "electron-packager": "^12.1.1",
     "eslint": "3.8.1",
     "eslint-config-react-app": "^0.5.0",
     "eslint-loader": "1.6.0",
@@ -41,6 +47,9 @@
     "postcss-loader": "^1.0.0",
     "promise": "7.1.1",
     "react-dev-utils": "^0.4.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-to-print": "^2.0.0-alpha-2",
     "recursive-readdir": "2.1.0",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
@@ -54,21 +63,72 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^1.0.0-alpha.14",
+    "electron-is-dev": "^0.3.0",
+    "html2canvas": "^1.0.0-alpha.12",
+    "jspdf": "^1.4.1",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-html-table-to-excel": "^2.0.0",
     "react-redux": "^5.0.7",
     "recompose": "^0.28.2",
+    "redocx": "^1.0.3",
     "redux": "^4.0.0",
+    "typeface-open-sans": "0.0.54",
     "typeface-roboto": "0.0.54"
   },
   "homepage": "./",
-  "main": "src/electron-starter.js",
+  "main": "./public/electron.js",
+  "build": {
+    "appId": "oneoften",
+    "files": [
+      "./build/**/*",
+      "./public/electron.js"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    },
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "electron": "electron .",
-    "dev": "nf start -p 3000"
+    "1": "electron-builder install-app-deps",
+    "2": "electron-builder node-gyp-rebuild  ",
+    "3": "electron-builder create-self-signed-cert  ",
+    "win": "electron-builder --win --x64 --dir",
+    "dev": "nf start -p 3000",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "build --em.main=build/electron.js",
+    "preelectron-pack": "yarn build",
+    "postinstall": "electron-builder install-app-deps"
   },
   "jest": {
     "collectCoverageFrom": [

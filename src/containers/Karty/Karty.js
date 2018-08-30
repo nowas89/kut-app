@@ -11,20 +11,25 @@ import Typography from "@material-ui/core/Typography";
 
 
 import DodajKuta from "../../components/DodajKuta/DodajKuta";
-import Tabela from "../../components/Tabela/Tabela";
+
+import TabelaGlowna from "../../components/Tabela/TabelaGlowna";
 
 const styles = theme => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    fontFamily: "Arial"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 200,
+    fontFamily: "Arial"
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    fontFamily: "Arial"
+    
   }
 })
 
@@ -32,6 +37,7 @@ class Karty extends Component {
   state = {
     buttonIsClicked: false,
     buttonDisable: false
+    
   };
 
   // onClickAction = () => {
@@ -39,16 +45,25 @@ class Karty extends Component {
   //   !this.props.buttonIsClicked  ?  this.setState({ buttonIsClicked: true, buttonDisable: true }) : this.setState({  buttonIsClicked: false, buttonDisable: false})
 
   // }
+
+
+
+
+    
   render() {
     const { classes } = this.props;
     
+    
+
+  
+  
     return (
       <Wrapper>
         {!this.props.buttonDisable ? (
          <Button
-         variant="contained"
+         variant="outlined"
          className={classes.button}
-      
+         style={{marginTop: "70px"}}
             onClick={(a, b) =>
               this.props.onAddingKut(
                 this.props.buttonDisable,
@@ -65,9 +80,13 @@ class Karty extends Component {
         )}
         {this.props.buttonIsClicked ? <DodajKuta /> : null}
 
-        {!this.props.buttonIsClicked && this.props.karty.length > 0 ? (
-          <Tabela />
+       {!this.props.buttonIsClicked && this.props.karty.length > 0 ? (
+ <TabelaGlowna />
         ) : null}
+   
+
+  
+
       </Wrapper>
     );
   }
@@ -76,10 +95,11 @@ class Karty extends Component {
 const Wrapper = styled.div`
   margin-left: 250px;
   min-height: 100vh;
-
+position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: calc(100% - 250px);
 
   button {
     margin-top: 30px;

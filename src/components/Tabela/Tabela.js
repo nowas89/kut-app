@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 import "./table.css";
 
@@ -37,6 +38,13 @@ class Tabela extends Component {
             clicked={() => this.props.onOpeningKut(karta)}
           />
         ))}
+                <ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="download-table-xls-button"
+                    table="tabela"
+                    filename="tablexls"
+                    sheet="tablexls"
+                    buttonText="Download as XLS"/>
       </div>
     );
   }

@@ -1,0 +1,172 @@
+import React, { Component } from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import compose from "recompose/compose";
+import SaveIcon from "@material-ui/icons/Save";
+// import Chip from "@material-ui/core/Chip";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+  button: {
+    margin: theme.spacing.unit
+  }
+});
+
+class Settings extends Component {
+  state = {
+    akronim: "",
+    rodzajRBH: ""
+  };
+  addAkronim = e => {
+    this.setState({
+      akronim: e.target.value
+    });
+  };
+  addTypRBH = e => {
+    this.setState({
+      rodzajRBH: e.target.value
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+    console.log(this.props.rbhState);
+    return (
+      <Wrapper>
+    
+        <Typography variant="headline" gutterBottom>
+            Ustawienia Programu
+          </Typography>
+        <Paper
+          className={classes.root}
+          style={{ marginTop: "50px", width: "900px" }}
+          elevation={1}
+        >
+         
+          <Typography variant="subheading" gutterBottom>
+            Ustaw Akronim który będzie wyświetlany w numerze Kart np " 12 / WŁ /
+            2018" (gdzie WŁ oznacza Warsztat Remontu Sprzętu Łączności i
+            Informatyki), <br />w sytuacji gdy akronim nie zostanie podany numer
+            karty będzie wyglądał następująco " 12 / 2018"
+          </Typography>
+          <TextField
+            label=" Ustaw Akronim Kart"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            name="karta"
+            defaultValue={this.props.akronim}
+            onChange={e => this.addAkronim(e)}
+          />{" "}
+          <span onClick={() => this.props.onSaveAcronim(this.state.akronim)}>
+            <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
+          </span>
+        </Paper>
+
+        <Paper
+          className={classes.root}
+          style={{ marginTop: "50px", width: "900px" }}
+          elevation={1}
+        >
+          <Typography variant="subheading" gutterBottom>
+           Skonfiguruj  typ, kategorie lub rodzaj
+           sprzętu potrzebnego do prowadzenia Ewidencji Godzin Pracy
+          </Typography>
+          <TextField
+            label="typ, kategoria lub rodzaj "
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            onChange={e => this.addTypRBH(e)}
+          />{" "}
+          <span onClick={() => this.props.onSaveRBH(this.state.rodzajRBH)}>
+            <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
+          </span>
+          {this.props.rbhState.length > 0
+            ? this.props.rbhState.map((rodzaj, i) => (
+                <List key={i}
+          style={{ width: '220px', position: 'relative' }}
+          >
+                  <ListItem  
+          style={{ fontSize: '12px', boxShadow: '0px 1px 14px 0px rgba(0, 0, 0, 0.12)', textAlign: 'center',
+          borderRadius: '50px',}}
+          >{rodzaj} <DeleteOutlinedIcon className={classes.icon} style={{position: 'absolute', right: '10px', bottom: '8px', color: "rgba(0, 0 ,0 , 0.3)" }} onClick={() => this.props.onDeleteRBH(rodzaj)}/></ListItem>
+                </List>
+              ))
+            : null}
+        </Paper>
+
+        <Typography
+          style={{ position: "absolute", bottom: "-30px" }}
+          variant="caption"
+          gutterBottom
+        >
+          wszystkie prawa zastrzeżone - Paweł Naworol @ pawel.naworol@icloud.com
+        </Typography>
+        <Typography variant="caption" gutterBottom 
+          style={{ position: "absolute", bottom: "-50px" }}
+          >
+          Wersja programu: {this.props.wersja}
+        </Typography>
+      </Wrapper>
+    );
+  }
+}
+
+const Wrapper = styled.div`
+  margin-top: 40px;
+  margin-left: 250px;
+  min-height: 750px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Helvetica";
+  font-weight: 400;
+
+`;
+
+const mapStateToProps = state => {
+  return {
+    wersja: state.wersja,
+    akronim: state.akronim,
+    rbhState: state.rodzajRBH
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSaveAcronim: a => dispatch(actions.saveAcronim(a)),
+    onSaveRBH: a => dispatch(actions.saveRodzajRBH(a)),
+    onDeleteRBH: a => dispatch(actions.deleteRodzajRBH(a))
+  };
+};
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Settings);
