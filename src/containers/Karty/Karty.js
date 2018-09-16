@@ -94,7 +94,7 @@ class Karty extends Component {
 
 const Wrapper = styled.div`
   margin-left: 250px;
-  min-height: 100vh;
+  min-height: calc(100vh + 90px);
 position: relative;
   display: flex;
   flex-direction: column;

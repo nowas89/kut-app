@@ -12,6 +12,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import Button from "@material-ui/core/Button";
 
 
 const styles = theme => ({
@@ -24,20 +25,23 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap"
   },
+    
+  button: {
+    margin: theme.spacing.unit,
+    fontFamily: "Arial"
+  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200
-  },
-  button: {
-    margin: theme.spacing.unit
   }
 });
 
 class Settings extends Component {
   state = {
     akronim: "",
-    rodzajRBH: ""
+    rodzajRBH: "",
+    ostatniNumer: 0
   };
   addAkronim = e => {
     this.setState({
@@ -47,6 +51,11 @@ class Settings extends Component {
   addTypRBH = e => {
     this.setState({
       rodzajRBH: e.target.value
+    });
+  };
+  addNowyNumerKarty = e => {
+    this.setState({
+      ostatniNumer: e.target.value
     });
   };
 
@@ -90,7 +99,7 @@ class Settings extends Component {
           style={{ marginTop: "50px", width: "900px" }}
           elevation={1}
         >
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subheading" gutterBottom >
            Skonfiguruj  typ, kategorie lub rodzaj
            sprzętu potrzebnego do prowadzenia Ewidencji Godzin Pracy
           </Typography>
@@ -101,7 +110,9 @@ class Settings extends Component {
             type="text"
             onChange={e => this.addTypRBH(e)}
           />{" "}
-          <span onClick={() => this.props.onSaveRBH(this.state.rodzajRBH)}>
+          <span onClick={
+            () => 
+            this.props.onSaveRBH(this.state.rodzajRBH)}>
             <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
           </span>
           {this.props.rbhState.length > 0
@@ -117,12 +128,68 @@ class Settings extends Component {
               ))
             : null}
         </Paper>
+        <Paper
+          className={classes.root}
+          style={{ marginTop: "50px", width: "900px" }}
+          elevation={1}
+        >
+          <Typography variant="subheading" gutterBottom>
+           Ustaw ręcznie ostatni numer Karty Usług Technicznych w sytuacji gdy program został wdrżony w okresie innym niż 1 stycznia bieżącego roku. 
+           <br />Ustawiony numer musi być numerem ostatniej wystawionej Karty Usług Technicznych.
+          </Typography>
+          <Typography variant="subheading" gutterBottom style={{color: 'red' }}>
+          {this.props.nowyNumerKuta ? "Obecny Numer Karty:   " + this.props.ostatniNumer : 'numer nie został ustawiony'}
+          </Typography>
+          <TextField
+            label="Nowy Numer Karty"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            onChange={e => this.addNowyNumerKarty(e)}
+          />{" "}
+          <span onClick={() => this.props.onNowyNumerKarty(this.state.ostatniNumer)}>
+            <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
+          </span>
+          <Typography variant="caption" gutterBottom  >
+    Aby wrócić do numeracji Kart Usług Technicznych w Kolejności według Lp. proszę wpisać 0 w pole wprowadzania tekstu.
+        </Typography>
+        </Paper>
+
+ <Paper
+          className={classes.root}
+          style={{ marginTop: "50px", width: "900px",  display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          elevation={1}
+        >
+ 
+          <Typography variant="subheading" gutterBottom  style={{ textAlign: 'center'}}>
+Aby wrócić do ustawień początkowych programu wciśnij przycisk " Przywróć Ustawienia Początkowe"
+
+          </Typography>
+         
+          <Button   variant="contained"
+           color="secondary"
+          className={classes.button}
+          style={{ fontSize: "14px", marginTop: '35px',marginBottom: '35px' }}
+          onClick={() => 
+          
+            window.confirm("Napewno chcesz przywrócić stan początkowy aplikacji ? \n  Po potwierdzeniu wyboru dane programu zostaną skasowanie nieodwracalnie!!! \n Upewnij się czy eksportowałeś wszystkie dane do plików XML ")
+            ? this.props.onResetState()
+            : null
+          }
+        >
+         Przywróć Ustawienia Początkowe
+        </Button>
+          <Typography variant="caption" gutterBottom style={{color: 'red', textAlign: 'center'}}
+          >
+Uwaga!! <br /> Po użyciu przycisku "Przywróć Ustawienia Początkowe" dane programu zostaną skasowanie nieodwracalnie!!! <br />
+Upewnij się czy eksportowałeś wszystkie dane do plików XML
+        </Typography>
+        </Paper>
 
         <Typography
           style={{ position: "absolute", bottom: "-30px" }}
           variant="caption"
-          gutterBottom
-        >
+          gutterBottom>
           wszystkie prawa zastrzeżone - Paweł Naworol @ pawel.naworol@icloud.com
         </Typography>
         <Typography variant="caption" gutterBottom 
@@ -152,7 +219,10 @@ const mapStateToProps = state => {
   return {
     wersja: state.wersja,
     akronim: state.akronim,
-    rbhState: state.rodzajRBH
+    rbhState: state.rodzajRBH,
+    ostatniNumer: state.ostatniNumer,
+    nowyNumerKuta: state.nowyNumerKuta,
+    wystepujaceRBH : state.rodzajRBH
   };
 };
 
@@ -160,7 +230,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onSaveAcronim: a => dispatch(actions.saveAcronim(a)),
     onSaveRBH: a => dispatch(actions.saveRodzajRBH(a)),
-    onDeleteRBH: a => dispatch(actions.deleteRodzajRBH(a))
+    onDeleteRBH: a => dispatch(actions.deleteRodzajRBH(a)),
+    onNowyNumerKarty: a => dispatch(actions.nowyNumerKarty(a)),
+    onResetState: () => dispatch(actions.resetState())
   };
 };
 export default compose(

@@ -80,19 +80,16 @@ const styles = theme => ({
 
 class DodajKuta extends Component {
   state = {
-    numerKuta:
-      this.props.akronim === ""
-        ? this.props.karty.length +
-          1 +
-          this.props.akronim +
-          " / " +
-          new Date().getFullYear()
-        : this.props.karty.length +
-          1 +
-          " / " +
-          this.props.akronim +
-          " / " +
-          new Date().getFullYear(),
+ostatniNumer: Number(this.props.ostatniNumer) + 1,
+    numerKuta: 
+    this.props.akronim === "" && this.props.nowyNumerKuta ?  (Number(this.props.ostatniNumer) + 1) + " / " +  new Date().getFullYear() : null ||
+(    this.props.akronim === "" && !this.props.nowyNumerKuta ?   (Number(this.props.karty.length) + 1) +  " / " +  new Date().getFullYear() : null) ||
+   ( this.props.akronim !== "" && this.props.nowyNumerKuta ? (Number(this.props.ostatniNumer) + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear(): null) ||
+(    this.props.akronim !== "" && !this.props.nowyNumerKuta ? (Number(this.props.karty.length) + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear() : null)
+         
+
+
+          ,
     id: this.props.karty.length + 1,
     dodajCzynnosc: false,
     kartaZdana: false,
@@ -146,8 +143,27 @@ class DodajKuta extends Component {
     this.setState({
       id: this.props.karty.length + 1
     });
-    console.log("wlasnie wczytalem kompnent");
+//     this.setState({
+
+// () =>
+//         if(this.props.akronim === "" && this.props.nowyNumerKuta) {
+//           return  (this.props.ostatniNumer + 1) + " / " +  new Date().getFullYear()
+//         } else if ( this.props.akronim === "" && !this.props.nowyNumerKuta) {
+//           return  (this.props.normalnyNumer + 1) +  " / " +  new Date().getFullYear()
+//         } else if (this.props.akronim !== "" && this.props.nowyNumerKuta) {
+//           return  (this.props.ostatniNumer + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear()
+//         }else if (this.props.akronim !== "" && !this.props.nowyNumerKuta) {
+//           return  (this.props.normalnyNumer + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear()
+//         }
+//              }
+//     });
+
+
+
+
+console.log(this.state.numerKuta)
   }
+
 
   componentWillUnmount() {
     this.setState({
@@ -916,7 +932,9 @@ const mapStateToProps = state => {
     buttonIsClicked: state.buttonIsClicked,
     buttonDisable: state.buttonDisable,
     akronim: state.akronim,
-    rbhState: state.rodzajRBH
+    rbhState: state.rodzajRBH,
+    ostatniNumer: state.ostatniNumer,
+    nowyNumerKuta: state.nowyNumerKuta
   };
 };
 

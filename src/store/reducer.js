@@ -6,9 +6,11 @@ const initialState = {
   buttonDisable: false,
   otwartakarta: {},
   kartaJestOtwarta: false,
-  wersja: "1.0.1",
+  wersja: "1.0.4",
   akronim: "",
-  rodzajRBH: []
+  rodzajRBH: [],
+  nowyNumerKuta: false,
+  ostatniNumer: 0
 };
 
 export const addNewKut = (state, action) => {
@@ -16,7 +18,7 @@ export const addNewKut = (state, action) => {
 
   nowaKarta.push(
     (action.state.id = {
-      numerKuta: action.state.numerKuta === "" ? "----------" : action.state.numerKuta,
+      numerKuta: action.state.numerKuta,
       id: action.state.id,
       wykonawca: action.state.wykonawca === "" ? "----------" : action.state.wykonawca,
       marka: action.state.marka === "" ? "----------" : action.state.marka,
@@ -49,7 +51,8 @@ export const addNewKut = (state, action) => {
     ...state,
     karty: nowaKarta,
     buttonIsClicked: false,
-    buttonDisable: false
+    buttonDisable: false,
+    ostatniNumer: action.state.ostatniNumer
   };
 };
 export const addNewCzynnosc = (state, action) => {
@@ -152,9 +155,8 @@ export const saveAcronim = (state, action) => {
 export const saveRodzajRBH = (state, action) => {
   let addRbhTyp = state.rodzajRBH.concat(action.typRBH);
 
-  console.log(addRbhTyp);
-  console.log(action.typRBH);
-  console.log(state.rodzajRBH);
+
+  
 
   return {
     ...state,
@@ -186,6 +188,46 @@ export const Anulowanie = (state, action) => {
     buttonDisable: false
   };
 };
+
+
+export const nowyNumerKarty = (state, action) => {
+let aktualizacjaNumeru;
+let nowyNumer;
+if(action.nowyNumer > 0) {
+aktualizacjaNumeru = true
+nowyNumer  = action.nowyNumer
+} else {
+aktualizacjaNumeru = false
+nowyNumer = state.ostatniNumer
+  
+}
+console.log(aktualizacjaNumeru)
+console.log(nowyNumer)
+
+  return {
+    ...state,
+    nowyNumerKuta: aktualizacjaNumeru,
+    ostatniNumer: nowyNumer
+    
+    
+  };
+};
+export const resetState = (state, action) => {
+
+  return {
+    karty: [],
+    buttonIsClicked: false,
+    buttonDisable: false,
+    otwartakarta: {},
+    kartaJestOtwarta: false,
+    wersja: "1.0.4",
+    akronim: "",
+    rodzajRBH: [],
+    nowyNumerKuta: false,
+    ostatniNumer: 0
+    
+  };
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_KUT:
@@ -208,6 +250,10 @@ const reducer = (state = initialState, action) => {
       return deleteRodzajRBH(state, action);
     case actionTypes.ANULOWANIE:
       return Anulowanie(state, action);
+    case actionTypes.NOWY_NUMER:
+      return nowyNumerKarty(state, action);
+    case actionTypes.RESET:
+      return resetState(state, action);
     default:
       return state;
   }

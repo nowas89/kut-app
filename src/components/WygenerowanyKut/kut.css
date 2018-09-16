@@ -653,7 +653,7 @@
     padding: 0;
   }
   h1 {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 400;
     font-family: "Roboto", sans-serif;
   }
@@ -1239,7 +1239,9 @@
   font-family: "Open-sans", sans-serif;
 }
 .mainWindow h1 {
-  font-size: 8px;
+  font-size: 11px;
+  font-weight: 400;
+
   position: relative;
   top: 2px;
   left: 2px;
@@ -1258,7 +1260,7 @@
 .task-rows {
   font-family: "Open-sans", sans-serif;
 
-  height: 359px;
+  height: 361px;
   width: 792px;
   display: flex;
   flex-direction: column;

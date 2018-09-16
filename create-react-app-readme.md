@@ -1,1 +1,0 @@
-Projekt opearty o React + Redux + React Router + Electron

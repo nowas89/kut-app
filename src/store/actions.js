@@ -92,3 +92,15 @@ export const Anulowanie = () => {
     type: actionTypes.ANULOWANIE
   };
 };
+export const nowyNumerKarty = (nowyNumer) => {
+  return {
+    type: actionTypes.NOWY_NUMER,
+    nowyNumer: nowyNumer
+  };
+};
+export const resetState = () => {
+  return {
+    type: actionTypes.RESET
+
+  };
+};

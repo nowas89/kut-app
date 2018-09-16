@@ -105,11 +105,11 @@ class KutToPrint extends Component {
                 W CZASIE DEFEKTACJI (BADAŃ DIAGNOSTYCZNYCH) STWIERDZONO
                 KONIECZNOŚĆ WYKONIANIA NASTĘPUJĄCYCH PRAC:
               </h3>
-              <h1 style={{ paddingTop: "10px" }}>{opis}</h1>
+              <h1 style={{ paddingTop: "10px",paddingLeft: "10px" }}>{opis}</h1>
             </div>
             <div className="second">
               <h3>UWAGI PRZYJMUJĄCEGO:</h3>
-              <h1 style={{ paddingTop: "10px" }}>{uwagi}</h1>
+              <h1 style={{ paddingTop: "10px",paddingLeft: "10px"  }}>{uwagi}</h1>
             </div>
           </div>
           <h1>ROZLICZENIE WYKONANIA ZADANIA</h1>

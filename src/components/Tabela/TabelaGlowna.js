@@ -250,7 +250,7 @@ state = {
                          <TextField
           label="Przeszukaj Karty"
           className={classes.textField}
-          style={{position: 'absolute', bottom: '0px'}}
+          style={{position: 'absolute', bottom: '-40px'}}
           margin="normal"
           type="text"
 
