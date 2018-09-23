@@ -133,7 +133,7 @@ class KutToPrint extends Component {
               </div>
               <div className="third">
                 <div className="third-1">
-                  <h2>Data wykonania</h2>
+                  <h2>Data < br /> wykonania</h2>
                 </div>
                 <div className="third-2">
                   <h2>3</h2>

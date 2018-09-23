@@ -138,10 +138,10 @@ class Settings extends Component {
            <br />Ustawiony numer musi być numerem ostatniej wystawionej Karty Usług Technicznych.
           </Typography>
           <Typography variant="subheading" gutterBottom style={{color: 'red' }}>
-          {this.props.nowyNumerKuta ? "Obecny Numer Karty:   " + this.props.ostatniNumer : 'numer nie został ustawiony'}
+          {this.props.nowyNumerKuta ? "Obecny Numer Karty:   " + this.props.ostatniNumer : 'Numer nie został ustawiony'}
           </Typography>
           <TextField
-            label="Nowy Numer Karty"
+            label="Numer Ostatniej Karty"
             className={classes.textField}
             margin="normal"
             type="text"
@@ -151,7 +151,7 @@ class Settings extends Component {
             <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
           </span>
           <Typography variant="caption" gutterBottom  >
-    Aby wrócić do numeracji Kart Usług Technicznych w Kolejności według Lp. proszę wpisać 0 w pole wprowadzania tekstu.
+    Aby wrócić do numeracji Kart Usług Technicznych w kolejności według Lp. proszę wpisać 0 w pole wprowadzania tekstu.
         </Typography>
         </Paper>
 

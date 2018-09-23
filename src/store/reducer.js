@@ -10,7 +10,9 @@ const initialState = {
   akronim: "",
   rodzajRBH: [],
   nowyNumerKuta: false,
-  ostatniNumer: 0
+  ostatniNumer: 0,
+  defWykonawca: '',
+  defWystawiajacy: ''
 };
 
 export const addNewKut = (state, action) => {
@@ -20,7 +22,7 @@ export const addNewKut = (state, action) => {
     (action.state.id = {
       numerKuta: action.state.numerKuta,
       id: action.state.id,
-      wykonawca: action.state.wykonawca === "" ? "----------" : action.state.wykonawca,
+      wykonawca: action.state.wykonawca,
       marka: action.state.marka === "" ? "----------" : action.state.marka,
       nrRej: action.state.nrRej === "" ? "----------" : action.state.nrRej,
       wlasciciel: action.state.wlasciciel === "" ? "----------" : action.state.wlasciciel,
@@ -52,7 +54,10 @@ export const addNewKut = (state, action) => {
     karty: nowaKarta,
     buttonIsClicked: false,
     buttonDisable: false,
-    ostatniNumer: action.state.ostatniNumer
+    ostatniNumer: action.state.ostatniNumer,
+    defWykonawca: action.state.defWykonawca,
+    defWystawiajacy: action.state.defWystawiajacy
+    
   };
 };
 export const addNewCzynnosc = (state, action) => {

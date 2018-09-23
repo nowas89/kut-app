@@ -44,23 +44,18 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 170,
     fontFamily: "Arial",
-    [theme.breakpoints.down('md')]: {
-    width: 120,
-    fontSize: 7,
-    },
+    [theme.breakpoints.down("md")]: {
+      width: 120,
+      fontSize: 7
+    }
   },
-    textFieldAr: {
-      width: 750, 
-      [theme.breakpoints.down('md')]: {
-       width: 420,
-    fontSize: 3,
-       
- 
-     },
- 
-   
+  textFieldAr: {
+    width: 750,
+    [theme.breakpoints.down("md")]: {
+      width: 420,
+      fontSize: 3
+    }
   },
-  
   button: {
     margin: theme.spacing.unit,
     fontFamily: "Arial"
@@ -80,21 +75,40 @@ const styles = theme => ({
 
 class DodajKuta extends Component {
   state = {
-ostatniNumer: Number(this.props.ostatniNumer) + 1,
-    numerKuta: 
-    this.props.akronim === "" && this.props.nowyNumerKuta ?  (Number(this.props.ostatniNumer) + 1) + " / " +  new Date().getFullYear() : null ||
-(    this.props.akronim === "" && !this.props.nowyNumerKuta ?   (Number(this.props.karty.length) + 1) +  " / " +  new Date().getFullYear() : null) ||
-   ( this.props.akronim !== "" && this.props.nowyNumerKuta ? (Number(this.props.ostatniNumer) + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear(): null) ||
-(    this.props.akronim !== "" && !this.props.nowyNumerKuta ? (Number(this.props.karty.length) + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear() : null)
-         
-
-
-          ,
+    ostatniNumer: Number(this.props.ostatniNumer) + 1,
+    numerKuta:
+      this.props.akronim === "" && this.props.nowyNumerKuta
+        ? Number(this.props.ostatniNumer) + 1 + " / " + new Date().getFullYear()
+        : null ||
+          (this.props.akronim === "" && !this.props.nowyNumerKuta
+            ? Number(this.props.karty.length) +
+              1 +
+              " / " +
+              new Date().getFullYear()
+            : null) ||
+          (this.props.akronim !== "" && this.props.nowyNumerKuta
+            ? Number(this.props.ostatniNumer) +
+              1 +
+              " / " +
+              this.props.akronim +
+              " / " +
+              new Date().getFullYear()
+            : null) ||
+          (this.props.akronim !== "" && !this.props.nowyNumerKuta
+            ? Number(this.props.karty.length) +
+              1 +
+              " / " +
+              this.props.akronim +
+              " / " +
+              new Date().getFullYear()
+            : null),
+    defWystawiajacy: this.props.defWystawiajacy,
+    defWykonawca: this.props.defWykonawca,
     id: this.props.karty.length + 1,
     dodajCzynnosc: false,
     kartaZdana: false,
     CzCzynnosci: [],
-    wykonawca: "",
+    wykonawca: this.props.defWykonawca,
     marka: "",
     nrRej: "",
     wlasciciel: "",
@@ -105,7 +119,7 @@ ostatniNumer: Number(this.props.ostatniNumer) + 1,
       "/" +
       new Date().getFullYear(),
     zadanie: "",
-    wystawiajacy: "",
+    wystawiajacy: this.props.defWystawiajacy,
     opis: "",
     dataZdania: "",
     uwagi: "",
@@ -143,27 +157,23 @@ ostatniNumer: Number(this.props.ostatniNumer) + 1,
     this.setState({
       id: this.props.karty.length + 1
     });
-//     this.setState({
+    //     this.setState({
 
-// () =>
-//         if(this.props.akronim === "" && this.props.nowyNumerKuta) {
-//           return  (this.props.ostatniNumer + 1) + " / " +  new Date().getFullYear()
-//         } else if ( this.props.akronim === "" && !this.props.nowyNumerKuta) {
-//           return  (this.props.normalnyNumer + 1) +  " / " +  new Date().getFullYear()
-//         } else if (this.props.akronim !== "" && this.props.nowyNumerKuta) {
-//           return  (this.props.ostatniNumer + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear()
-//         }else if (this.props.akronim !== "" && !this.props.nowyNumerKuta) {
-//           return  (this.props.normalnyNumer + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear()
-//         }
-//              }
-//     });
+    // () =>
+    //         if(this.props.akronim === "" && this.props.nowyNumerKuta) {
+    //           return  (this.props.ostatniNumer + 1) + " / " +  new Date().getFullYear()
+    //         } else if ( this.props.akronim === "" && !this.props.nowyNumerKuta) {
+    //           return  (this.props.normalnyNumer + 1) +  " / " +  new Date().getFullYear()
+    //         } else if (this.props.akronim !== "" && this.props.nowyNumerKuta) {
+    //           return  (this.props.ostatniNumer + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear()
+    //         }else if (this.props.akronim !== "" && !this.props.nowyNumerKuta) {
+    //           return  (this.props.normalnyNumer + 1) +  " / " + this.props.akronim + " / " +  new Date().getFullYear()
+    //         }
+    //              }
+    //     });
 
-
-
-
-console.log(this.state.numerKuta)
+    console.log(this.state.numerKuta);
   }
-
 
   componentWillUnmount() {
     this.setState({
@@ -226,10 +236,10 @@ console.log(this.state.numerKuta)
   handleChange = event => {
     this.setState({ kartaZdana: event.target.checked });
   };
-
   addWykonawca = e => {
     this.setState({
-      wykonawca: e.target.value
+      wykonawca: e.target.value,
+      defWykonawca: e.target.value
     });
   };
   addMarka = e => {
@@ -254,7 +264,8 @@ console.log(this.state.numerKuta)
   };
   addWystawiajacy = e => {
     this.setState({
-      wystawiajacy: e.target.value.toUpperCase()
+      wystawiajacy: e.target.value,
+      defWystawiajacy: e.target.value
     });
   };
   addOpis = e => {
@@ -459,7 +470,7 @@ console.log(this.state.numerKuta)
               margin="normal"
               type="text"
               name="wykonawca"
-              defaultValue={this.state.wykonawca}
+              defaultValue={this.state.defWykonawca}
               autoComplete="on"
               onChange={e => this.addWykonawca(e)}
             />
@@ -566,7 +577,7 @@ console.log(this.state.numerKuta)
               margin="normal"
               type="text"
               name="wystawiajacy"
-              defaultValue={this.state.wystawiajacy}
+              defaultValue={this.state.defWystawiajacy}
               autoComplete="on"
               onChange={e => this.addWystawiajacy(e)}
             />
@@ -574,7 +585,7 @@ console.log(this.state.numerKuta)
 
           <TextAr>
             <TextField
-             className={classes.textFieldAr}
+              className={classes.textFieldAr}
               label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
               wykonania następujących prac: "
               type="text"
@@ -588,8 +599,7 @@ console.log(this.state.numerKuta)
 
           <TextAr>
             <TextField
-             className={classes.textFieldAr}
-        
+              className={classes.textFieldAr}
               label="  Uwagi przyjmującego"
               type="text"
               margin="normal"
@@ -865,8 +875,7 @@ console.log(this.state.numerKuta)
           style={{
             margin: "0",
             marginTop: "50px",
-            marginBottom: "20px",
-
+            marginBottom: "20px"
           }}
         >
           Anuluj Dodawanie Karty
@@ -934,7 +943,9 @@ const mapStateToProps = state => {
     akronim: state.akronim,
     rbhState: state.rodzajRBH,
     ostatniNumer: state.ostatniNumer,
-    nowyNumerKuta: state.nowyNumerKuta
+    nowyNumerKuta: state.nowyNumerKuta,
+    defWystawiajacy: state.defWystawiajacy,
+    defWykonawca: state.defWykonawca
   };
 };
 
