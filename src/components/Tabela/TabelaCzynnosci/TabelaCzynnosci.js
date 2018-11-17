@@ -1,7 +1,57 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions"
+import compose from "recompose/compose";
+import { withStyles } from "@material-ui/core/styles";
 
-// import { connect } from "react-redux";
 
+
+const styles = theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    fontFamily: "Arial"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 180,
+    fontFamily: "Arial",
+    [theme.breakpoints.down("md")]: {
+      width: 120,
+      fontSize: 7
+    }
+  },
+  textFieldAr: {
+    width: 750,
+    [theme.breakpoints.down("md")]: {
+      width: 420,
+      fontSize: 3
+    }
+  },
+  button: {
+    margin: theme.spacing.unit,
+    fontFamily: "Arial"
+  },
+  input: {
+    display: "none",
+    fontFamily: "Arial"
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
+  }
+});
 import "../table.css";
 
 import RowCzynnosci from "./RowCzynnosci";
@@ -25,7 +75,7 @@ class TabelaCzynnosci extends Component {
         {this.props.zawartosCzynnosci.map(karta => {
 
           return (
-            <RowCzynnosci
+            <RowCzynnosci clicked={() => this.props.onEditCzynnosc(karta)}
               key={karta.CzOperacjaId}
               CzOperacja={karta.CzOperacja}
               CzRbh={karta.CzRbh}
@@ -44,4 +94,24 @@ class TabelaCzynnosci extends Component {
     );
   }
 }
-export default TabelaCzynnosci;
+
+
+const mapStateToProps = state => {
+  return {
+
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onEditCzynnosc: cz => dispatch(actions.editCzynnosc(cz)),
+  };
+};
+
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(TabelaCzynnosci);

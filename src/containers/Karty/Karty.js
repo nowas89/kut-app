@@ -80,13 +80,9 @@ class Karty extends Component {
         )}
         {this.props.buttonIsClicked ? <DodajKuta /> : null}
 
-       {!this.props.buttonIsClicked && this.props.karty.length > 0 ? (
+       {!this.props.buttonIsClicked && !this.props.kartaJestOtwarta && this.props.karty.length > 0 ? (
  <TabelaGlowna />
         ) : null}
-   
-
-  
-
       </Wrapper>
     );
   }
@@ -110,7 +106,8 @@ const mapStateToProps = state => {
   return {
     karty: state.karty,
     buttonIsClicked: state.buttonIsClicked,
-    buttonDisable: state.buttonDisable
+    buttonDisable: state.buttonDisable,
+    kartaJestOtwarta: state.kartaJestOtwarta
   };
 };
 

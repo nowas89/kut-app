@@ -104,3 +104,19 @@ export const resetState = () => {
 
   };
 };
+export const editCzynnosc = (cz) => {
+  return {
+    type: actionTypes.EDIT_CZYNNOSC,
+    
+    czynnosc: cz
+
+  };
+};
+export const aktualizacjaCzynnosci = (karta) => {
+  return {
+    type: actionTypes.AKTUALIZACJA_CZYNNOSCI,
+    
+    karta: karta
+
+  };
+};

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions";
 import compose from "recompose/compose";
+import * as actions from "../../store/actions";
 import Typography from "@material-ui/core/Typography";
 
 import styled from "styled-components";
@@ -42,7 +42,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 170,
+    width: 180,
     fontFamily: "Arial",
     [theme.breakpoints.down("md")]: {
       width: 120,
@@ -76,6 +76,7 @@ const styles = theme => ({
 class DodajKuta extends Component {
   state = {
     ostatniNumer: Number(this.props.ostatniNumer) + 1,
+    numer: Number(this.props.ostatniNumer) + 1,
     numerKuta:
       this.props.akronim === "" && this.props.nowyNumerKuta
         ? Number(this.props.ostatniNumer) + 1 + " / " + new Date().getFullYear()
@@ -151,7 +152,19 @@ class DodajKuta extends Component {
 
     rodzajRBH: "",
     iloscRBH: "",
-    iloscSprzetuRBH: ""
+    iloscSprzetuRBH: "",
+    edytowaneCz: {
+      editCzOperacjaId: '',
+      editCzOperacja: "",
+      editCzRbh: "",
+      editCzDataWyk: "asdasdassdadasadsdsa",
+      editCzWykonawca: "",
+      editCzWyszczegolnienie: "",
+      editCzOznaczenie: "",
+      editCzIlosc: "",
+      editCzAsygnata: "",
+      editCzUwagi: ""
+    }
   };
   componentDidMount() {
     this.setState({
@@ -214,6 +227,7 @@ class DodajKuta extends Component {
   addNumerKuta = e => {
     this.setState({
       numerKuta: e.target.value
+    
     });
   };
 
@@ -539,8 +553,9 @@ class DodajKuta extends Component {
               onChange={e => this.addTerminWYkonania(e)}
             />
             <TextField
-              label=" Data ważności karty"
+              label=" Data wystawienia karty"
               className={classes.textField}
+              style={{fontSize: '8px'}}
               margin="normal"
               type="text"
               name="karta"
@@ -889,7 +904,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100%;
+  min-height: 100vh;
   width: 95%;
   position: relative;
   overflow: hidden;

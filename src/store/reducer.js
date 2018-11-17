@@ -11,8 +11,10 @@ const initialState = {
   rodzajRBH: [],
   nowyNumerKuta: false,
   ostatniNumer: 0,
-  defWykonawca: '',
-  defWystawiajacy: ''
+  defWykonawca: "",
+  defWystawiajacy: "",
+  edytowanaCz: {},
+  editOperacji: true
 };
 
 export const addNewKut = (state, action) => {
@@ -22,32 +24,42 @@ export const addNewKut = (state, action) => {
     (action.state.id = {
       numerKuta: action.state.numerKuta,
       id: action.state.id,
+      numer: action.state.numer,
       wykonawca: action.state.wykonawca,
       marka: action.state.marka === "" ? "----------" : action.state.marka,
       nrRej: action.state.nrRej === "" ? "----------" : action.state.nrRej,
-      wlasciciel: action.state.wlasciciel === "" ? "----------" : action.state.wlasciciel,
+      wlasciciel:
+        action.state.wlasciciel === "" ? "----------" : action.state.wlasciciel,
       terminWykonania:
-        action.state.terminWykonania === "" ? "----------" : action.state.terminWykonania,
-      zadanie: action.state.zadanie === "" ? "----------" : action.state.zadanie,
+        action.state.terminWykonania === ""
+          ? "----------"
+          : action.state.terminWykonania,
+      zadanie:
+        action.state.zadanie === "" ? "----------" : action.state.zadanie,
       wystawiajacy:
-        action.state.wystawiajacy === "" ? "----------" : action.state.wystawiajacy,
+        action.state.wystawiajacy === ""
+          ? "----------"
+          : action.state.wystawiajacy,
       opis: action.state.opis === "" ? "----------" : action.state.opis,
       uwagi: action.state.uwagi === "" ? "----------" : action.state.uwagi,
       typ: action.state.typ === "" ? "----------" : action.state.typ,
-      podstawa: action.state.podstawa === "" ? "----------" : action.state.podstawa,
+      podstawa:
+        action.state.podstawa === "" ? "----------" : action.state.podstawa,
       pobierajacy:
-        action.state.pobierajacy === "" ? "----------" : action.state.pobierajacy,
-      dataZdania: action.state.dataZdania === "" ? "----------" : action.state.dataZdania,
+        action.state.pobierajacy === ""
+          ? "----------"
+          : action.state.pobierajacy,
+      dataZdania:
+        action.state.dataZdania === "" ? "----------" : action.state.dataZdania,
       waznoscKarty: action.state.waznoscKarty,
       CzCzynnosci: action.state.CzCzynnosci,
       kartaZdana: action.state.kartaZdana,
-        rodzajRBH: action.state.rodzajRBH,
-        iloscRBH: action.state.iloscRBH,
-        iloscSprzetuRBH: action.state.iloscSprzetuRBH
-      
+      rodzajRBH: action.state.rodzajRBH,
+      iloscRBH: action.state.iloscRBH,
+      iloscSprzetuRBH: action.state.iloscSprzetuRBH,
+      edytowaneCz: action.state.edytowaneCz
     })
   );
-
 
   return {
     ...state,
@@ -57,7 +69,6 @@ export const addNewKut = (state, action) => {
     ostatniNumer: action.state.ostatniNumer,
     defWykonawca: action.state.defWykonawca,
     defWystawiajacy: action.state.defWystawiajacy
-    
   };
 };
 export const addNewCzynnosc = (state, action) => {
@@ -68,7 +79,6 @@ export const addNewCzynnosc = (state, action) => {
 };
 
 export const buttonKlicked = (state, action) => {
-
   return {
     ...state,
     buttonIsClicked: !action.btnIsClicked,
@@ -77,11 +87,11 @@ export const buttonKlicked = (state, action) => {
 };
 
 export const openKut = (state, action) => {
-
-console.log( action)
-console.log( action.karta)
+  console.log(action);
+  console.log(action.karta);
   const nowOtwartaKarta = {
     numerKuta: action.karta.numerKuta,
+    numer: action.karta.numer,
     id: action.karta.id,
     wykonawca: action.karta.wykonawca,
     marka: action.karta.marka,
@@ -102,7 +112,6 @@ console.log( action.karta)
     iloscRBH: action.karta.iloscRBH,
     iloscSprzetuRBH: action.karta.iloscSprzetuRBH,
     rodzajRBH: action.karta.rodzajRBH
-    
   };
 
   console.log("[open kut]", nowOtwartaKarta);
@@ -160,22 +169,14 @@ export const saveAcronim = (state, action) => {
 export const saveRodzajRBH = (state, action) => {
   let addRbhTyp = state.rodzajRBH.concat(action.typRBH);
 
-
-  
-
   return {
     ...state,
     rodzajRBH: addRbhTyp
   };
 };
 export const deleteRodzajRBH = (state, action) => {
-
-  let deleteTyp = state.rodzajRBH.filter(
-    item => item !== action.typRBH
-  );
-  console.log(deleteTyp)
-
-
+  let deleteTyp = state.rodzajRBH.filter(item => item !== action.typRBH);
+  console.log(deleteTyp);
 
   return {
     ...state,
@@ -183,10 +184,6 @@ export const deleteRodzajRBH = (state, action) => {
   };
 };
 export const Anulowanie = (state, action) => {
-
-
-
-
   return {
     ...state,
     buttonIsClicked: false,
@@ -194,31 +191,26 @@ export const Anulowanie = (state, action) => {
   };
 };
 
-
 export const nowyNumerKarty = (state, action) => {
-let aktualizacjaNumeru;
-let nowyNumer;
-if(action.nowyNumer > 0) {
-aktualizacjaNumeru = true
-nowyNumer  = action.nowyNumer
-} else {
-aktualizacjaNumeru = false
-nowyNumer = state.ostatniNumer
-  
-}
-console.log(aktualizacjaNumeru)
-console.log(nowyNumer)
+  let aktualizacjaNumeru;
+  let nowyNumer;
+  if (action.nowyNumer > 0) {
+    aktualizacjaNumeru = true;
+    nowyNumer = action.nowyNumer;
+  } else {
+    aktualizacjaNumeru = false;
+    nowyNumer = state.ostatniNumer;
+  }
+  console.log(aktualizacjaNumeru);
+  console.log(nowyNumer);
 
   return {
     ...state,
     nowyNumerKuta: aktualizacjaNumeru,
     ostatniNumer: nowyNumer
-    
-    
   };
 };
 export const resetState = (state, action) => {
-
   return {
     karty: [],
     buttonIsClicked: false,
@@ -230,9 +222,26 @@ export const resetState = (state, action) => {
     rodzajRBH: [],
     nowyNumerKuta: false,
     ostatniNumer: 0
-    
   };
 };
+export const editCzynnosc = (state, action) => {
+  console.log(state.edytowanaCz);
+
+  return {
+    ...state,
+    edytowanaCz: action.czynnosc,
+    editOperacji: !state.editOperacji
+  };
+};
+
+export const aktualizacjaCzynnosci = (state, action) => {
+  
+  return {
+    ...state,
+    editOperacji: !state.editOperacji
+  };
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_KUT:
@@ -259,9 +268,46 @@ const reducer = (state = initialState, action) => {
       return nowyNumerKarty(state, action);
     case actionTypes.RESET:
       return resetState(state, action);
+    case actionTypes.EDIT_CZYNNOSC:
+      return editCzynnosc(state, action);
+    case actionTypes.AKTUALIZACJA_CZYNNOSCI:
+      return aktualizacjaCzynnosci(state, action);
     default:
       return state;
   }
 };
 
 export default reducer;
+
+// const uaktualnionaListaKart = state.karty.map(item => {
+//   if (item.id === action.karta.id) {
+
+//   action.karta.CzCzynnosci.map(czynnosc => {
+//     if(czynnosc.CzOperacjaId === action.karta.edytowaneCz.editCzOperacjaId) {
+//       return {
+//         karta: {
+// ...item,
+// CzCzynnosci: {
+// CzDataWyk:action.karta.edytowaneCz.editCzDataWyk
+//        ,
+//       CzOperacja: action.karta.edytowaneCz.editCzOperacja,
+//       CzRbh: action.karta.edytowaneCz.editCzRbh,
+//       CzWykonawca: action.karta.edytowaneCz.editCzWykonawca,
+//       CzWyszczegolnienie: action.karta.edytowaneCz.editCzWyszczegolnienie,
+//       CzOznaczenie: action.karta.edytowaneCz.editCzOznaczenie,
+//       CzIlosc: action.karta.edytowaneCz.editCzIlosc,
+//       CzAsygnata: action.karta.edytowaneCz.editCzAsygnata,
+//       CzUwagi: action.karta.edytowaneCz.editCzUwagi
+// }
+
+//         }
+//       }
+//     } else { return item }
+//   }
+//   )}
+//   else {
+//     return item;
+//   }
+// })
+
+// console.log(uaktualnionaListaKart)

@@ -6,9 +6,8 @@ import compose from "recompose/compose";
 import styled from "styled-components";
 
 import * as actions from "../../store/actions";
-import WygenerowanyKut from '../WygenerowanyKut/WygenerowanyKut';
-import TabelaCzynnosci from '../Tabela/TabelaCzynnosci/TabelaCzynnosci'
-
+import WygenerowanyKut from "../WygenerowanyKut/WygenerowanyKut";
+import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
@@ -19,7 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
 import WygenerowanyKut2 from "../WygenerowanyKut/WygenerowanyKut2";
 import Paper from "@material-ui/core/Paper";
@@ -43,28 +42,23 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 170,
+    width: 180,
     fontFamily: "Arial",
-    [theme.breakpoints.down('md')]: {
-    width: 120,
-    fontSize: 7,
-    },
+    [theme.breakpoints.down("md")]: {
+      width: 120,
+      fontSize: 7
+    }
   },
-    textFieldAr: {
-      width: 750, 
-      [theme.breakpoints.down('md')]: {
-       width: 420,
-    fontSize: 3,
-       
- 
-     },
- 
-   
+  textFieldAr: {
+    width: 750,
+    [theme.breakpoints.down("md")]: {
+      width: 420,
+      fontSize: 3
+    }
   },
   button: {
-    margin: theme.spacing.unit
-    ,
-    fontFamily: 'Arial'
+    margin: theme.spacing.unit,
+    fontFamily: "Arial"
   },
   extendedIcon: {
     marginRight: theme.spacing.unit
@@ -72,7 +66,7 @@ const styles = theme => ({
   button2: {
     margin: theme.spacing.unit,
     width: 160,
-    fontSize: 14,
+    fontSize: 14
   },
 
   checked: {},
@@ -86,7 +80,7 @@ const styles = theme => ({
   },
   icon: {
     marginRight: 5,
-    fontSize: 24,
+    fontSize: 24
   },
   formControl: {
     margin: theme.spacing.unit,
@@ -100,8 +94,9 @@ const styles = theme => ({
 class OtwartaKarta extends Component {
   state = {
     dodajCzynosc: false,
-drukowanie: false,
+    drukowanie: false,
     karta: {
+      numer: "",
       kartaZdana: null,
       numerKuta: "",
       id: "",
@@ -111,7 +106,7 @@ drukowanie: false,
       marka: "",
       nrRej: "",
       wlasciciel: "",
-      dataZdania: '',
+      dataZdania: "",
       terminWykonania: "",
       zadanie: "",
       wystawiajacy: "",
@@ -136,19 +131,31 @@ drukowanie: false,
       CzAsygnata: "",
       CzUwagi: "",
       CzOperacjaId: 0,
-        rodzajRBH: "",
-        iloscSprzetuRBH: "",
-        iloscRBH: ""
-      
+      rodzajRBH: "",
+      iloscSprzetuRBH: "",
+      iloscRBH: "",
+      edytowaneCz: {
+        editCzOperacjaId: '',
+        editCzOperacja: "",
+        editCzRbh: "",
+        editCzDataWyk: "",
+        editCzWykonawca: "",
+        editCzWyszczegolnienie: "",
+        editCzOznaczenie: "",
+        editCzIlosc: "",
+        editCzAsygnata: "",
+        editCzUwagi: ""
+      }, 
+      editOperacji: this.props.editOperacji
     }
   };
 
   componentWillMount() {
-
     this.setState({
       dodajCzynnosc: this.props.taKartaJestOtwarta.dodajCzynnosc,
       karta: {
         numerKuta: this.props.taKartaJestOtwarta.numerKuta,
+        numer: this.props.taKartaJestOtwarta.numer,
         id: this.props.taKartaJestOtwarta.id,
         kartaZdana: this.props.taKartaJestOtwarta.kartaZdana,
         CzCzynnosci: this.props.taKartaJestOtwarta.CzCzynnosci,
@@ -170,11 +177,12 @@ drukowanie: false,
         rodzajRBH: this.props.taKartaJestOtwarta.rodzajRBH,
         iloscSprzetuRBH: this.props.taKartaJestOtwarta.iloscSprzetuRBH,
         iloscRBH: this.props.taKartaJestOtwarta.iloscRBH,
-        CzDataWyk:  new Date().getDate() +
-        "/" +
-        (new Date().getMonth() + 1) +
-        "/" +
-        new Date().getFullYear(),
+        CzDataWyk:
+          new Date().getDate() +
+          "/" +
+          (new Date().getMonth() + 1) +
+          "/" +
+          new Date().getFullYear(),
         CzOperacja: "",
         CzRbh: "",
         CzWykonawca: "",
@@ -182,9 +190,19 @@ drukowanie: false,
         CzOznaczenie: "",
         CzIlosc: "",
         CzAsygnata: "",
-        CzUwagi: ""
-      
-        
+        CzUwagi: "",
+        edytowaneCz: {
+          editCzOperacjaId: this.props.edytowanaCz.CzOperacjaId,
+          editCzOperacja: this.props.edytowanaCz.CzOperacja,
+          editCzRbh: this.props.edytowanaCz.CzRbh,
+          editCzDataWyk: this.props.edytowanaCz.CzDataWyk,
+          editCzWykonawca: this.props.edytowanaCz.CzWykonawca,
+          editCzWyszczegolnienie: this.props.edytowanaCz.CzWyszczegolnienie,
+          editCzOznaczenie: this.props.edytowanaCz.CzOznaczenie,
+          editCzIlosc: this.props.edytowanaCz.CzIlosc,
+          editCzAsygnata: this.props.edytowanaCz.CzAsygnata,
+          editCzUwagi: this.props.edytowanaCz.CzUwagi
+        }
       }
     });
   }
@@ -196,9 +214,7 @@ drukowanie: false,
           ? "----------"
           : this.state.karta.CzOperacja,
       CzRbh:
-        this.state.karta.CzRbh === "" ? 
-        "----------"
-         : this.state.karta.CzRbh,
+        this.state.karta.CzRbh === "" ? "----------" : this.state.karta.CzRbh,
       CzDataWyk:
         this.state.karta.CzDataWyk === ""
           ? "----------"
@@ -227,7 +243,7 @@ drukowanie: false,
         this.state.karta.CzUwagi === ""
           ? "----------"
           : this.state.karta.CzUwagi,
-          CzOperacjaId: this.state.karta.CzCzynnosci.length + 1
+      CzOperacjaId: this.state.karta.CzCzynnosci.length + 1
     });
 
     this.setState({
@@ -272,43 +288,35 @@ drukowanie: false,
 
   drukuj = e => {
     this.setState({
-      
-drukowanie: !e.target.value
-     
-      
-    })
+      drukowanie: !e.target.value
+    });
   };
 
   zmianaSelecta = e => {
     this.setState({
-   karta: {
-    ...this.state.karta,
-  
-      rodzajRBH: e.target.value
-    
-   }
+      karta: {
+        ...this.state.karta,
+
+        rodzajRBH: e.target.value
+      }
     });
   };
   addIloscSprzetuRBH = e => {
     this.setState({
       karta: {
-
         ...this.state.karta,
 
-          iloscSprzetuRBH: e.target.value
-        
+        iloscSprzetuRBH: e.target.value
       }
     });
   };
   addIloscRBH = e => {
     this.setState({
-     karta: {
-      ...this.state.karta,
-
+      karta: {
+        ...this.state.karta,
 
         iloscRBH: e.target.value
-      
-     }
+      }
     });
   };
 
@@ -508,12 +516,143 @@ drukowanie: !e.target.value
       }
     });
   };
+  // edycja czynnosci
+
+  editCzOperacja = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: {  ...this.state.karta.edytowaneCz, editCzOperacja: e.target.value.toUpperCase() }
+      }
+    });
+  };
+  editCzRbh = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: {...this.state.karta.edytowaneCz,  editCzRbh: e.target.value }
+      }
+    });
+  };
+  editCzDataWyk = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: { ...this.state.karta.edytowaneCz, editCzDataWyk: e.target.value }
+      }
+    });
+  };
+  editCzWykonawca = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: {...this.state.karta.edytowaneCz,  editCzWykonawca: e.target.value.toUpperCase() }
+      }
+    });
+  };
+  editCzWyszczegolnienie = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: {...this.state.karta.edytowaneCz,  editCzWyszczegolnienie: e.target.value }
+      }
+    });
+  };
+  editCzOznaczenie = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: {...this.state.karta.edytowaneCz,  editCzOznaczenie: e.target.value }
+      }
+    });
+  };
+  editCzIlosc = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: { ...this.state.karta.edytowaneCz, editCzIlosc: e.target.value }
+      }
+    });
+  };
+  editCzAsygnata = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: { ...this.state.karta.edytowaneCz, editCzAsygnata: e.target.value }
+      }
+    });
+  };
+  editCzUwagi = e => {
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        edytowaneCz: { ...this.state.karta.edytowaneCz, editCzUwagi: e.target.value }
+      }
+    });
+  };
+
+  editCzynnosci = czynnosci => {
+let sprawdzanaCz= this.props.edytowanaCz
+let edytowanaCzynnosc = this.state.karta.edytowaneCz;
+let nowaListaCz = this.state.karta.CzCzynnosci.map(czynnosc => {
+            if (
+              czynnosc.CzOperacjaId === sprawdzanaCz.CzOperacjaId
+            ) {
+              return {
+                CzDataWyk:edytowanaCzynnosc.editCzDataWyk,
+                CzOperacja: edytowanaCzynnosc.editCzOperacja,
+                CzRbh: edytowanaCzynnosc.editCzRbh,
+                CzWykonawca: edytowanaCzynnosc.editCzWykonawca,
+                CzWyszczegolnienie:edytowanaCzynnosc.editCzWyszczegolnienie,
+                CzOznaczenie: edytowanaCzynnosc.editCzOznaczenie,
+                CzIlosc:edytowanaCzynnosc.editCzIlosc,
+                CzAsygnata: edytowanaCzynnosc.editCzAsygnata,
+                CzUwagi: edytowanaCzynnosc.editCzUwagi,
+                CzOperacjaId: edytowanaCzynnosc.editCzOperacjaId
+              };
+            } else {
+              return czynnosc;
+            }
+
+          })
+          this.setState({
+            karta: {
+              ...this.state.karta,
+              CzCzynnosci: nowaListaCz
+            },
+            
+          });
+         
+let asd = () => this.props.editCzynnosci(this.state.editOperacji)
+asd()
+          console.log(nowaListaCz)
+  }
+
+
+
+  deleteCzCzynnosc = () => {
+
+    let arrayAfterDelete = this.state.karta.CzCzynnosci.filter(
+      item => item.CzOperacjaId !== this.props.edytowanaCz.CzOperacjaId
+    );
+    this.setState({
+      karta: {
+        ...this.state.karta,
+        CzCzynnosci: arrayAfterDelete
+      },
+      
+    });
+    console.log(arrayAfterDelete)
+    let asd = () => this.props.editCzynnosci(this.state.editOperacji)
+    asd()
+
+  }
   render() {
     const { classes } = this.props;
-
+console.log(this.state.karta.numer)
     return (
       <Wrapper>
-         <Paper
+        <Paper
           style={{
             display: "flex",
             flexDirection: "column",
@@ -524,174 +663,174 @@ drukowanie: !e.target.value
             marginTop: "52px"
           }}
         >
-        <Form>
-          <Typography variant="display1" gutterBottom  style={{fontFamily: 'Arial'}}>
-            Edytujesz Kartę Nr. {this.state.karta.numerKuta}
-          </Typography>
-        </Form>
-        <Form>
-          <TextField
-            label="Wykonawca *"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="wykonawca"
-            defaultValue={this.state.karta.wykonawca}
-            autoComplete="on"
-            onChange={e => this.addWykonawca(e)}
-          />
+          <Form>
+            <Typography
+              variant="display1"
+              gutterBottom
+              style={{ fontFamily: "Arial" }}
+            >
+              Edytujesz Kartę Nr. {this.state.karta.numerKuta}
+            </Typography>
+          </Form>
+          <Form>
+            <TextField
+              label="Wykonawca *"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="wykonawca"
+              defaultValue={this.state.karta.wykonawca}
+              autoComplete="on"
+              onChange={e => this.addWykonawca(e)}
+            />
 
-          <TextField
-            label="Marka i typ sprzętu *"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="typ"
-            defaultValue={this.state.karta.marka}
-            autoComplete="on"
-            onChange={e => this.addMarka(e)}
-          />
+            <TextField
+              label="Marka i typ sprzętu *"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="typ"
+              defaultValue={this.state.karta.marka}
+              autoComplete="on"
+              onChange={e => this.addMarka(e)}
+            />
 
-          <TextField
-            label="Typ UiSw:"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="rodzaj"
-            defaultValue={this.state.karta.typ}
-            autoComplete="on"
-            onChange={e => this.addTyp(e)}
-          />
-          <TextField
-            label="Podstawa wydania"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="podstawa"
-            defaultValue={this.state.karta.podstawa}
-            autoComplete="on"
-            onChange={e => this.addPodstawa(e)}
-          />
-             <TextField
-            label="Nr. rejestracyjny *"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="rejestracja"
-            defaultValue={this.state.karta.nrRej}
-            autoComplete="on"
-            onChange={e => this.addNrRej(e)}
-          />
-        </Form>
-        <Form>
-       
+            <TextField
+              label="Typ UiSw:"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="rodzaj"
+              defaultValue={this.state.karta.typ}
+              autoComplete="on"
+              onChange={e => this.addTyp(e)}
+            />
+            <TextField
+              label="Podstawa wydania"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="podstawa"
+              defaultValue={this.state.karta.podstawa}
+              autoComplete="on"
+              onChange={e => this.addPodstawa(e)}
+            />
+            <TextField
+              label="Nr. rejestracyjny *"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="rejestracja"
+              defaultValue={this.state.karta.nrRej}
+              autoComplete="on"
+              onChange={e => this.addNrRej(e)}
+            />
+          </Form>
+          <Form>
+            <TextField
+              label="  Sprzęt Należy do: *"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="wlasciciel"
+              defaultValue={this.state.karta.wlasciciel}
+              autoComplete="on"
+              onChange={e => this.addWlasciciel(e)}
+            />
 
-          <TextField
-            label="  Sprzęt Należy do: *"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="wlasciciel"
-            defaultValue={this.state.karta.wlasciciel}
-            autoComplete="on"
-            onChange={e => this.addWlasciciel(e)}
-          />
+            <TextField
+              label=" Termin wykonania"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="terminwykonania"
+              defaultValue={this.state.karta.terminWykonania}
+              autoComplete="on"
+              onChange={e => this.addTerminWYkonania(e)}
+            />
+            <TextField
+              label=" Data wystawienia karty"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="karta"
+              defaultValue={this.state.karta.waznoscKarty}
+              autoComplete="on"
+              onChange={e => this.addWaznoscKarty(e)}
+            />
+            <TextField
+              label=" Data zdania karty"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="karta"
+              defaultValue={this.state.karta.dataZdania}
+              autoComplete="on"
+              onChange={e => this.addDataZdania(e)}
+            />
+          </Form>
+          <Form>
+            <TextField
+              label=" Zadanie: *"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="zadanie"
+              defaultValue={this.state.karta.zadanie}
+              autoComplete="on"
+              onChange={e => this.addZadanie(e)}
+            />
 
-          <TextField
-            label=" Termin wykonania"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="terminwykonania"
-            defaultValue={this.state.karta.terminWykonania}
-            autoComplete="on"
-            onChange={e => this.addTerminWYkonania(e)}
-          />
-          <TextField
-            label=" Data ważności karty"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="karta"
-            defaultValue={this.state.karta.waznoscKarty}
-            autoComplete="on"
-            onChange={e => this.addWaznoscKarty(e)}
-          />
-             <TextField
-            label=" Data zdania karty"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="karta"
-            defaultValue={this.state.karta.dataZdania}
-            autoComplete="on"
-            onChange={e => this.addDataZdania(e)}
-          />
-        </Form>
-        <Form>
-          <TextField
-            label=" Zadanie: *"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="zadanie"
-            defaultValue={this.state.karta.zadanie}
-            autoComplete="on"
-            onChange={e => this.addZadanie(e)}
-          />
+            <TextField
+              label="  Kartę wystawił *"
+              className={classes.textField}
+              margin="normal"
+              type="text"
+              name="wystawiajacy"
+              defaultValue={this.state.karta.wystawiajacy}
+              autoComplete="on"
+              onChange={e => this.addWystawiajacy(e)}
+            />
+          </Form>
 
-          <TextField
-            label="  Kartę wystawił *"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            name="wystawiajacy"
-            defaultValue={this.state.karta.wystawiajacy}
-            autoComplete="on"
-            onChange={e => this.addWystawiajacy(e)}
-          />
-        </Form>
-
-        <TextAr>
-          <TextField
-             className={classes.textFieldAr}
-         
-            label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
+          <TextAr>
+            <TextField
+              className={classes.textFieldAr}
+              label=" W czasie defektacji (Badań diagnostycznych) stwierdzono Konieczność
              wykonania następujących prac:"
-            type="text"
-            name="opis"
-            multiline={true}
-            defaultValue={this.state.karta.opis}
-            autoComplete="on"
-            onChange={e => this.addOpis(e)}
-          />
-        </TextAr>
+              type="text"
+              name="opis"
+              multiline={true}
+              defaultValue={this.state.karta.opis}
+              autoComplete="on"
+              onChange={e => this.addOpis(e)}
+            />
+          </TextAr>
 
-        <TextAr>
+          <TextAr>
+            <TextField
+              className={classes.textFieldAr}
+              label="  Uwagi przyjmującego"
+              type="text"
+              margin="normal"
+              name="uwagi"
+              defaultValue={this.state.karta.uwagi}
+              autoComplete="on"
+              onChange={e => this.addUwagi(e)}
+            />
+          </TextAr>
+
           <TextField
-             className={classes.textFieldAr}
-         
-            label="  Uwagi przyjmującego"
-            type="text"
+            label=" Karte Pobrał *"
+            className={classes.textField}
             margin="normal"
-            name="uwagi"
-            defaultValue={this.state.karta.uwagi}
+            type="text"
+            name="pobierajacy"
+            defaultValue={this.state.karta.pobierajacy}
             autoComplete="on"
-            onChange={e => this.addUwagi(e)}
+            onChange={e => this.addPobierajacy(e)}
           />
-        </TextAr>
-
-        <TextField
-          label=" Karte Pobrał *"
-          className={classes.textField}
-          margin="normal"
-          type="text"
-          name="pobierajacy"
-          defaultValue={this.state.karta.pobierajacy}
-          autoComplete="on"
-          onChange={e => this.addPobierajacy(e)}
-        />
-</Paper>
+        </Paper>
         <Typography
           variant="headline"
           gutterBottom
@@ -742,7 +881,6 @@ drukowanie: !e.target.value
               label="Jednostek Sprzętu *"
               className={classes.textField}
               style={{ width: "150px" }}
-
               margin="normal"
               type="text"
               name=""
@@ -756,18 +894,155 @@ drukowanie: !e.target.value
           <TabelaCzynnosci zawartosCzynnosci={this.state.karta.CzCzynnosci} />
         ) : null}
 
-        <Button
-          variant="outlined"
-          
-          className={classes.button2}
-          style={{marginTop: "50px", fontSize: '13px'}}
+        {/* edycja operacji w karcie */}
 
-          
-          onClick={this.onClickAction}
-       
-        >
-          Dodaj Czynność
-        </Button>
+        {this.props.editOperacji ? (
+          <Czynnosci>
+            <Typography
+              variant="headline"
+              gutterBottom
+              style={{ marginTop: "52px" }}
+            >
+              Edytujesz Czynność
+            </Typography>
+            <Container>
+              <TextField
+                label=" Operacja, czynność"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzOperacja}
+                onChange={e => this.editCzOperacja(e)}
+              />
+
+              <TextField
+                label=" Zużyto Roboczo Godzin"
+                className={classes.textField}
+                style={{ width: "200px" }}
+                margin="normal"
+                type="number"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzRbh}
+                onChange={e => this.editCzRbh(e)}
+              />
+
+              <TextField
+                label="Data Wykonania"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzDataWyk}
+                onChange={e => this.editCzDataWyk(e)}
+              />
+
+              <TextField
+                label=" Wykonawca Nazwisko"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzWykonawca}
+                onChange={e => this.editCzWykonawca(e)}
+              />
+            </Container>
+            <Typography variant="headline" gutterBottom>
+              Zużycie części i materiałów
+            </Typography>
+
+            <Container>
+              <TextField
+                label="Wyszczególnienie"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzWyszczegolnienie}
+                onChange={e => this.editCzWyszczegolnienie(e)}
+              />
+
+              <TextField
+                label="    Oznaczenie Katalogowe"
+                className={classes.textField}
+                style={{ width: "200px" }}
+                margin="normal"
+                type="text"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzOznaczenie}
+                onChange={e => this.editCzOznaczenie(e)}
+              />
+
+              <TextField
+                label="Ilość"
+                className={classes.textField}
+                margin="normal"
+                type="number"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzIlosc}
+                onChange={e => this.editCzIlosc(e)}
+              />
+
+              <TextField
+                label=" Nr. Asygnaty"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzAsygnata}
+                onChange={e => this.editCzAsygnata(e)}
+              />
+
+              <TextField
+                label=" Uwagi"
+                className={classes.textField}
+                margin="normal"
+                type="text"
+                name="karta"
+                defaultValue={this.props.edytowanaCz.CzUwagi}
+                onChange={e => this.editCzUwagi(e)}
+              />
+            </Container>
+
+      <div>
+      <Button
+              variant="outlined"
+              className={classes.button2}
+              style={{ marginTop: "30px", bottom: "10px",padding: '11px',marginRight: "30px" }}
+              onClick={() => this.editCzynnosci(this.state.CzCzynnosci)}
+            >
+              Zapisz zmiany
+            </Button>
+            <Button
+            variant="contained"
+            color="secondary"
+            size="medium"
+            onClick={() =>
+            this.deleteCzCzynnosc()
+            }
+            className={classes.button}
+            style={{marginLeft: "30px"}}
+          >
+            <DeleteOutlinedIcon className={classes.icon} />
+            Usuń Czynność
+          </Button>
+      </div>
+          </Czynnosci>
+        ) : null}
+
+        {/* koniec edycji operacji w karcie? */}
+
+        {!this.props.editOperacji ? (
+          <Button
+            variant="outlined"
+            className={classes.button2}
+            style={{ marginTop: "50px", fontSize: "13px" }}
+            onClick={this.onClickAction}
+          >
+            Dodaj Czynność
+          </Button>
+        ) : null}
+
         {this.state.dodajCzynnosc ? (
           <Czynnosci>
             <Container>
@@ -785,7 +1060,6 @@ drukowanie: !e.target.value
                 label=" Zużyto Roboczo Godzin"
                 className={classes.textField}
                 style={{ width: "200px" }}
-                
                 margin="normal"
                 type="number"
                 name="karta"
@@ -814,9 +1088,9 @@ drukowanie: !e.target.value
               />
             </Container>
             <Typography variant="headline" gutterBottom>
-            Zużycie części i materiałów
-        </Typography>
-           
+              Zużycie części i materiałów
+            </Typography>
+
             <Container>
               <TextField
                 label="Wyszczególnienie"
@@ -832,7 +1106,6 @@ drukowanie: !e.target.value
                 label="    Oznaczenie Katalogowe"
                 className={classes.textField}
                 style={{ width: "200px" }}
-                
                 margin="normal"
                 type="text"
                 name="karta"
@@ -876,7 +1149,7 @@ drukowanie: !e.target.value
               color="default"
               aria-label="Add"
               className={classes.button}
-              style={{ marginTop: "30px", bottom: '10px' }}
+              style={{ marginTop: "30px", bottom: "10px" }}
               onClick={() => this.addNewCzynnoscAndReset()}
             >
               <AddIcon />
@@ -893,86 +1166,118 @@ drukowanie: !e.target.value
               color="primary"
             />
           }
-          label={this.state.karta.kartaZdana ? "karta zostala zdana" : 'karta nie została zdana'}
+          label={
+            this.state.karta.kartaZdana
+              ? "karta zostala zdana"
+              : "karta nie została zdana"
+          }
         />
 
-        <div style={{display: 'flex'}}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="medium"
-          className={classes.button}
-          style={{ margin: "0", marginTop: "50px", marginBottom: "20px", marginRight: "40px" }}
-          onClick={() =>
-            this.props.onZamykanieKarty(
-              this.props.kartaJestOtwarta,
-              this.state.karta
-            )
-          }
-        >
-          <SaveIcon
-            className={classNames(classes.leftIcon, classes.iconSmall, classes.icon)}
-          />
-          Zapisz Kartę
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="medium"
-          onClick={() => window.confirm('Napewno chcesz usunąć kartę') ? this.props.onUsuwanie(this.state.karta) : null}
-          className={classes.button}
-          style={{ margin: "0", marginTop: "50px", marginBottom: "20px", marginLeft: "40px"  }}
-          
-        >
-           <DeleteOutlinedIcon className={classes.icon} />
-          Usuń Kartę
-        </Button>
-      
-        </div>
+     
+         {
+           this.props.editOperacji ? 
+           <Typography variant="headline" gutterBottom
+           style={{ color: "red" }}>
+           Zakończ edycje czynności aby móc zapisać kartę
+         </Typography>
 
-  {
-  this.state.drukowanie ? 
- <WrapPrint>
-    <WygenerowanyKut kartaDoDruku={this.state.karta} style={{left: '200px'}}/> 
-  <WygenerowanyKut2 />
- </WrapPrint>
-  
+           :
+           (
+            <div style={{ display: "flex" }}>
+            <Button
+            variant="contained"
+            color="primary"
+            size="medium"
+            className={classes.button}
+            style={{
+              margin: "0",
+              marginTop: "50px",
+              marginBottom: "20px",
+              marginRight: "40px"
+            }}
+            onClick={() =>
+              this.props.onZamykanieKarty(
+                this.props.kartaJestOtwarta,
+                this.state.karta
+              )
+            }
+          >
+            <SaveIcon
+              className={classNames(
+                classes.leftIcon,
+                classes.iconSmall,
+                classes.icon
+              )}
+            />
+            Zapisz Kartę
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="medium"
+            onClick={() =>
+              window.confirm("Napewno chcesz usunąć kartę")
+                ? this.props.onUsuwanie(this.state.karta)
+                : null
+            }
+            className={classes.button}
+            style={{
+              margin: "0",
+              marginTop: "50px",
+              marginBottom: "20px",
+              marginLeft: "40px"
+            }}
+          >
+            <DeleteOutlinedIcon className={classes.icon} />
+            Usuń Kartę
+          </Button>
+           </div>
+           )
+         }
+       
 
-  : <Button   style={{ marginTop: "150px", marginBottom: "20px"  }}
-variant="outlined"
-className={classes.button}
-
-   onClick={e =>
-     this.drukuj(e)
-   }
- >Drukuj
- </Button>  
-}
+        {this.state.drukowanie ? (
+          <WrapPrint>
+            <WygenerowanyKut
+              kartaDoDruku={this.state.karta}
+              style={{ left: "200px" }}
+            />
+            <WygenerowanyKut2 />
+          </WrapPrint>
+        ) : (
+          <Button
+            style={{ marginTop: "150px", marginBottom: "20px" }}
+            variant="outlined"
+            className={classes.button}
+            onClick={e => this.drukuj(e)}
+          >
+            Drukuj
+          </Button>
+        )}
       </Wrapper>
     );
   }
 }
 
 const WrapPrint = styled.div`
-
-display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-const Wrapper = styled.div`
-overflow: hidden;
-  position: absolute;
-  padding-top: 20px;
-  top: 0;
-  background: white;
-margin-left: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100%;
+`;
+
+const Wrapper = styled.div`
+  overflow: hidden;
+  position: absolute;
+  padding-top: 20px;
+  top: 0;
+  background: white;
+  margin-left: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   width: calc(100% - 240px);
   z-index: 1;
   label {
@@ -986,15 +1291,14 @@ margin-left: 240px;
 `;
 
 const Czynnosci = styled.div`
-
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
-  0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-  font-family: 'Open Sans';
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  font-family: "Open Sans";
 `;
 
 const Form = styled.form`
@@ -1015,14 +1319,17 @@ const Container = styled.div`
 
 const mapStateToProps = state => {
   return {
-    rbhState: state.rodzajRBH
+    rbhState: state.rodzajRBH,
+    edytowanaCz: state.edytowanaCz,
+    editOperacji: state.editOperacji
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onZamykanieKarty: (a, b) => dispatch(actions.zamykanieKarty(a, b)),
-    onUsuwanie: a => dispatch(actions.usuwanieKarty(a))
+    onUsuwanie: a => dispatch(actions.usuwanieKarty(a)),
+    editCzynnosci: a => dispatch(actions.aktualizacjaCzynnosci(a))
   };
 };
 

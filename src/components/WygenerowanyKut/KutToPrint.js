@@ -38,7 +38,9 @@ class KutToPrint extends Component {
     });
   }
 
+
   render() {
+    
     const {
       numerKuta,
       wykonawca,
@@ -50,10 +52,14 @@ class KutToPrint extends Component {
       wystawiajacy,
       opis,
       uwagi,
-      CzCzynnosci
+      CzCzynnosci,
+      waznoscKarty
     } = this.props.kartaDoDruku;
     console.log(CzCzynnosci);
     console.log(this.state.iloscPustych);
+
+
+  let markalen = marka.length < 14 ? {fontSize: '11px',marginTop: '3px'}: {fontSize: '6px',marginTop: '3px'}
 
     return (
       <div className="wrapper">
@@ -71,7 +77,7 @@ class KutToPrint extends Component {
             </div>
             <div className="second">
               <h3>MARKA I TYP SPRZĘTU:</h3>
-              <h1>{marka}</h1>
+              <h1 style={markalen}>{marka}</h1>
             </div>
             <div className="third">
               <h3>MER:</h3>
@@ -95,8 +101,8 @@ class KutToPrint extends Component {
               <h4 style={{ left: "65px", bottom: "1px" }}>
                 (stopień, nazwisko)
               </h4>
-              <h4 style={{ right: "85px", bottom: "1px" }}>(podpis, data))</h4>
-              <h1>{wystawiajacy}</h1> <h1>{terminWykonania}</h1>
+              <h4 style={{ right: "65px", bottom: "1px" }}>(podpis, data))</h4>
+              <h1>{wystawiajacy}</h1> <h1>{waznoscKarty}</h1>
             </div>
           </div>
           <div className="third-row">
@@ -216,7 +222,7 @@ class KutToPrint extends Component {
             {CzCzynnosci.map((row, i) => (
               <div className="task-row" key={i}>
                 <div className="row1">
-                  <h2>{row.CzOperacja}</h2>
+                  <h2 style={row.CzOperacja.length < 15 ? {fontSize: '7px'}: {fontSize: '5px'}}>{row.CzOperacja}</h2>
                 </div>
                 <div className="row2">
                   <h2>{row.CzRbh}</h2>

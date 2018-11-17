@@ -71,6 +71,14 @@ class TabelaGlowna extends Component {
   render() {
     const { classes } = this.props;
     let newArray = this.props.karty;
+ newArray.sort((a, b) => a.numerKuta > b.numerKuta)
+
+   
+    
+
+
+
+    console.log('[sortowanie]',  newArray)
     let searchString = this.state.searchString.trim().toLowerCase();
 
     if (searchString.length > 0 && this.state.zdaneKarty) {
@@ -111,14 +119,9 @@ class TabelaGlowna extends Component {
       });
     }
 
-    // if(this.state.zdaneKarty) {
-    //   newArray = this.props.karty.filter(karta =>    {
-    //     return (
-    //       karta.kartaZdana ? karta : null
-    //     )
-    //   } )  }
 
-    console.log(newArray);
+
+
 
     return (
       <Wrapper>
