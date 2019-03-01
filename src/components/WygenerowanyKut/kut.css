@@ -632,8 +632,9 @@
     size: A4, landspace;
   }
   body {
-    zoom: 166%;
+    zoom: 160%;
     transform: rotate(-90deg);
+
   }
   .wrapper {
     position: relative;
