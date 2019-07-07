@@ -26,10 +26,29 @@ const styles = theme => ({
   }
 });
 class Menu extends Component {
+  state = {
+    kartyIsActive: false
+
+   };
+   updateActive = (e) => {
+
+      e.target.classList.contains('active') ? this.setState({  
+          kartyIsActive: true
+        }) : this.setState({  
+          kartyIsActive: true
+        }) 
+    }
+   
+    deActive = (e) => {
+      e.target.classList.contains('active') ? this.setState({  
+          kartyIsActive: false
+        }) : this.setState({  
+          kartyIsActive: false
+        }) 
+    }
+  
+    
   render() {
-
-
-
     return (
       <div>
         <MenuWrap>
@@ -37,13 +56,18 @@ class Menu extends Component {
             <Nav>
               <ul>
                 <li >
-                  <NavLink  to="/karty"    style={{fontFamily: 'Arial'}} >Karty Usług Technicznych</NavLink>
+                  <NavLink  to="/karty"  onClick={(e) => this.updateActive(e)}  style={{fontFamily: 'Arial'}} >Karty Usług Technicznych</NavLink>
+                </li>
+                {
+                  this.state.kartyIsActive ?  <li >
+                  <NavLink  to="/asd"   style={{fontFamily: 'Arial', background: 'pink'}} >2018 r.</NavLink>
+                </li> : console.log('nie ma active')
+                }
+                <li>
+                  <NavLink to="/ewidencja"  onClick={(e) => this.deActive(e)}  style={{fontFamily: 'Arial'}}>Ewidencja Kart</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/ewidencja"    style={{fontFamily: 'Arial'}}>Ewidencja Kart</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/ewidencjaPracy"    style={{fontFamily: 'Arial'}}>Ewidencja Pracy Warsztatu</NavLink>
+                  <NavLink to="/ewidencjaPracy"  onClick={(e) => this.deActive(e)}  style={{fontFamily: 'Arial'}}>Ewidencja Pracy Warsztatu</NavLink>
                 </li>
               </ul>
             </Nav>    
@@ -58,9 +82,9 @@ class Menu extends Component {
         </MenuWrap>
         <Switch>
         <Route   exact path="/karty"  component={Karty} />
-          <Route  exact  path="/ewidencja" component={TabelaEwidencyjna} />
-          <Route  exact  path="/ewidencjaPracy" component={EwidencjaPracy} />
-          <Route  exact  path="/ustawienia" component={Settings} />
+          <Route    path="/ewidencja" component={TabelaEwidencyjna} />
+          <Route    path="/ewidencjaPracy" component={EwidencjaPracy} />
+          <Route    path="/ustawienia" component={Settings} />
  
         </Switch>
       </div>

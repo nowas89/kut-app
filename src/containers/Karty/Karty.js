@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 
 
 import DodajKuta from "../../components/DodajKuta/DodajKuta";
-
 import TabelaGlowna from "../../components/Tabela/TabelaGlowna";
 
 const styles = theme => ({
@@ -29,7 +28,7 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
     fontFamily: "Arial"
-    
+
   }
 })
 
@@ -37,51 +36,40 @@ class Karty extends Component {
   state = {
     buttonIsClicked: false,
     buttonDisable: false
-    
+
   };
-
-  // onClickAction = () => {
-
-  //   !this.props.buttonIsClicked  ?  this.setState({ buttonIsClicked: true, buttonDisable: true }) : this.setState({  buttonIsClicked: false, buttonDisable: false})
-
-  // }
-
-
-
-
-    
+// scrollFun = () => {
+//   window.scrollTo(0, 100%)
+// }
   render() {
     const { classes } = this.props;
-    
-    
 
-  
-  
     return (
       <Wrapper>
+        <h1 onClick={() => window.scrollTo(0, 1000)}>na sam dół</h1>
         {!this.props.buttonDisable ? (
-         <Button
-         variant="outlined"
-         className={classes.button}
-         style={{marginTop: "70px"}}
+          <Button
+            variant="outlined"
+            className={classes.button}
+            style={{ marginTop: "70px" }}
             onClick={(a, b) =>
               this.props.onAddingKut(
                 this.props.buttonDisable,
                 this.props.buttonIsClicked
               )
             }
-          > <AddIcon/>
-         Dodaj Nową Kartę
+          > <AddIcon />
+            Dodaj Nową Kartę
           </Button>
         ) : (
-          <Typography variant="display1" gutterBottom style={{marginTop: "40px"}}>
-          Dodajesz nową kartę . . .
+            <Typography variant="display1" gutterBottom style={{ marginTop: "40px" }}>
+              Dodajesz nową kartę . . .
           </ Typography>
-        )}
+          )}
         {this.props.buttonIsClicked ? <DodajKuta /> : null}
 
-       {!this.props.buttonIsClicked && !this.props.kartaJestOtwarta && this.props.karty.length > 0 ? (
- <TabelaGlowna />
+        {!this.props.buttonIsClicked && !this.props.kartaJestOtwarta && this.props.karty.length > 0 ? (
+          <TabelaGlowna />
         ) : null}
       </Wrapper>
     );
