@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Switch, Route, NavLink } from "react-router-dom";
+import { withRouter, Switch, Route, NavLink } from "react-router-dom";
 import Karty from "../Karty/Karty";
 import Image from './niepodlegla.jpg'
+import { connect } from "react-redux";
+// import * as actions from "../../store/actions";
+import compose from "recompose/compose";
+
 // import TabelaEwidencyjna from '../../components/Tabela/TabelaEwidencyjna/TabelaEwidencyjna';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -46,8 +50,6 @@ class Menu extends Component {
           kartyIsActive: false
         }) 
     }
-  
-    
   render() {
     return (
       <div>
@@ -59,9 +61,13 @@ class Menu extends Component {
                   <NavLink  to="/karty"  onClick={(e) => this.updateActive(e)}  style={{fontFamily: 'Arial'}} >Karty Usług Technicznych</NavLink>
                 </li>
                 {
-                  this.state.kartyIsActive ?  <li >
-                  <NavLink  to="/asd"   style={{fontFamily: 'Arial', background: 'pink'}} >2018 r.</NavLink>
-                </li> : console.log('nie ma active')
+                  this.state.kartyIsActive & this.props.grupy.length > 0 ?  
+                this.props.grupy.map((grupa, id) => 
+                  <li key={id}>
+                  <NavLink to={`/${grupa}`} style={{fontFamily: 'Arial'}} key={id} >{grupa}</NavLink>
+                  </li>
+            )
+                : console.log('nie ma active')
                 }
                 <li>
                   <NavLink to="/ewidencja"  onClick={(e) => this.deActive(e)}  style={{fontFamily: 'Arial'}}>Ewidencja Kart</NavLink>
@@ -81,11 +87,16 @@ class Menu extends Component {
 </Button></NavLink></DOlnyDiv>
         </MenuWrap>
         <Switch>
-        <Route   exact path="/karty"  component={Karty} />
+        <Route    path="/"  component={Karty} />
+        {
+                 this.props.grupy.length > 0 
+                 ?  this.props.grupy.map((grupa, id) => 
+                 (<Route path={`/${grupa}` } component={Karty} key={id}>{grupa}</Route>))
+                 : console.log('nie daje route')
+         }
           <Route    path="/ewidencja" component={TabelaEwidencyjna} />
           <Route    path="/ewidencjaPracy" component={EwidencjaPracy} />
           <Route    path="/ustawienia" component={Settings} />
- 
         </Switch>
       </div>
     );
@@ -166,4 +177,22 @@ margin-top: 100px;
 `
 
 
-export default withStyles(styles)(Menu);
+const mapStateToProps = state => {
+  return {
+    grupy: state.grupy
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+
+  };
+};
+
+export default withRouter(compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Menu));

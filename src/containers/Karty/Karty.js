@@ -7,8 +7,7 @@ import Button from "@material-ui/core/Button";
 import compose from "recompose/compose";
 import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
-
-
+import ArrowImg from "../../img/arrow-down.png";
 
 import DodajKuta from "../../components/DodajKuta/DodajKuta";
 import TabelaGlowna from "../../components/Tabela/TabelaGlowna";
@@ -28,25 +27,18 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
     fontFamily: "Arial"
-
   }
-})
-
+});
 class Karty extends Component {
   state = {
     buttonIsClicked: false,
     buttonDisable: false
-
   };
-// scrollFun = () => {
-//   window.scrollTo(0, 100%)
-// }
   render() {
     const { classes } = this.props;
-
     return (
       <Wrapper>
-        <h1 onClick={() => window.scrollTo(0, 1000)}>na sam dół</h1>
+        <IMG src={ArrowImg} onClick={() => window.scrollTo(0, 1000)} />
         {!this.props.buttonDisable ? (
           <Button
             variant="outlined"
@@ -58,17 +50,24 @@ class Karty extends Component {
                 this.props.buttonIsClicked
               )
             }
-          > <AddIcon />
+          >
+            <AddIcon />
             Dodaj Nową Kartę
           </Button>
         ) : (
-            <Typography variant="display1" gutterBottom style={{ marginTop: "40px" }}>
-              Dodajesz nową kartę . . .
-          </ Typography>
-          )}
+          <Typography
+            variant="display1"
+            gutterBottom
+            style={{ marginTop: "40px" }}
+          >
+            Dodajesz nową kartę . . .
+          </Typography>
+        )}
         {this.props.buttonIsClicked ? <DodajKuta /> : null}
 
-        {!this.props.buttonIsClicked && !this.props.kartaJestOtwarta && this.props.karty.length > 0 ? (
+        {!this.props.buttonIsClicked &&
+        !this.props.kartaJestOtwarta &&
+        this.props.karty.length > 0 ? (
           <TabelaGlowna />
         ) : null}
       </Wrapper>
@@ -79,7 +78,7 @@ class Karty extends Component {
 const Wrapper = styled.div`
   margin-left: 250px;
   min-height: calc(100vh + 90px);
-position: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,6 +87,15 @@ position: relative;
   button {
     margin-top: 30px;
   }
+`;
+const IMG = styled.img`
+  height: 25px;
+  width: 20px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  fill: #743ee8;
 `;
 
 const mapStateToProps = state => {

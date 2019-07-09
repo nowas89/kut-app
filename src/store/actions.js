@@ -1,11 +1,9 @@
 import * as actionTypes from "./actionTypes";
 
-export const addNewKut = (
-  state
-) => {
+export const addNewKut = state => {
   return {
     type: actionTypes.ADD_KUT,
-  state: state
+    state: state
   };
 };
 export const addNewCzynnosc = (
@@ -43,13 +41,12 @@ export const buttonKlicked = (btnIsClicked, btnIsDisabled) => {
 
 export const openKut = karta => {
   console.log(karta);
-    
+
   return {
     type: actionTypes.OPEN_KUT,
     karta: karta
   };
 };
-
 
 export const zamykanieKarty = (zamknij, taKartaJestOtwarta) => {
   return {
@@ -92,7 +89,7 @@ export const Anulowanie = () => {
     type: actionTypes.ANULOWANIE
   };
 };
-export const nowyNumerKarty = (nowyNumer) => {
+export const nowyNumerKarty = nowyNumer => {
   return {
     type: actionTypes.NOWY_NUMER,
     nowyNumer: nowyNumer
@@ -101,22 +98,29 @@ export const nowyNumerKarty = (nowyNumer) => {
 export const resetState = () => {
   return {
     type: actionTypes.RESET
-
   };
 };
-export const editCzynnosc = (cz) => {
+export const editCzynnosc = cz => {
   return {
     type: actionTypes.EDIT_CZYNNOSC,
-    
     czynnosc: cz
-
   };
 };
-export const aktualizacjaCzynnosci = (karta) => {
+export const aktualizacjaCzynnosci = karta => {
   return {
     type: actionTypes.AKTUALIZACJA_CZYNNOSCI,
-    
     karta: karta
-
+  };
+};
+export const addGroup = grupa => {
+  return {
+    type: actionTypes.ADD_GROUP,
+    grupa: grupa
+  };
+};
+export const deleteGroup = grupa => {
+  return {
+    type: actionTypes.DELETE_GROUP,
+    grupa: grupa
   };
 };

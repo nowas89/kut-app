@@ -14,7 +14,8 @@ const initialState = {
   defWykonawca: "",
   defWystawiajacy: "",
   edytowanaCz: {},
-  editOperacji: true
+  editOperacji: true,
+  grupy: []
 };
 
 export const addNewKut = (state, action) => {
@@ -183,6 +184,7 @@ export const deleteRodzajRBH = (state, action) => {
     rodzajRBH: deleteTyp
   };
 };
+
 export const Anulowanie = (state, action) => {
   return {
     ...state,
@@ -235,13 +237,30 @@ export const editCzynnosc = (state, action) => {
 };
 
 export const aktualizacjaCzynnosci = (state, action) => {
-  
   return {
     ...state,
     editOperacji: !state.editOperacji
   };
 };
+export const addGroup = (state, action) => {
+  const grupyTablica = [...state.grupy];
+  let updateGrupy = grupyTablica.concat(action.grupa);
+console.log(state.grupy)
+  return {
+    ...state,
+    grupy: updateGrupy
+  };
+};
 
+export const deleteGroup = (state, action) => {
+  let deleteGroup = state.grupy.filter(item => item !== action.grupa);
+  console.log(deleteGroup);
+
+  return {
+    ...state,
+    grupy: deleteGroup
+  };
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_KUT:
@@ -272,6 +291,10 @@ const reducer = (state = initialState, action) => {
       return editCzynnosc(state, action);
     case actionTypes.AKTUALIZACJA_CZYNNOSCI:
       return aktualizacjaCzynnosci(state, action);
+    case actionTypes.ADD_GROUP:
+      return addGroup(state, action);
+    case actionTypes.DELETE_GROUP:
+      return deleteGroup(state, action);
     default:
       return state;
   }

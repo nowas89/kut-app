@@ -11,9 +11,8 @@ import SaveIcon from "@material-ui/icons/Save";
 // import Chip from "@material-ui/core/Chip";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import Button from "@material-ui/core/Button";
-
 
 const styles = theme => ({
   root: {
@@ -25,7 +24,7 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap"
   },
-    
+
   button: {
     margin: theme.spacing.unit,
     fontFamily: "Arial"
@@ -41,7 +40,8 @@ class Settings extends Component {
   state = {
     akronim: "",
     rodzajRBH: "",
-    ostatniNumer: 0
+    ostatniNumer: 0,
+    rodzajGroup: ""
   };
   addAkronim = e => {
     this.setState({
@@ -51,6 +51,11 @@ class Settings extends Component {
   addTypRBH = e => {
     this.setState({
       rodzajRBH: e.target.value
+    });
+  };
+  addTypGroup = e => {
+    this.setState({
+      rodzajGroup: e.target.value
     });
   };
   addNowyNumerKarty = e => {
@@ -64,16 +69,14 @@ class Settings extends Component {
     console.log(this.props.rbhState);
     return (
       <Wrapper>
-    
         <Typography variant="headline" gutterBottom>
-            Ustawienia Programu
-          </Typography>
+          Ustawienia Programu
+        </Typography>
         <Paper
           className={classes.root}
           style={{ marginTop: "50px", width: "900px" }}
           elevation={1}
         >
-         
           <Typography variant="subheading" gutterBottom>
             Ustaw Akronim który będzie wyświetlany w numerze Kart np " 12 / WŁ /
             2018" (gdzie WŁ oznacza Warsztat Remontu Sprzętu Łączności i
@@ -88,7 +91,7 @@ class Settings extends Component {
             name="karta"
             defaultValue={this.props.akronim}
             onChange={e => this.addAkronim(e)}
-          />{" "}
+          />
           <span onClick={() => this.props.onSaveAcronim(this.state.akronim)}>
             <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
           </span>
@@ -99,9 +102,9 @@ class Settings extends Component {
           style={{ marginTop: "50px", width: "900px" }}
           elevation={1}
         >
-          <Typography variant="subheading" gutterBottom >
-           Skonfiguruj  typ, kategorie lub rodzaj
-           sprzętu potrzebnego do prowadzenia Ewidencji Godzin Pracy
+          <Typography variant="subheading" gutterBottom>
+            Skonfiguruj typ, kategorie lub rodzaj sprzętu potrzebnego do
+            prowadzenia Ewidencji Godzin Pracy
           </Typography>
           <TextField
             label="typ, kategoria lub rodzaj "
@@ -109,21 +112,33 @@ class Settings extends Component {
             margin="normal"
             type="text"
             onChange={e => this.addTypRBH(e)}
-          />{" "}
-          <span onClick={
-            () => 
-            this.props.onSaveRBH(this.state.rodzajRBH)}>
+          />
+          <span onClick={() => this.props.onSaveRBH(this.state.rodzajRBH)}>
             <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
           </span>
           {this.props.rbhState.length > 0
             ? this.props.rbhState.map((rodzaj, i) => (
-                <List key={i}
-          style={{ width: '220px', position: 'relative' }}
-          >
-                  <ListItem  
-          style={{ fontSize: '12px', boxShadow: '0px 1px 14px 0px rgba(0, 0, 0, 0.12)', textAlign: 'center',
-          borderRadius: '50px',}}
-          >{rodzaj} <DeleteOutlinedIcon className={classes.icon} style={{position: 'absolute', right: '10px', bottom: '8px', color: "rgba(0, 0 ,0 , 0.3)" }} onClick={() => this.props.onDeleteRBH(rodzaj)}/></ListItem>
+                <List key={i} style={{ width: "220px", position: "relative" }}>
+                  <ListItem
+                    style={{
+                      fontSize: "12px",
+                      boxShadow: "0px 1px 14px 0px rgba(0, 0, 0, 0.12)",
+                      textAlign: "center",
+                      borderRadius: "50px"
+                    }}
+                  >
+                    {rodzaj}
+                    <DeleteOutlinedIcon
+                      className={classes.icon}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        bottom: "8px",
+                        color: "rgba(0, 0 ,0 , 0.3)"
+                      }}
+                      onClick={() => this.props.onDeleteRBH(rodzaj)}
+                    />
+                  </ListItem>
                 </List>
               ))
             : null}
@@ -134,11 +149,21 @@ class Settings extends Component {
           elevation={1}
         >
           <Typography variant="subheading" gutterBottom>
-           Ustaw ręcznie ostatni numer Karty Usług Technicznych w sytuacji gdy program został wdrżony w okresie innym niż 1 stycznia bieżącego roku. 
-           <br />Ustawiony numer musi być numerem ostatniej wystawionej Karty Usług Technicznych.
+            Ustaw ręcznie ostatni numer Karty Usług Technicznych w sytuacji gdy
+            program został wdrżony w okresie innym niż 1 stycznia bieżącego
+            roku.
+            <br />
+            Ustawiony numer musi być numerem ostatniej wystawionej Karty Usług
+            Technicznych.
           </Typography>
-          <Typography variant="subheading" gutterBottom style={{color: 'red' }}>
-          {this.props.nowyNumerKuta ? "Obecny Numer Karty:   " + this.props.ostatniNumer : 'Numer nie został ustawiony'}
+          <Typography
+            variant="subheading"
+            gutterBottom
+            style={{ color: "red" }}
+          >
+            {this.props.nowyNumerKuta
+              ? "Obecny Numer Karty:   " + this.props.ostatniNumer
+              : "Numer nie został ustawiony"}
           </Typography>
           <TextField
             label="Numer Ostatniej Karty"
@@ -146,55 +171,113 @@ class Settings extends Component {
             margin="normal"
             type="text"
             onChange={e => this.addNowyNumerKarty(e)}
-          />{" "}
-          <span onClick={() => this.props.onNowyNumerKarty(this.state.ostatniNumer)}>
+          />
+          <span
+            onClick={() => this.props.onNowyNumerKarty(this.state.ostatniNumer)}
+          >
             <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
           </span>
-          <Typography variant="caption" gutterBottom  >
-    Aby wrócić do numeracji Kart Usług Technicznych w kolejności według Lp. proszę wpisać 0 w pole wprowadzania tekstu.
-        </Typography>
+          <Typography variant="caption" gutterBottom>
+            Aby wrócić do numeracji Kart Usług Technicznych w kolejności według
+            Lp. proszę wpisać 0 w pole wprowadzania tekstu.
+          </Typography>
         </Paper>
-
- <Paper
+        <Paper
           className={classes.root}
-          style={{ marginTop: "50px", width: "900px",  display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          style={{ marginTop: "50px", width: "900px" }}
           elevation={1}
         >
- 
-          <Typography variant="subheading" gutterBottom  style={{ textAlign: 'center'}}>
-Aby wrócić do ustawień początkowych programu wciśnij przycisk " Przywróć Ustawienia Początkowe"
-
+          <Typography variant="subheading" gutterBottom>
+            Dodaj grupę Kart. W kadej grupie karty będą dodawane od nr. 1
           </Typography>
-         
-          <Button   variant="contained"
-           color="secondary"
-          className={classes.button}
-          style={{ fontSize: "14px", marginTop: '35px',marginBottom: '35px' }}
-          onClick={() => 
-          
-            window.confirm("Napewno chcesz przywrócić stan początkowy aplikacji ? \n  Po potwierdzeniu wyboru dane programu zostaną skasowanie nieodwracalnie!!! \n Upewnij się czy eksportowałeś wszystkie dane do plików XML ")
-            ? this.props.onResetState()
-            : null
-          }
-        >
-         Przywróć Ustawienia Początkowe
-        </Button>
-          <Typography variant="caption" gutterBottom style={{color: 'red', textAlign: 'center'}}
+          <TextField
+            label="dodaj grupę"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            onChange={e => this.addTypGroup(e)}
+          />
+          <span onClick={() => this.props.onAddGroup(this.state.rodzajGroup)}>
+            <SaveIcon style={{ color: "rgba(0, 0 ,0 , 0.3)" }} />
+          </span>
+          {this.props.grupy.length > 0
+            ? this.props.grupy.map((rodzaj, i) => (
+                <List key={i}
+          style={{ width: '220px', position: 'relative' }}
           >
-Uwaga!! <br /> Po użyciu przycisku "Przywróć Ustawienia Początkowe" dane programu zostaną skasowanie nieodwracalnie!!! <br />
-Upewnij się czy eksportowałeś wszystkie dane do plików XML
-        </Typography>
+          <ListItem  
+          style={{ fontSize: '12px', boxShadow: '0px 1px 14px 0px rgba(0, 0, 0, 0.12)', textAlign: 'center',borderRadius: '50px',}}>
+          {rodzaj} 
+          <DeleteOutlinedIcon 
+              className={classes.icon} 
+              style={{position: 'absolute', right: '10px', bottom: '8px', color: "rgba(0, 0 ,0 , 0.3)" }} 
+              onClick={() => this.props.onDeleteGroup(rodzaj)}/></ListItem>
+           </List>
+              ))
+            : null}
+        </Paper>
+        <Paper
+          className={classes.root}
+          style={{
+            marginTop: "50px",
+            width: "900px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+          elevation={1}
+        >
+          <Typography
+            variant="subheading"
+            gutterBottom
+            style={{ textAlign: "center" }}
+          >
+            Aby wrócić do ustawień początkowych programu wciśnij przycisk "
+            Przywróć Ustawienia Początkowe"
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+            style={{
+              fontSize: "14px",
+              marginTop: "35px",
+              marginBottom: "35px"
+            }}
+            onClick={() =>
+              window.confirm(
+                "Napewno chcesz przywrócić stan początkowy aplikacji ? \n  Po potwierdzeniu wyboru dane programu zostaną skasowanie nieodwracalnie!!! \n Upewnij się czy eksportowałeś wszystkie dane do plików XML "
+              )
+                ? this.props.onResetState()
+                : null
+            }
+          >
+            Przywróć Ustawienia Początkowe
+          </Button>
+          <Typography
+            variant="caption"
+            gutterBottom
+            style={{ color: "red", textAlign: "center" }}
+          >
+            Uwaga!! <br /> Po użyciu przycisku "Przywróć Ustawienia Początkowe"
+            dane programu zostaną skasowanie nieodwracalnie!!! <br />
+            Upewnij się czy eksportowałeś wszystkie dane do plików XML
+          </Typography>
         </Paper>
 
         <Typography
           style={{ position: "absolute", bottom: "-30px" }}
           variant="caption"
-          gutterBottom>
+          gutterBottom
+        >
           wszystkie prawa zastrzeżone - Paweł Naworol @ pawel.naworol@icloud.com
         </Typography>
-        <Typography variant="caption" gutterBottom 
+        <Typography
+          variant="caption"
+          gutterBottom
           style={{ position: "absolute", bottom: "-50px" }}
-          >
+        >
           Wersja programu: {this.props.wersja}
         </Typography>
       </Wrapper>
@@ -212,7 +295,6 @@ const Wrapper = styled.div`
   align-items: center;
   font-family: "Helvetica";
   font-weight: 400;
-
 `;
 
 const mapStateToProps = state => {
@@ -222,7 +304,8 @@ const mapStateToProps = state => {
     rbhState: state.rodzajRBH,
     ostatniNumer: state.ostatniNumer,
     nowyNumerKuta: state.nowyNumerKuta,
-    wystepujaceRBH : state.rodzajRBH
+    wystepujaceRBH: state.rodzajRBH,
+    grupy: state.grupy
   };
 };
 
@@ -232,7 +315,9 @@ const mapDispatchToProps = dispatch => {
     onSaveRBH: a => dispatch(actions.saveRodzajRBH(a)),
     onDeleteRBH: a => dispatch(actions.deleteRodzajRBH(a)),
     onNowyNumerKarty: a => dispatch(actions.nowyNumerKarty(a)),
-    onResetState: () => dispatch(actions.resetState())
+    onResetState: () => dispatch(actions.resetState()),
+    onAddGroup: (a) => dispatch(actions.addGroup(a)),
+    onDeleteGroup: (a) => dispatch(actions.deleteGroup(a))
   };
 };
 export default compose(
