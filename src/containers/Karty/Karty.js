@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import compose from "recompose/compose";
 import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
+import ArrowImg from "../../img/arrow-down.png";
 
 
 
@@ -59,6 +60,8 @@ class Karty extends Component {
   
     return (
       <Wrapper>
+<IMG src={ArrowImg} onClick={() => window.scrollTo(0, 1000000000)}/> 
+          
         {!this.props.buttonDisable ? (
          <Button
          variant="outlined"
@@ -88,6 +91,15 @@ class Karty extends Component {
   }
 }
 
+const IMG = styled.img`
+  height: 25px;
+  width: 20px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  fill: #743ee8;
+`;
 const Wrapper = styled.div`
   margin-left: 250px;
   min-height: calc(100vh + 90px);
