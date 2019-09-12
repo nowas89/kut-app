@@ -26,31 +26,31 @@ export const addNewKut = (state, action) => {
       id: action.state.id,
       numer: action.state.numer,
       wykonawca: action.state.wykonawca,
-      marka: action.state.marka === "" ? "----------" : action.state.marka,
-      nrRej: action.state.nrRej === "" ? "----------" : action.state.nrRej,
+      marka: action.state.marka === "" ? "- - -" : action.state.marka,
+      nrRej: action.state.nrRej === "" ? "- - -" : action.state.nrRej,
       wlasciciel:
-        action.state.wlasciciel === "" ? "----------" : action.state.wlasciciel,
+        action.state.wlasciciel === "" ? "- - -" : action.state.wlasciciel,
       terminWykonania:
         action.state.terminWykonania === ""
-          ? "----------"
+          ? "- - -"
           : action.state.terminWykonania,
       zadanie:
-        action.state.zadanie === "" ? "----------" : action.state.zadanie,
+        action.state.zadanie === "" ? "- - -" : action.state.zadanie,
       wystawiajacy:
         action.state.wystawiajacy === ""
-          ? "----------"
+          ? "- - -"
           : action.state.wystawiajacy,
-      opis: action.state.opis === "" ? "----------" : action.state.opis,
-      uwagi: action.state.uwagi === "" ? "----------" : action.state.uwagi,
-      typ: action.state.typ === "" ? "----------" : action.state.typ,
+      opis: action.state.opis === "" ? "- - -" : action.state.opis,
+      uwagi: action.state.uwagi === "" ? "- - -" : action.state.uwagi,
+      typ: action.state.typ === "" ? "- - -" : action.state.typ,
       podstawa:
-        action.state.podstawa === "" ? "----------" : action.state.podstawa,
+        action.state.podstawa === "" ? "- - -" : action.state.podstawa,
       pobierajacy:
         action.state.pobierajacy === ""
-          ? "----------"
+          ? "- - -"
           : action.state.pobierajacy,
       dataZdania:
-        action.state.dataZdania === "" ? "----------" : action.state.dataZdania,
+        action.state.dataZdania === "" ? "- - -" : action.state.dataZdania,
       waznoscKarty: action.state.waznoscKarty,
       CzCzynnosci: action.state.CzCzynnosci,
       kartaZdana: action.state.kartaZdana,

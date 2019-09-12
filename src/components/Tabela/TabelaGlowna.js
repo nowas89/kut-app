@@ -125,6 +125,37 @@ class TabelaGlowna extends Component {
 
     return (
       <Wrapper>
+          <Paper style={{ position: "relative", marginTop: '30px', padding: "10px", width: '310px' }}>
+          <Typography variant="subheading" gutterBottom style={{}}>
+            Przeszukaj Karty
+          </Typography>
+          <TextField
+            label="Szukaj"
+            className={classes.textField}
+            margin="normal"
+            type="text"
+            defaultValue={this.state.searchString}
+            autoComplete="on"
+            onChange={e => this.przeszukajKarty(e)}
+          />
+
+          <FormControlLabel
+            style={{ margin: "0", display: 'flex', justifyContent: 'center'}}
+            control={
+              <Checkbox
+                checked={this.state.kartaZdana}
+                onChange={e => this.handleChange(e)}
+                value="kartaZdana"
+                color="primary"
+              />
+            }
+            label={
+              this.state.zdaneKarty
+                ? "Przeszukujesz Niezdane Karty"
+                : "Przeszukaj Niezdane Karty"
+            }
+          />
+        </Paper>
         <Paper className={classes.root}>
           <Table className={classes.table} id="tabelaKart">
             <TableHead>
@@ -281,7 +312,7 @@ class TabelaGlowna extends Component {
                           padding: "4px 10px 4px 24px"
                         }}
                       >
-                        {karta.kartaZdana ? "TAK" : "NIE"}
+                        {karta.kartaZdana ? "TAK": <h3 style={{color: 'red'}}>NIE</h3> }
                       </TableCell>
                     </TableRow>
                   ))
@@ -359,9 +390,10 @@ class TabelaGlowna extends Component {
                         style={{
                           textAlign: "center",
                           padding: "4px 10px 4px 24px"
+                        
                         }}
                       >
-                        {karta.kartaZdana ? "TAK" : "NIE"}
+                        {karta.kartaZdana ? "TAK": <h3 style={{color: 'red'}}>NIE</h3> }
                       </TableCell>
                     </TableRow>
                   ))}
@@ -377,37 +409,7 @@ class TabelaGlowna extends Component {
           buttonText="Eksportuj Listę do XML"
         />
 
-        <Paper style={{ position: "relative", marginBottom: '90px', top: "100px", padding: "10px", width: '310px' }}>
-          <Typography variant="subheading" gutterBottom style={{}}>
-            Przeszukaj Karty
-          </Typography>
-          <TextField
-            label="Szukaj"
-            className={classes.textField}
-            margin="normal"
-            type="text"
-            defaultValue={this.state.searchString}
-            autoComplete="on"
-            onChange={e => this.przeszukajKarty(e)}
-          />
-
-          <FormControlLabel
-            style={{ margin: "0", display: 'flex', justifyContent: 'center'}}
-            control={
-              <Checkbox
-                checked={this.state.kartaZdana}
-                onChange={e => this.handleChange(e)}
-                value="kartaZdana"
-                color="primary"
-              />
-            }
-            label={
-              this.state.zdaneKarty
-                ? "Przeszukujesz Niezdane Karty"
-                : "Przeszukaj Niezdane Karty"
-            }
-          />
-        </Paper>
+      
       </Wrapper>
     );
   }
