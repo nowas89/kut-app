@@ -7,8 +7,6 @@ import Button from "@material-ui/core/Button";
 import compose from "recompose/compose";
 import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
-import ArrowImg from "../../img/arrow-down.png";
-
 
 
 import DodajKuta from "../../components/DodajKuta/DodajKuta";
@@ -46,21 +44,14 @@ class Karty extends Component {
   //   !this.props.buttonIsClicked  ?  this.setState({ buttonIsClicked: true, buttonDisable: true }) : this.setState({  buttonIsClicked: false, buttonDisable: false})
 
   // }
-
-
-
-
-    
+ 
   render() {
     const { classes } = this.props;
     
-    
 
-  
-  
     return (
       <Wrapper>
-<IMG src={ArrowImg} onClick={() => window.scrollTo(0, 1000000000)}/> 
+<SVG  onClick={() => window.scrollTo(0, 1000000000)}  width="24" height="24"xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z"/></SVG>
           
         {!this.props.buttonDisable ? (
          <Button
@@ -99,6 +90,14 @@ const IMG = styled.img`
   right: 20px;
   cursor: pointer;
   fill: #743ee8;
+`;
+const SVG = styled.svg`
+
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
 `;
 const Wrapper = styled.div`
   margin-left: 250px;

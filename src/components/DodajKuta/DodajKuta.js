@@ -114,9 +114,9 @@ class DodajKuta extends Component {
     nrRej: "",
     wlasciciel: "",
     terminWykonania:
-       (new Date().getDate() < 9 ? '0' + new Date().getDate()  : null) +
+       (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
       "/" +
-      (new Date().getMonth() < 9 ? '0' + (new Date().getMonth() + 1) : + 1) +
+      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
       "/" +
       new Date().getFullYear(),
     zadanie: "",
@@ -128,21 +128,21 @@ class DodajKuta extends Component {
     podstawa: "",
     waznoscKarty:
       
-      (new Date().getDate() < 9 ? '0' + new Date().getDate()  : null) +
-      "/" +
-      (new Date().getMonth() < 9 ? '0' + (new Date().getMonth() + 1) : + 1) +
-      "/" +
-      new Date().getFullYear(),
+    (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
+    "/" +
+    (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
+    "/" +
+    new Date().getFullYear(),
     pobierajacy: "",
 
     CzOperacja: "",
     CzRbh: "",
     CzDataWyk:
-    (new Date().getDate() < 9 ? '0' + new Date().getDate()  : null) +
-    "/" +
-    (new Date().getMonth() < 9 ? '0' + (new Date().getMonth() + 1) : + 1) +
-    "/" +
-    new Date().getFullYear(),
+    (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
+      "/" +
+      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
+      "/" +
+      new Date().getFullYear(),
     CzWykonawca: "",
     CzWyszczegolnienie: "",
     CzOznaczenie: "",
@@ -198,9 +198,9 @@ class DodajKuta extends Component {
       nrRej: "",
       wlasciciel: "",
       terminWykonania:
-      (new Date().getDate() < 9 ? '0' + new Date().getDate()  : null) +
+      (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
       "/" +
-      (new Date().getMonth() < 9 ? '0' + (new Date().getMonth() + 1) : + 1) +
+      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
       "/" +
       new Date().getFullYear(),
       zadanie: "",
@@ -416,9 +416,9 @@ class DodajKuta extends Component {
         CzOperacja: "",
         CzRbh: "",
         CzDataWyk:
-        (new Date().getDate() < 9 ? '0' + new Date().getDate()  : null) +
+        (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
         "/" +
-        (new Date().getMonth() < 9 ? '0' + (new Date().getMonth() + 1) : + 1) +
+        (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
         "/" +
         new Date().getFullYear(),
         CzWykonawca: "",
