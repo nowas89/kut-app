@@ -116,7 +116,7 @@ class DodajKuta extends Component {
     terminWykonania:
        (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
       "/" +
-      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
+      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
       "/" +
       new Date().getFullYear(),
     zadanie: "",
@@ -130,7 +130,7 @@ class DodajKuta extends Component {
       
     (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
     "/" +
-    (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
+    (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
     "/" +
     new Date().getFullYear(),
     pobierajacy: "",
@@ -140,7 +140,7 @@ class DodajKuta extends Component {
     CzDataWyk:
     (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
       "/" +
-      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
+      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
       "/" +
       new Date().getFullYear(),
     CzWykonawca: "",
@@ -200,7 +200,7 @@ class DodajKuta extends Component {
       terminWykonania:
       (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
       "/" +
-      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
+      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
       "/" +
       new Date().getFullYear(),
       zadanie: "",
@@ -418,7 +418,7 @@ class DodajKuta extends Component {
         CzDataWyk:
         (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
         "/" +
-        (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : + 1) +
+        (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
         "/" +
         new Date().getFullYear(),
         CzWykonawca: "",

@@ -63,6 +63,14 @@ class EwidencjaPracy extends Component {
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"
                     }} >Numer Karty</TableCell>
+                      <TableCell style={{
+                      textAlign: "center",
+                      padding: "4px 10px 4px 24px"
+                    }} >Nazwa sprzętu, typ sprzętu, numer fabryczny</TableCell>
+                    <TableCell style={{
+                      textAlign: "center",
+                      padding: "4px 10px 4px 24px"
+                    }} >Rodzaj naprawy</TableCell>
             <TableCell style={{
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"
@@ -83,6 +91,7 @@ class EwidencjaPracy extends Component {
         </TableHead>
         <TableBody>
           {this.props.karty.map((row, i) => {
+            console.log(row)
             return (
               <TableRow key={i} className={classes.row}>
    
@@ -94,6 +103,14 @@ class EwidencjaPracy extends Component {
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"
                     }} >{row.numerKuta}</TableCell>
+                     <TableCell style={{
+                      textAlign: "center",
+                      padding: "4px 10px 4px 24px"
+                    }} >{row.marka}</TableCell>
+                     <TableCell style={{
+                      textAlign: "center",
+                      padding: "4px 10px 4px 24px"
+                    }} >{row.zadanienpm }</TableCell>
                 <TableCell style={{
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"

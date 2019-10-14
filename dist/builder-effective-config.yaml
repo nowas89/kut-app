@@ -3,8 +3,9 @@ directories:
   buildResources: assets
 appId: oneoften
 files:
-  - ./build/**/*
-  - ./public/electron.js
+  - filter:
+      - ./build/**/*
+      - ./public/electron.js
 dmg:
   contents:
     - x: 110
