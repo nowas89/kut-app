@@ -110,7 +110,7 @@ class EwidencjaPracy extends Component {
                      <TableCell style={{
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"
-                    }} >{row.zadanienpm }</TableCell>
+                    }} >{row.zadanie }</TableCell>
                 <TableCell style={{
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"
