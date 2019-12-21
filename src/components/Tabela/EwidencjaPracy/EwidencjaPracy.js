@@ -142,7 +142,7 @@ class EwidencjaPracy extends Component {
           table="ewidencja-roboczogodzin"
           filename="Ewidencja RBH pracy warsztatu"
           sheet="Ewidencja RBH pracy warsztatu"
-          buttonText="Eksportuj Liste do XML"
+          buttonText="Eksportuj Liste do XLS"
         />
       </Wrapper>
     );

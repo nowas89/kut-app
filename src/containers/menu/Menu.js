@@ -37,7 +37,7 @@ class Menu extends Component {
             <Nav>
               <ul>
                 <li >
-                  <NavLink  to="/"    style={{fontFamily: 'Arial'}} >Karty Usług Technicznych</NavLink>
+                  <NavLink  to="/karty"    style={{fontFamily: 'Arial'}} >Karty Usług Technicznych</NavLink>
                 </li>
                 <li>
                   <NavLink to="/ewidencja"    style={{fontFamily: 'Arial'}}>Ewidencja Kart</NavLink>
@@ -57,10 +57,11 @@ class Menu extends Component {
 </Button></NavLink></DOlnyDiv>
         </MenuWrap>
         <Switch>
-        <Route   exact path="/"  component={Karty} />
-          <Route  exact  path="/ewidencja" component={TabelaEwidencyjna} />
-          <Route exact   path="/ewidencjaPracy" component={EwidencjaPracy} />
-          <Route exact   path="/ustawienia" component={Settings} />
+          
+        <Route    path="/karty"  component={Karty} />
+          <Route    path="/ewidencja" component={TabelaEwidencyjna} />
+          <Route    path="/ewidencjaPracy" component={EwidencjaPracy} />
+          <Route    path="/ustawienia" component={Settings} />
  
         </Switch>
       </div>

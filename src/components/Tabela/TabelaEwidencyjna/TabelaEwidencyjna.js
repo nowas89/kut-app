@@ -101,6 +101,11 @@ class TabelaEwidencyjna extends Component {
                 >
                   Data zwrotu karty
                 </TableCell>
+                <TableCell
+                  style={{ textAlign: "center", display: "none"}}
+                >
+                  Opis defaktacji
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -202,6 +207,13 @@ class TabelaEwidencyjna extends Component {
                   >
                     {karta.dataZdania}
                   </TableCell>
+                  <TableCell
+                    style={{
+                      display: "none"
+                    }}
+                  >
+                    {karta.opis}
+                  </TableCell>
                  
                 </TableRow>
               ))}
@@ -214,7 +226,7 @@ class TabelaEwidencyjna extends Component {
           table="tabela"
           filename="Ewidencja kart usług technicznych"
           sheet="Ewidencja kart usług technicznych"
-          buttonText="Eksportuj Liste do XML"
+          buttonText="Eksportuj Liste do XLS"
         />
       </Wrapper>
     );
