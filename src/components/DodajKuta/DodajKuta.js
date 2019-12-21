@@ -248,9 +248,18 @@ class DodajKuta extends Component {
     });
   };
 
-  handleChange = event => {
-    this.setState({ kartaZdana: event.target.checked });
-  };
+  dataZdania = event => {
+    let data = (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
+    "." +
+    (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
+    "." +
+    new Date().getFullYear()
+
+    this.setState({ 
+      kartaZdana: event.target.checked,
+      dataZdania: data
+     })
+    }
   addWykonawca = e => {
     this.setState({
       wykonawca: e.target.value,
@@ -833,7 +842,7 @@ class DodajKuta extends Component {
           control={
             <Checkbox
               checked={this.state.kartaZdana}
-              onChange={e => this.handleChange(e)}
+              onChange={e => this.dataZdania(e)}
               value="kartaZdana"
               color="primary"
             />

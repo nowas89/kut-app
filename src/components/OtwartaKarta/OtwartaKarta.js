@@ -320,14 +320,21 @@ class OtwartaKarta extends Component {
     });
   };
 
-  handleChange = event => {
+  dataZdania = event => {
+    let data = (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
+    "." +
+    (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
+    "." +
+    new Date().getFullYear()
     this.setState({
       karta: {
         ...this.state.karta,
-        kartaZdana: event.target.checked
+        kartaZdana: event.target.checked,
+        dataZdania: data
       }
     });
   };
+
 
   addWykonawca = e => {
     this.setState({
@@ -764,7 +771,7 @@ console.log(this.state.karta.numer)
               margin="normal"
               type="text"
               name="karta"
-              defaultValue={this.state.karta.dataZdania}
+              defaultValue={this.state.karta.kartaZdana ? this.state.karta.dataZdania : " - - - "}
               autoComplete="on"
               onChange={e => this.addDataZdania(e)}
             />
@@ -1161,7 +1168,7 @@ console.log(this.state.karta.numer)
           control={
             <Checkbox
               checked={this.state.karta.kartaZdana}
-              onChange={e => this.handleChange(e)}
+              onChange={e => this.dataZdania(e)}
               value="kartaZdana"
               color="primary"
             />
