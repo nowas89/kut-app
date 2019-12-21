@@ -19,6 +19,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
+
 // import styled from "styled-components";
 const styles = theme => ({
   root: {
@@ -52,7 +53,7 @@ const styles = theme => ({
 class TabelaGlowna extends Component {
   state = {
     searchString: "",
-    zdaneKarty: false,
+
     sorted: false
   };
   przeszukajKarty = e => {
@@ -76,9 +77,7 @@ class TabelaGlowna extends Component {
     }, 50);
   };
 
-  handleChange = event => {
-    this.setState({ zdaneKarty: event.target.checked });
-  };
+
 
   render() {
     const { classes } = this.props;
@@ -103,22 +102,25 @@ class TabelaGlowna extends Component {
       .trim()
       .toLowerCase();
 
-    if (searchString.length > 0 && this.state.zdaneKarty) {
+    if (searchString.length > 0 && this.props.zdaneKarty) {
       newArray = newArray.filter(karta => {
         return ((karta.numerKuta.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.pobierajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.marka.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.nrRej.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wlasciciel.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wystawiajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana));
       });
-    } else if (searchString.length > 0 && !this.state.zdaneKarty) {
+    } else if (searchString.length > 0 && !this.props.zdaneKarty) {
       newArray = newArray.filter(karta => {
         return (karta.numerKuta.toLowerCase().includes(this.state.searchString) || karta.pobierajacy.toLowerCase().includes(this.state.searchString) || karta.marka.toLowerCase().includes(this.state.searchString) || karta.nrRej.toLowerCase().includes(this.state.searchString) || karta.wlasciciel.toLowerCase().includes(this.state.searchString) || karta.wystawiajacy.toLowerCase().includes(this.state.searchString));
       });
-    } else if (searchString.length === 0 && this.state.zdaneKarty) {
+    } else if (searchString.length === 0 && this.props.zdaneKarty) {
       newArray = newArray.filter(karta => {
         return ((karta.numerKuta.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.pobierajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.marka.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.nrRej.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wlasciciel.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wystawiajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana));
       });
     }
 
+    console.log(new Date())
+
     return (
       <Wrapper>
+
         <Paper
           style={{
             position: "relative",
@@ -145,13 +147,13 @@ class TabelaGlowna extends Component {
               justifyContent: 'center'
             }}
             control={< Checkbox checked={
-              this.state.kartaZdana
+              this.props.zdaneKarty
             }
               onChange={
-                e => this.handleChange(e)
+                (e) => this.props.zdaneKartyFun(e)
               }
               value="kartaZdana" color="primary" />}
-            label={this.state.zdaneKarty
+            label={this.props.zdaneKarty
               ? "Przeszukujesz Niezdane Karty"
               : "Przeszukaj Niezdane Karty"} />
         </Paper>
@@ -175,7 +177,7 @@ class TabelaGlowna extends Component {
                     alignItems: "center",
                     height: "56px"
                   }}>
-                  Numer Karty 
+                  Numer Karty
                   {this.state.sorted
                     ? <SVG
                       onClick={() => this.sort()}
@@ -231,6 +233,7 @@ class TabelaGlowna extends Component {
                   }}>
                   Zadanie
                                 </TableCell>
+                       
                 <TableCell
                   style={{
                     textAlign: "center",
@@ -247,9 +250,12 @@ class TabelaGlowna extends Component {
                                 </TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
-              {this.state.searchString !== "" || this.state.zdaneKarty
+              
+              {this.state.searchString !== "" || this.props.zdaneKarty
                 ? newArray.map((karta, i) => (
+                
                   <TableRow
                     key={i + 1}
                     className={classes.row}
@@ -261,6 +267,12 @@ class TabelaGlowna extends Component {
                       }}>
                       {i + 1}
                     </TableCell>
+                    {
+console.log( new Date(
+  karta.terminWykonania.split("/")[2],
+  Number(karta.terminWykonania.split("/")[1]) - 1,
+  karta.terminWykonania.split("/")[0]))
+                      }
                     <TableCell
                       style={{
                         textAlign: "center",
@@ -282,6 +294,7 @@ class TabelaGlowna extends Component {
                       }}>
                       {karta.nrRej}
                     </TableCell>
+                 
                     <TableCell
                       style={{
                         textAlign: "center",
@@ -294,7 +307,17 @@ class TabelaGlowna extends Component {
                         textAlign: "center",
                         padding: "4px 10px 4px 24px"
                       }}>
-                      {karta.terminWykonania}
+                    {
+                        new Date() > new Date(
+                          karta.terminWykonania.split("/")[2],
+                          Number(karta.terminWykonania.split("/")[1]) - 1,
+                          karta.terminWykonania.split("/")[0]) && !karta.kartaZdana ?   <h3
+                            style={{
+                              color: 'red'
+                            }}>{karta.terminWykonania}</h3>
+                            : karta.terminWykonania
+
+                      }
                     </TableCell>
                     <TableCell
                       style={{
@@ -323,6 +346,7 @@ class TabelaGlowna extends Component {
                           }}>NIE</h3>}
                     </TableCell>
                   </TableRow>
+                
                 ))
                 : this
                   .props
@@ -353,6 +377,14 @@ class TabelaGlowna extends Component {
                         }}>
                         {karta.marka}
                       </TableCell>
+                      {
+
+console.log(
+  new Date(
+    karta.terminWykonania.split("/")[2],
+    Number(karta.terminWykonania.split("/")[1]) - 1,
+    karta.terminWykonania.split("/")[0]))
+}
                       <TableCell
                         style={{
                           textAlign: "center",
@@ -372,7 +404,17 @@ class TabelaGlowna extends Component {
                           textAlign: "center",
                           padding: "4px 10px 4px 24px"
                         }}>
-                        {karta.terminWykonania}
+                           {
+                        new Date() > new Date(
+                          karta.terminWykonania.split("/")[2],
+                          Number(karta.terminWykonania.split("/")[1]) - 1,
+                          karta.terminWykonania.split("/")[0]) && !karta.kartaZdana ? <h3
+                            style={{
+                              color: 'red'
+                            }}>{karta.terminWykonania}</h3>
+                            : karta.terminWykonania
+
+                      }
                       </TableCell>
                       <TableCell
                         style={{
@@ -401,8 +443,11 @@ class TabelaGlowna extends Component {
                             }}>NIE</h3>}
                       </TableCell>
                     </TableRow>
+                    
                   ))}
+                 
             </TableBody>
+
           </Table>
         </Paper>
         <ReactHTMLTableToExcel
@@ -441,12 +486,16 @@ transform: rotate(180deg);
 
 `;
 const mapStateToProps = state => {
-  return { karty: state.karty };
+  return {
+    karty: state.karty,
+    zdaneKarty: state.zdaneKarty
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOpeningKut: karta => dispatch(actions.openKut(karta))
+    onOpeningKut: karta => dispatch(actions.openKut(karta)),
+    zdaneKartyFun: event => dispatch(actions.zdaneKarty(event))
   };
 };
 export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(TabelaGlowna);

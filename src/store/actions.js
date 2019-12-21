@@ -120,3 +120,10 @@ export const aktualizacjaCzynnosci = (karta) => {
 
   };
 };
+export const zdaneKarty = (e) => {
+  return {
+    type: actionTypes.ZDANE_KARTY,
+    e: e
+
+  };
+};

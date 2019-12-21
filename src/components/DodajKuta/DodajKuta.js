@@ -115,9 +115,9 @@ class DodajKuta extends Component {
     wlasciciel: "",
     terminWykonania:
        (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-      "/" +
+      "." +
       (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-      "/" +
+      "." +
       new Date().getFullYear(),
     zadanie: "",
     wystawiajacy: this.props.defWystawiajacy,
@@ -129,9 +129,9 @@ class DodajKuta extends Component {
     waznoscKarty:
       
     (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-    "/" +
+    "." +
     (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-    "/" +
+    "." +
     new Date().getFullYear(),
     pobierajacy: "",
 
@@ -139,9 +139,9 @@ class DodajKuta extends Component {
     CzRbh: "",
     CzDataWyk:
     (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-      "/" +
+      "." +
       (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-      "/" +
+      "." +
       new Date().getFullYear(),
     CzWykonawca: "",
     CzWyszczegolnienie: "",
@@ -199,9 +199,9 @@ class DodajKuta extends Component {
       wlasciciel: "",
       terminWykonania:
       (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-      "/" +
+      "." +
       (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-      "/" +
+      "." +
       new Date().getFullYear(),
       zadanie: "",
       wystawiajacy: "",
@@ -417,9 +417,9 @@ class DodajKuta extends Component {
         CzRbh: "",
         CzDataWyk:
         (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-        "/" +
+        "." +
         (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-        "/" +
+        "." +
         new Date().getFullYear(),
         CzWykonawca: "",
         CzWyszczegolnienie: "",
@@ -450,7 +450,7 @@ class DodajKuta extends Component {
     if (mm < 10) {
       mm = "0" + mm;
     }
-    today = dd + "/" + mm + "/" + yyyy;
+    today = dd + "." + mm + "." + yyyy;
 
     return (
       <Wrapper>

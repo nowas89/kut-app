@@ -14,7 +14,8 @@ const initialState = {
   defWykonawca: "",
   defWystawiajacy: "",
   edytowanaCz: {},
-  editOperacji: true
+  editOperacji: true,
+  zdaneKarty: false
 };
 
 export const addNewKut = (state, action) => {
@@ -225,7 +226,7 @@ export const resetState = (state, action) => {
   };
 };
 export const editCzynnosc = (state, action) => {
-  console.log(state.edytowanaCz);
+
 
   return {
     ...state,
@@ -240,6 +241,13 @@ export const aktualizacjaCzynnosci = (state, action) => {
     ...state,
     editOperacji: !state.editOperacji
   };
+};
+
+export const zdanKarty = (state, action)  => {
+  console.log(action.e.target.checked )
+  return {
+    ...state,
+  zdaneKarty: action.e.target.checked }
 };
 
 const reducer = (state = initialState, action) => {
@@ -272,6 +280,8 @@ const reducer = (state = initialState, action) => {
       return editCzynnosc(state, action);
     case actionTypes.AKTUALIZACJA_CZYNNOSCI:
       return aktualizacjaCzynnosci(state, action);
+    case actionTypes.ZDANE_KARTY:
+      return zdanKarty(state, action);
     default:
       return state;
   }

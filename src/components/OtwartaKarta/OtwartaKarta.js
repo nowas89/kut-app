@@ -120,9 +120,9 @@ class OtwartaKarta extends Component {
       CzRbh: "",
       CzDataWyk:
         new Date().getDate() +
-        "/" +
+        "." +
         (new Date().getMonth() + 1) +
-        "/" +
+        "." +
         new Date().getFullYear(),
       CzWykonawca: "",
       CzWyszczegolnienie: "",
@@ -179,9 +179,9 @@ class OtwartaKarta extends Component {
         iloscRBH: this.props.taKartaJestOtwarta.iloscRBH,
         CzDataWyk:
           new Date().getDate() +
-          "/" +
+          "." +
           (new Date().getMonth() + 1) +
-          "/" +
+          "." +
           new Date().getFullYear(),
         CzOperacja: "",
         CzRbh: "",

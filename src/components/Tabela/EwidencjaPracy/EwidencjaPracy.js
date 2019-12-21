@@ -44,6 +44,9 @@ class EwidencjaPracy extends Component {
     const { classes } =this.props;
     return (
       <Wrapper>
+        <SVG  onClick={() => window.scrollTo(0, 1000000000)}  width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z"/></SVG>
+          
+
              <Typography
           variant="headline"
           gutterBottom
@@ -155,6 +158,14 @@ display: flex;
 flex-direction: column;
 align-items: center;
 `
+const SVG = styled.svg`
+
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
+`;
 
 const mapStateToProps = state => {
   return {

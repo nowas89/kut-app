@@ -751,7 +751,7 @@ class KutToPrint extends Component {
     </div>
     <div className="task-row">
         <div className="row1">
-            <h2></h2>
+            <h5>RAZEM</h5>
         </div>
         <div className="row2">
             <h2></h2>

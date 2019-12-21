@@ -658,6 +658,11 @@
     font-weight: 400;
     font-family: "Roboto", sans-serif;
   }
+  h5 {
+    font-size: 11px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+  }
 
   h2 {
     font-size: 8px;
@@ -1246,6 +1251,16 @@
   position: relative;
   top: 2px;
   left: 2px;
+  padding: 0;
+  font-family: "Open-sans", sans-serif;
+}
+
+.mainWindow h5 {
+  font-size: 11px;
+  font-weight: 400;
+
+  position: relative;
+
   padding: 0;
   font-family: "Open-sans", sans-serif;
 }
