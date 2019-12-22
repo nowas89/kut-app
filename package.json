@@ -1,10 +1,10 @@
 {
-  "name": "ewidencja-pracy-warsztatu-2020",
-  "version": "1.0.6",
+  "name": "Ewidencja-Pracy-Warsztatu-2020",
+  "version": "1.1.1",
   "private": true,
   "author": "Pawel Naworol",
   "nodeGypRebuild": "true",
-  "description": "Aplikacja systemowa zarządzająca Ewidencją pracy warsztatu",
+  "description": "Aplikacja systemowa zarządzająca ewidencją pracy warsztatu",
   "devDependencies": {
     "@material-ui/core": "^3.6.1",
     "autoprefixer": "6.5.1",
@@ -50,7 +50,7 @@
     "react-dev-utils": "^0.4.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-to-print": "^2.0.0-alpha-2",
+    "react-to-print": "^2.5.0",
     "recursive-readdir": "2.1.0",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",

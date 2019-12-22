@@ -81,6 +81,10 @@ class EwidencjaPracy extends Component {
             <TableCell style={{
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"
+                    }} >Termin Wykonania</TableCell>
+            <TableCell style={{
+                      textAlign: "center",
+                      padding: "4px 10px 4px 24px"
                     }} >Rodzaj / Typ / Kategoria</TableCell>
             <TableCell style={{
                       textAlign: "center",
@@ -115,6 +119,10 @@ class EwidencjaPracy extends Component {
                       padding: "4px 10px 4px 24px"
                     }} >{row.zadanie }</TableCell>
                 <TableCell style={{
+                      textAlign: "center",
+                      padding: "4px 10px 4px 24px"
+                    }} >{row.waznoscKarty}</TableCell>
+                     <TableCell style={{
                       textAlign: "center",
                       padding: "4px 10px 4px 24px"
                     }} >{row.terminWykonania}</TableCell>

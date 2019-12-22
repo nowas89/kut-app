@@ -226,6 +226,13 @@ class TabelaGlowna extends Component {
                   }}>
                   Termin Wykonania
                                 </TableCell>
+                                <TableCell
+                  style={{
+                    textAlign: "center",
+                    padding: "4px 10px 4px 24px"
+                  }}>
+                  Data Wystawienia
+                                </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
@@ -269,9 +276,9 @@ class TabelaGlowna extends Component {
                     </TableCell>
                     {
 console.log( new Date(
-  karta.terminWykonania.split("/")[2],
-  Number(karta.terminWykonania.split("/")[1]) - 1,
-  karta.terminWykonania.split("/")[0]))
+  karta.terminWykonania.split(".")[2],
+  Number(karta.terminWykonania.split(".")[1]) - 1,
+  karta.terminWykonania.split(".")[0]))
                       }
                     <TableCell
                       style={{
@@ -309,15 +316,22 @@ console.log( new Date(
                       }}>
                     {
                         new Date() > new Date(
-                          karta.terminWykonania.split("/")[2],
-                          Number(karta.terminWykonania.split("/")[1]) - 1,
-                          karta.terminWykonania.split("/")[0]) && !karta.kartaZdana ?   <h3
+                          karta.terminWykonania.split(".")[2],
+                          Number(karta.terminWykonania.split(".")[1]) - 1,
+                          karta.terminWykonania.split(".")[0]) && !karta.kartaZdana ?   <h3
                             style={{
                               color: 'red'
                             }}>{karta.terminWykonania}</h3>
                             : karta.terminWykonania
 
                       }
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        textAlign: "center",
+                        padding: "4px 10px 4px 24px"
+                      }}>
+                      {karta.waznoscKarty}
                     </TableCell>
                     <TableCell
                       style={{
@@ -381,9 +395,9 @@ console.log( new Date(
 
 console.log(
   new Date(
-    karta.terminWykonania.split("/")[2],
-    Number(karta.terminWykonania.split("/")[1]) - 1,
-    karta.terminWykonania.split("/")[0]))
+    karta.terminWykonania.split(".")[2],
+    Number(karta.terminWykonania.split(".")[1]) - 1,
+    karta.terminWykonania.split(".")[0]))
 }
                       <TableCell
                         style={{
@@ -406,9 +420,9 @@ console.log(
                         }}>
                            {
                         new Date() > new Date(
-                          karta.terminWykonania.split("/")[2],
-                          Number(karta.terminWykonania.split("/")[1]) - 1,
-                          karta.terminWykonania.split("/")[0]) && !karta.kartaZdana ? <h3
+                          karta.terminWykonania.split(".")[2],
+                          Number(karta.terminWykonania.split(".")[1]) - 1,
+                          karta.terminWykonania.split(".")[0]) && !karta.kartaZdana ? <h3
                             style={{
                               color: 'red'
                             }}>{karta.terminWykonania}</h3>
@@ -416,6 +430,13 @@ console.log(
 
                       }
                       </TableCell>
+                      <TableCell
+                      style={{
+                        textAlign: "center",
+                        padding: "4px 10px 4px 24px"
+                      }}>
+                      {karta.waznoscKarty}
+                    </TableCell>
                       <TableCell
                         style={{
                           textAlign: "center",

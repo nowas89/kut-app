@@ -102,7 +102,7 @@ class TabelaEwidencyjna extends Component {
                   Data zwrotu karty
                 </TableCell>
                 <TableCell
-                  style={{ textAlign: "center", display: "none"}}
+                  style={{ textAlign: "center", display:"none"}}
                 >
                   Opis defaktacji
                 </TableCell>
@@ -141,7 +141,7 @@ class TabelaEwidencyjna extends Component {
                       padding: "4px 10px 4px 24px"
                     }}
                   >
-                    {karta.terminWykonania}
+                    {karta.waznoscKarty}
                   </TableCell>
                   <TableCell
                     style={{
@@ -189,7 +189,7 @@ class TabelaEwidencyjna extends Component {
                       padding: "4px 10px 4px 24px"
                     }}
                   >
-                    {karta.waznoscKarty}
+                    {karta.terminWykonania}
                   </TableCell>
                   <TableCell
                     style={{
