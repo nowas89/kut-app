@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
 import compose from "recompose/compose";
 
@@ -150,6 +150,7 @@ class OtwartaKarta extends Component {
     }
   };
 
+  
   componentWillMount() {
     this.setState({
       dodajCzynnosc: this.props.taKartaJestOtwarta.dodajCzynnosc,
@@ -203,8 +204,14 @@ class OtwartaKarta extends Component {
           editCzAsygnata: this.props.edytowanaCz.CzAsygnata,
           editCzUwagi: this.props.edytowanaCz.CzUwagi
         }
-      }
+      },
     });
+    document.addEventListener("keydown", this.zapiszWyslij, false);
+
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.zapiszWyslij, false);
   }
 
   addNewCzynnoscAndReset = () => {
@@ -279,6 +286,15 @@ class OtwartaKarta extends Component {
       });
     }, 100);
   };
+  
+ 
+
+
+  zapiszWyslij = () => {
+    this.props.onZamykanieKarty(
+      this.props.kartaJestOtwarta,
+      this.state.karta)
+  }
 
   onClickAction = () => {
     if (!this.state.dodajCzynnosc) {
@@ -1203,10 +1219,8 @@ console.log(this.state.karta.numer)
               marginRight: "40px"
             }}
             onClick={() =>
-              this.props.onZamykanieKarty(
-                this.props.kartaJestOtwarta,
-                this.state.karta
-              )
+             this.zapiszWyslij()
+              
             }
           >
             <SaveIcon
