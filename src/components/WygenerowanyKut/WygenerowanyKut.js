@@ -8,14 +8,17 @@ import ReactToPrint from "react-to-print";
 class WygenerowanyKut extends Component {
   render() {
     return (
-      <Wrap> 
-        <div >
+      <Wrap>
+        <div>
           <ReactToPrint
             trigger={() => <ASD href="#">Wydrukuj</ASD>}
             content={() => this.componentRef}
           />
         </div>
-        <KutToPrint kartaDoDruku={this.props.kartaDoDruku} ref={el => (this.componentRef = el)} />
+        <KutToPrint
+          kartaDoDruku={this.props.kartaDoDruku}
+          ref={(el) => (this.componentRef = el)}
+        />
       </Wrap>
     );
   }

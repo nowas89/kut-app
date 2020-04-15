@@ -15,7 +15,8 @@ const initialState = {
   defWystawiajacy: "",
   edytowanaCz: {},
   editOperacji: true,
-  zdaneKarty: false
+  zdaneKarty: false,
+  persons: []
 };
 
 export const addNewKut = (state, action) => {
@@ -250,6 +251,28 @@ export const zdanKarty = (state, action)  => {
   zdaneKarty: action.e.target.checked }
 };
 
+export const  deletePerson = (state, action)  => {
+  console.log(action.e.target )
+  let deleteTyp = state.persons.filter(item => item !== action.e);
+  console.log(deleteTyp);
+
+  return {
+    ...state,
+    persons: deleteTyp
+  };
+};
+
+export const savePerson = (state, action)  => {
+  console.log(action.e.target )
+  let persDel = state.persons.concat(action.e);
+
+  return {
+    ...state,
+    persons: persDel
+  };
+};
+
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_KUT:
@@ -282,6 +305,10 @@ const reducer = (state = initialState, action) => {
       return aktualizacjaCzynnosci(state, action);
     case actionTypes.ZDANE_KARTY:
       return zdanKarty(state, action);
+    case actionTypes.DELETE_PERSON:
+      return deletePerson(state, action);
+    case actionTypes.SAVE_PERSON:
+      return savePerson(state, action);
     default:
       return state;
   }

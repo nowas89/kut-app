@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component} from "react";
 import { connect } from "react-redux";
 import compose from "recompose/compose";
 
@@ -10,7 +10,7 @@ import WygenerowanyKut from "../WygenerowanyKut/WygenerowanyKut";
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
 
 import { withStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
+
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -26,6 +26,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import PrintIcon from '@material-ui/icons/Print';
+import classNames from "classnames";
 
 const styles = theme => ({
   root: {
@@ -290,11 +292,24 @@ class OtwartaKarta extends Component {
  
 
 
-  zapiszWyslij = () => {
+  zapiszWyslij = (e) => {
+    if(e.keyCode === 27) {
     this.props.onZamykanieKarty(
       this.props.kartaJestOtwarta,
       this.state.karta)
-  }
+  } else if(e.keyCode !== 27 && e.target !== e.keyCode) {
+    // this.props.onZamykanieKarty(
+    //   this.props.kartaJestOtwarta,
+    //   this.state.karta)
+    console.log(e.target, e.keyCode)
+  } 
+}
+
+zapiszWyslijButton = (e) => {
+  this.props.onZamykanieKarty(
+    this.props.kartaJestOtwarta,
+    this.state.karta)
+}
 
   onClickAction = () => {
     if (!this.state.dodajCzynnosc) {
@@ -675,6 +690,7 @@ asd()
 console.log(this.state.karta.numer)
     return (
       <Wrapper>
+        <SVG  onClick={() => window.scrollTo(0, 1000000000)}  width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z"/></SVG>
         <Paper
           style={{
             display: "flex",
@@ -1218,9 +1234,8 @@ console.log(this.state.karta.numer)
               marginBottom: "20px",
               marginRight: "40px"
             }}
-            onClick={() =>
-             this.zapiszWyslij()
-              
+            onClick={(e) =>
+             this.zapiszWyslijButton(e)
             }
           >
             <SaveIcon
@@ -1266,25 +1281,41 @@ console.log(this.state.karta.numer)
             <WygenerowanyKut2 />
           </WrapPrint>
         ) : (
+          <WrapPrint>
           <Button
             style={{ marginTop: "150px", marginBottom: "20px" }}
-            variant="outlined"
+            variant="contained"
+            color="default"
             className={classes.button}
+            endIcon={<PrintIcon />}
             onClick={e => this.drukuj(e)}
           >
             Drukuj
           </Button>
+          </WrapPrint>
         )}
       </Wrapper>
     );
   }
 }
 
+
+
+const SVG = styled.svg`
+
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
+`;
+
 const WrapPrint = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 200px;
 `;
 
 const Wrapper = styled.div`
@@ -1334,7 +1365,7 @@ const TextAr = styled.div`
 `;
 const Container = styled.div`
   display: flex;
-  justify-center: center;
+  justify-content: center;
   padding: 10px 0;
 `;
 

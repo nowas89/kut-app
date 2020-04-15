@@ -127,3 +127,17 @@ export const zdaneKarty = (e) => {
 
   };
 };
+export const savePerson = (e) => {
+  return {
+    type: actionTypes.SAVE_PERSON,
+    e: e
+
+  };
+};
+export const deletePerson = (e) => {
+  return {
+    type: actionTypes.DELETE_PERSON,
+    e: e
+
+  };
+};

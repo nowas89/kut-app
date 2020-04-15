@@ -1,43 +1,39 @@
+/* eslint-disable no-use-before-define */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import compose from "recompose/compose";
-import * as actions from "../../store/actions";
-import Typography from "@material-ui/core/Typography";
-
-import styled from "styled-components";
-
 import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
-import SaveIcon from "@material-ui/icons/Save";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Paper from "@material-ui/core/Paper";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-
-import FormControl from "@material-ui/core/FormControl";
+import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
-
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import AddIcon from "@material-ui/icons/Add";
+import SaveIcon from "@material-ui/icons/Save";
 import classNames from "classnames";
 
+import compose from "recompose/compose";
+import styled from "styled-components";
+import * as actions from "../../store/actions";
 import TabelaCzynnosci from "../Tabela/TabelaCzynnosci/TabelaCzynnosci";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import { withStyles } from "@material-ui/core/styles";
-
-import TextField from "@material-ui/core/TextField";
-
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
   },
   container: {
     display: "flex",
     flexWrap: "wrap",
-    fontFamily: "Arial"
+    fontFamily: "Arial",
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -46,31 +42,31 @@ const styles = theme => ({
     fontFamily: "Arial",
     [theme.breakpoints.down("md")]: {
       width: 120,
-      fontSize: 7
-    }
+      fontSize: 7,
+    },
   },
   textFieldAr: {
     width: 750,
     [theme.breakpoints.down("md")]: {
       width: 420,
-      fontSize: 3
-    }
+      fontSize: 3,
+    },
   },
   button: {
     margin: theme.spacing.unit,
-    fontFamily: "Arial"
+    fontFamily: "Arial",
   },
   input: {
     display: "none",
-    fontFamily: "Arial"
+    fontFamily: "Arial",
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120
+    minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing.unit * 2
-  }
+    marginTop: theme.spacing.unit * 2,
+  },
 });
 
 class DodajKuta extends Component {
@@ -114,9 +110,13 @@ class DodajKuta extends Component {
     nrRej: "",
     wlasciciel: "",
     terminWykonania:
-       (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
+      (new Date().getDate() < 9
+        ? `0${new Date().getDate()}`
+        : new Date().getDate()) +
       "." +
-      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
+      (new Date().getMonth() < 9
+        ? `0${new Date().getMonth() + 1}`
+        : new Date().getMonth() + 1) +
       "." +
       new Date().getFullYear(),
     zadanie: "",
@@ -127,20 +127,27 @@ class DodajKuta extends Component {
     typ: "",
     podstawa: "",
     waznoscKarty:
-      
-    (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-    "." +
-    (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-    "." +
-    new Date().getFullYear(),
+      (new Date().getDate() < 9
+        ? `0${new Date().getDate()}`
+        : new Date().getDate()) +
+      "." +
+      (new Date().getMonth() < 9
+        ? `0${new Date().getMonth() + 1}`
+        : new Date().getMonth() + 1) +
+      "." +
+      new Date().getFullYear(),
     pobierajacy: "",
 
     CzOperacja: "",
     CzRbh: "",
     CzDataWyk:
-    (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
+      (new Date().getDate() < 9
+        ? `0${new Date().getDate()}`
+        : new Date().getDate()) +
       "." +
-      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
+      (new Date().getMonth() < 9
+        ? `0${new Date().getMonth() + 1}`
+        : new Date().getMonth() + 1) +
       "." +
       new Date().getFullYear(),
     CzWykonawca: "",
@@ -155,7 +162,7 @@ class DodajKuta extends Component {
     iloscRBH: "",
     iloscSprzetuRBH: "",
     edytowaneCz: {
-      editCzOperacjaId: '',
+      editCzOperacjaId: "",
       editCzOperacja: "",
       editCzRbh: "",
       editCzDataWyk: "",
@@ -164,12 +171,12 @@ class DodajKuta extends Component {
       editCzOznaczenie: "",
       editCzIlosc: "",
       editCzAsygnata: "",
-      editCzUwagi: ""
-    }
+      editCzUwagi: "",
+    },
   };
   componentDidMount() {
     this.setState({
-      id: this.props.karty.length + 1
+      id: this.props.karty.length + 1,
     });
     //     this.setState({
 
@@ -198,11 +205,15 @@ class DodajKuta extends Component {
       nrRej: "",
       wlasciciel: "",
       terminWykonania:
-      (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-      "." +
-      (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-      "." +
-      new Date().getFullYear(),
+        (new Date().getDate() < 9
+          ? `0${new Date().getDate()}`
+          : new Date().getDate()) +
+        "." +
+        (new Date().getMonth() < 9
+          ? `0${new Date().getMonth() + 1}`
+          : new Date().getMonth() + 1) +
+        "." +
+        new Date().getFullYear(),
       zadanie: "",
       wystawiajacy: "",
       opis: "",
@@ -215,7 +226,7 @@ class DodajKuta extends Component {
 
       rodzajRBH: "",
       iloscSprzetuRBH: "",
-      iloscRBH: ""
+      iloscRBH: "",
     });
   }
 
@@ -225,159 +236,178 @@ class DodajKuta extends Component {
     }
   };
 
-  addNumerKuta = e => {
+  addNumerKuta = (e) => {
     this.setState({
-      numerKuta: e.target.value
-    
+      numerKuta: e.target.value,
     });
   };
 
-  zmianaSelecta = e => {
+  zmianaSelecta = (e) => {
     this.setState({
-      rodzajRBH: e.target.value
+      rodzajRBH: e.target.value,
     });
   };
-  addIloscSprzetuRBH = e => {
+  addIloscSprzetuRBH = (e) => {
     this.setState({
-      iloscSprzetuRBH: e.target.value
+      iloscSprzetuRBH: e.target.value,
     });
   };
-  addIloscRBH = e => {
+  addIloscRBH = (e) => {
     this.setState({
-      iloscRBH: e.target.value
+      iloscRBH: e.target.value,
     });
   };
 
-  dataZdania = event => {
-    let data = (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-    "." +
-    (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-    "." +
-    new Date().getFullYear()
+  dataZdania = (event) => {
+    let data =
+      (new Date().getDate() < 9
+        ? `0${new Date().getDate()}`
+        : new Date().getDate()) +
+      "." +
+      (new Date().getMonth() < 9
+        ? `0${new Date().getMonth() + 1}`
+        : new Date().getMonth() + 1) +
+      "." +
+      new Date().getFullYear();
 
-    this.setState({ 
+    this.setState({
       kartaZdana: event.target.checked,
-      dataZdania: data
-     })
-    }
-  addWykonawca = e => {
+      dataZdania: data,
+    });
+  };
+  addWykonawca = (e) => {
     this.setState({
       wykonawca: e.target.value,
-      defWykonawca: e.target.value
+      defWykonawca: e.target.value,
     });
   };
-  addMarka = e => {
+  addMarka = (e) => {
     this.setState({
-      marka: e.target.value.toUpperCase()
+      marka: e.target.value.toUpperCase(),
     });
   };
-  addNrRej = e => {
+  addNrRej = (e) => {
     this.setState({
-      nrRej: e.target.value.toUpperCase()
+      nrRej: e.target.value.toUpperCase(),
     });
   };
-  addTerminWYkonania = e => {
+  addTerminWYkonania = (e) => {
     this.setState({
-      terminWykonania: e.target.value
+      terminWykonania: e.target.value,
     });
   };
-  addZadanie = e => {
+  addZadanie = (e) => {
     this.setState({
-      zadanie: e.target.value.toUpperCase()
+      zadanie: e.target.value.toUpperCase(),
     });
   };
-  addWystawiajacy = e => {
-    this.setState({
+  addWystawiajacy = (e, values) => {
+    console.log(e, values);
+    if(values !== undefined) {
+      this.setState({
+        wystawiajacy: values,
+        defWystawiajacy: values,
+      });
+    } else {
+        this.setState({
       wystawiajacy: e.target.value,
-      defWystawiajacy: e.target.value
+      defWystawiajacy: e.target.value,}
+    )}
+  };
+  addOpis = (e) => {
+    this.setState({
+      opis: e.target.value,
     });
   };
-  addOpis = e => {
+  addUwagi = (e) => {
     this.setState({
-      opis: e.target.value
+      uwagi: e.target.value,
     });
   };
-  addUwagi = e => {
+  addWlasciciel = (e) => {
     this.setState({
-      uwagi: e.target.value
+      wlasciciel: e.target.value.toUpperCase(),
     });
   };
-  addWlasciciel = e => {
+  addTyp = (e) => {
     this.setState({
-      wlasciciel: e.target.value.toUpperCase()
+      typ: e.target.value,
     });
   };
-  addTyp = e => {
+  addPodstawa = (e) => {
     this.setState({
-      typ: e.target.value
+      podstawa: e.target.value,
     });
   };
-  addPodstawa = e => {
+  addWaznoscKarty = (e) => {
     this.setState({
-      podstawa: e.target.value
+      waznoscKarty: e.target.value,
     });
   };
-  addWaznoscKarty = e => {
+  addPobierajacy = (e) => {
     this.setState({
-      waznoscKarty: e.target.value
+      pobierajacy: e.target.value,
     });
   };
-  addPobierajacy = e => {
+  addDataZdania = (e) => {
     this.setState({
-      pobierajacy: e.target.value
-    });
-  };
-  addDataZdania = e => {
-    this.setState({
-      dataZdania: e.target.value
+      dataZdania: e.target.value,
     });
   };
 
   // dodaj czynnosc
 
-  addCzOperacja = e => {
+  addCzOperacja = (e) => {
     this.setState({
-      CzOperacja: e.target.value.toUpperCase()
+      CzOperacja: e.target.value.toUpperCase(),
     });
   };
-  addCzRbh = e => {
+  addCzRbh = (e) => {
     this.setState({
-      CzRbh: e.target.value
+      CzRbh: e.target.value,
     });
   };
-  addCzDataWyk = e => {
+  addCzDataWyk = (e) => {
     this.setState({
-      CzDataWyk: e.target.value
+      CzDataWyk: e.target.value,
     });
   };
-  addCzWykonawca = e => {
+ 
+
+  addCzWykonawca = (e, values) => {
+    console.log(e, values);
+    if(values !== undefined) {
+      this.setState({
+        CzWykonawca: values.toUpperCase()
+      });
+    } else {
+        this.setState({
+          CzWykonawca: e.target.value.toUpperCase()
+        })  };
+      }
+  addCzWyszczegolnienie = (e) => {
     this.setState({
-      CzWykonawca: e.target.value.toUpperCase()
+      CzWyszczegolnienie: e.target.value,
     });
   };
-  addCzWyszczegolnienie = e => {
+  addCzOznaczenie = (e) => {
     this.setState({
-      CzWyszczegolnienie: e.target.value
+      CzOznaczenie: e.target.value,
     });
   };
-  addCzOznaczenie = e => {
+  addCzIlosc = (e) => {
     this.setState({
-      CzOznaczenie: e.target.value
+      CzIlosc: e.target.value,
     });
   };
-  addCzIlosc = e => {
+  addCzAsygnata = (e) => {
     this.setState({
-      CzIlosc: e.target.value
+      CzAsygnata: e.target.value,
     });
   };
-  addCzAsygnata = e => {
+  addCzUwagi = (e) => {
     this.setState({
-      CzAsygnata: e.target.value
-    });
-  };
-  addCzUwagi = e => {
-    this.setState({
-      CzUwagi: e.target.value
+      CzUwagi: e.target.value,
     });
   };
   dispatchAndAndResetCzynnosc = () => {
@@ -400,11 +430,11 @@ class DodajKuta extends Component {
         this.state.CzAsygnata === "" ? "----------" : this.state.CzAsygnata,
       CzUwagi: this.state.CzUwagi === "" ? "----------" : this.state.CzUwagi,
       CzOperacjaId:
-        this.state.CzOperacjaId === "" ? "----------" : this.state.CzOperacjaId
+        this.state.CzOperacjaId === "" ? "----------" : this.state.CzOperacjaId,
     });
 
     this.setState({
-      CzCzynnosci: [...nowyItemCaly]
+      CzCzynnosci: [...nowyItemCaly],
     });
 
     //     this.props.onAddNewCzynnosc(
@@ -425,11 +455,15 @@ class DodajKuta extends Component {
         CzOperacja: "",
         CzRbh: "",
         CzDataWyk:
-        (new Date().getDate() < 9 ? `0${new Date().getDate()}`  : new Date().getDate()) +
-        "." +
-        (new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1) +
-        "." +
-        new Date().getFullYear(),
+          (new Date().getDate() < 9
+            ? `0${new Date().getDate()}`
+            : new Date().getDate()) +
+          "." +
+          (new Date().getMonth() < 9
+            ? `0${new Date().getMonth() + 1}`
+            : new Date().getMonth() + 1) +
+          "." +
+          new Date().getFullYear(),
         CzWykonawca: "",
         CzWyszczegolnienie: "",
         CzOznaczenie: "",
@@ -437,7 +471,7 @@ class DodajKuta extends Component {
         CzAsygnata: "",
         CzUwagi: "",
         CzOperacjaId: this.state.CzCzynnosci.length + 1,
-        dodajCzynnosc: false
+        dodajCzynnosc: false,
       });
     }, 100);
   };
@@ -460,6 +494,10 @@ class DodajKuta extends Component {
       mm = "0" + mm;
     }
     today = dd + "." + mm + "." + yyyy;
+    const wystawia = [
+      { title: "st. szer. Paweł NAWOROL" },
+      { title: "kpr. Paweł PODGORSKI" },
+    ];
 
     return (
       <Wrapper>
@@ -471,7 +509,7 @@ class DodajKuta extends Component {
             width: "95%",
             paddingTop: "50px",
             paddingBottom: "50px",
-            marginTop: "52px"
+            marginTop: "52px",
           }}
         >
           <Form>
@@ -480,11 +518,11 @@ class DodajKuta extends Component {
               defaultValue={this.state.numerKuta}
               className={classes.textField}
               inputProps={{
-                style: { textAlign: "center" }
+                style: { textAlign: "center" },
               }}
               margin="normal"
               type="text"
-              onChange={e => this.addNumerKuta(e)}
+              onChange={(e) => this.addNumerKuta(e)}
             />
           </Form>
           <Form>
@@ -496,7 +534,7 @@ class DodajKuta extends Component {
               name="wykonawca"
               defaultValue={this.state.defWykonawca}
               autoComplete="on"
-              onChange={e => this.addWykonawca(e)}
+              onChange={(e) => this.addWykonawca(e)}
             />
 
             <TextField
@@ -507,7 +545,7 @@ class DodajKuta extends Component {
               name="typ"
               defaultValue={this.state.marka}
               autoComplete="on"
-              onChange={e => this.addMarka(e)}
+              onChange={(e) => this.addMarka(e)}
             />
 
             <TextField
@@ -518,7 +556,7 @@ class DodajKuta extends Component {
               name="rodzaj"
               defaultValue={this.state.typ}
               autoComplete="on"
-              onChange={e => this.addTyp(e)}
+              onChange={(e) => this.addTyp(e)}
             />
             <TextField
               label="Podstawa wydania"
@@ -537,7 +575,7 @@ class DodajKuta extends Component {
               name="rejestracja"
               defaultValue={this.state.nrRej}
               autoComplete="on"
-              onChange={e => this.addNrRej(e)}
+              onChange={(e) => this.addNrRej(e)}
             />
           </Form>
           <Form>
@@ -549,7 +587,7 @@ class DodajKuta extends Component {
               name="wlasciciel"
               defaultValue={this.state.wlasciciel}
               autoComplete="on"
-              onChange={e => this.addWlasciciel(e)}
+              onChange={(e) => this.addWlasciciel(e)}
             />
 
             <TextField
@@ -560,18 +598,18 @@ class DodajKuta extends Component {
               name="terminwykonania"
               defaultValue={this.state.terminWykonania}
               autoComplete="on"
-              onChange={e => this.addTerminWYkonania(e)}
+              onChange={(e) => this.addTerminWYkonania(e)}
             />
             <TextField
               label=" Data wystawienia karty"
               className={classes.textField}
-              style={{fontSize: '8px'}}
+              style={{ fontSize: "8px" }}
               margin="normal"
               type="text"
               name="karta"
               defaultValue={this.state.waznoscKarty}
               autoComplete="on"
-              onChange={e => this.addWaznoscKarty(e)}
+              onChange={(e) => this.addWaznoscKarty(e)}
             />
             <TextField
               label=" Data zdania karty"
@@ -581,7 +619,7 @@ class DodajKuta extends Component {
               name="karta"
               defaultValue={this.state.dataZdania}
               autoComplete="on"
-              onChange={e => this.addDataZdania(e)}
+              onChange={(e) => this.addDataZdania(e)}
             />
           </Form>
           <Form>
@@ -593,9 +631,28 @@ class DodajKuta extends Component {
               name="zadanie"
               defaultValue={this.state.zadanie}
               autoComplete="on"
-              onChange={e => this.addZadanie(e)}
+              onChange={(e) => this.addZadanie(e)}
             />
-
+            <Autocomplete
+              freeSolo
+              options={this.props.persons.map((wystawia) => wystawia)}
+              onChange={this.addWystawiajacy}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="  Kartę wystawił *"
+                  className={classes.textField}
+                  margin="normal"
+                  type="text"
+                  name="wystawiajacy"
+                  defaultValue={this.state.defWystawiajacy}
+                  autoComplete="on"
+                  onChange={this.addWystawiajacy}
+                  InputProps={{ ...params.InputProps }}
+                />
+              )}
+            />
+            {/* 
             <TextField
               label="  Kartę wystawił *"
               className={classes.textField}
@@ -605,7 +662,7 @@ class DodajKuta extends Component {
               defaultValue={this.state.defWystawiajacy}
               autoComplete="on"
               onChange={e => this.addWystawiajacy(e)}
-            />
+            /> */}
           </Form>
 
           <TextAr>
@@ -618,7 +675,7 @@ class DodajKuta extends Component {
               multiline={true}
               defaultValue={this.state.opis}
               autoComplete="on"
-              onChange={e => this.addOpis(e)}
+              onChange={(e) => this.addOpis(e)}
             />
           </TextAr>
 
@@ -631,7 +688,7 @@ class DodajKuta extends Component {
               name="uwagi"
               defaultValue={this.state.uwagi}
               autoComplete="on"
-              onChange={e => this.addUwagi(e)}
+              onChange={(e) => this.addUwagi(e)}
             />
           </TextAr>
 
@@ -643,7 +700,7 @@ class DodajKuta extends Component {
             name="pobierajacy"
             defaultValue={this.state.pobierajacy}
             autoComplete="on"
-            onChange={e => this.addPobierajacy(e)}
+            onChange={(e) => this.addPobierajacy(e)}
           />
         </Paper>
         <Typography
@@ -660,7 +717,7 @@ class DodajKuta extends Component {
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: "50px"
+            marginTop: "50px",
           }}
         >
           <Typography variant="subheading" gutterBottom>
@@ -684,7 +741,7 @@ class DodajKuta extends Component {
             </FormControl>
             <TextField
               inputProps={{
-                style: { textAlign: "center" }
+                style: { textAlign: "center" },
               }}
               label="Ilość Godzin *"
               className={classes.textField}
@@ -692,18 +749,18 @@ class DodajKuta extends Component {
               margin="normal"
               type="text"
               defaultValue={this.state.iloscRBH}
-              onChange={e => this.addIloscRBH(e)}
+              onChange={(e) => this.addIloscRBH(e)}
             />
             <TextField
               inputProps={{
-                style: { textAlign: "center" }
+                style: { textAlign: "center" },
               }}
               label="Jednostek Sprzętu *"
               className={classes.textField}
               style={{ width: "160px" }}
               margin="normal"
               type="text"
-              onChange={e => this.addIloscSprzetuRBH(e)}
+              onChange={(e) => this.addIloscSprzetuRBH(e)}
               defaultValue={this.state.iloscSprzetuRBH}
             />
           </div>
@@ -730,7 +787,7 @@ class DodajKuta extends Component {
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzOperacja}
-                onChange={e => this.addCzOperacja(e)}
+                onChange={(e) => this.addCzOperacja(e)}
               />
 
               <TextField
@@ -741,7 +798,7 @@ class DodajKuta extends Component {
                 type="number"
                 name="karta"
                 defaultValue={this.state.CzRbh}
-                onChange={e => this.addCzRbh(e)}
+                onChange={(e) => this.addCzRbh(e)}
               />
 
               <TextField
@@ -751,9 +808,9 @@ class DodajKuta extends Component {
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzDataWyk}
-                onChange={e => this.addCzDataWyk(e)}
+                onChange={(e) => this.addCzDataWyk(e)}
               />
-
+{/* 
               <TextField
                 label=" Wykonawca Nazwisko"
                 className={classes.textField}
@@ -761,8 +818,27 @@ class DodajKuta extends Component {
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzWykonawca}
-                onChange={e => this.addCzWykonawca(e)}
-              />
+                onChange={(e) => this.addCzWykonawca(e)}
+              /> */}
+                   <Autocomplete
+              freeSolo
+              options={this.props.persons.map((wystawia) => wystawia)}
+              onChange={this.addCzWykonawca}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="  Wykonawca Nazwisko"
+                  className={classes.textField}
+                  margin="normal"
+                  type="text"
+                  name="wystawiajacy"
+                  defaultValue={this.state.CzWykonawca}
+                  autoComplete="on"
+                  onChange={this.addCzWykonawca}
+                  InputProps={{ ...params.InputProps }}
+                />
+              )}
+            />
             </Container>
             <Typography
               variant="subheading"
@@ -780,7 +856,7 @@ class DodajKuta extends Component {
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzWyszczegolnienie}
-                onChange={e => this.addCzWyszczegolnienie(e)}
+                onChange={(e) => this.addCzWyszczegolnienie(e)}
               />
 
               <TextField
@@ -791,7 +867,7 @@ class DodajKuta extends Component {
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzOznaczenie}
-                onChange={e => this.addCzOznaczenie(e)}
+                onChange={(e) => this.addCzOznaczenie(e)}
               />
 
               <TextField
@@ -801,7 +877,7 @@ class DodajKuta extends Component {
                 type="number"
                 name="karta"
                 defaultValue={this.state.CzIlosc}
-                onChange={e => this.addCzIlosc(e)}
+                onChange={(e) => this.addCzIlosc(e)}
               />
 
               <TextField
@@ -811,7 +887,7 @@ class DodajKuta extends Component {
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzAsygnata}
-                onChange={e => this.addCzAsygnata(e)}
+                onChange={(e) => this.addCzAsygnata(e)}
               />
 
               <TextField
@@ -821,7 +897,7 @@ class DodajKuta extends Component {
                 type="text"
                 name="karta"
                 defaultValue={this.state.CzUwagi}
-                onChange={e => this.addCzUwagi(e)}
+                onChange={(e) => this.addCzUwagi(e)}
               />
             </Container>
             <Button
@@ -842,7 +918,7 @@ class DodajKuta extends Component {
           control={
             <Checkbox
               checked={this.state.kartaZdana}
-              onChange={e => this.dataZdania(e)}
+              onChange={(e) => this.dataZdania(e)}
               value="kartaZdana"
               color="primary"
             />
@@ -900,7 +976,7 @@ class DodajKuta extends Component {
           style={{
             margin: "0",
             marginTop: "50px",
-            marginBottom: "20px"
+            marginBottom: "20px",
           }}
         >
           Anuluj Dodawanie Karty
@@ -960,7 +1036,7 @@ const Container = styled.div`
   padding: 10px 0;
 `;
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     karty: state.karty,
     buttonIsClicked: state.buttonIsClicked,
@@ -970,13 +1046,14 @@ const mapStateToProps = state => {
     ostatniNumer: state.ostatniNumer,
     nowyNumerKuta: state.nowyNumerKuta,
     defWystawiajacy: state.defWystawiajacy,
-    defWykonawca: state.defWykonawca
+    defWykonawca: state.defWykonawca,
+    persons: state.persons
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onAddNewKut: state => dispatch(actions.addNewKut(state)),
+    onAddNewKut: (state) => dispatch(actions.addNewKut(state)),
     onAnulowanie: () => dispatch(actions.Anulowanie()),
     onAddNewCzynnosc: (
       operacja,
@@ -1003,14 +1080,11 @@ const mapDispatchToProps = dispatch => {
           uwagi,
           CzCzynnosci
         )
-      )
+      ),
   };
 };
 
 export default compose(
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 )(DodajKuta);

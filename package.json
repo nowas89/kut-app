@@ -6,7 +6,6 @@
   "nodeGypRebuild": "true",
   "description": "Aplikacja systemowa zarządzająca ewidencją pracy warsztatu",
   "devDependencies": {
-    "@material-ui/core": "^3.6.1",
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
     "babel-eslint": "7.1.1",
@@ -64,8 +63,11 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.49",
     "@react-pdf/renderer": "^1.0.0-alpha.14",
+    "classnames": "^2.2.6",
     "electron-builder-squirrel-windows": "^21.2.0",
     "electron-is-dev": "^0.3.0",
     "html2canvas": "^1.0.0-alpha.12",
@@ -74,6 +76,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-fade-in": "^0.1.6",
+    "react-hot-keys": "^2.5.2",
     "react-html-table-to-excel": "^2.0.0",
     "react-redux": "^5.1.2",
     "recompose": "^0.28.2",
@@ -130,7 +133,7 @@
     "dev": "nf start -p 3000",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3001&& electron .\"",
     "electron-pack": "build --em.main=build/electron.js",
     "preelectron-pack": "yarn build",
     "postinstall": "electron-builder install-app-deps"
