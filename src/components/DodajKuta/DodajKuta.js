@@ -137,7 +137,6 @@ class DodajKuta extends Component {
       "." +
       new Date().getFullYear(),
     pobierajacy: "",
-
     CzOperacja: "",
     CzRbh: "",
     CzDataWyk:
@@ -277,8 +276,7 @@ class DodajKuta extends Component {
   };
   addWykonawca = (e) => {
     this.setState({
-      wykonawca: e.target.value,
-      defWykonawca: e.target.value,
+      wykonawca: e.target.value
     });
   };
   addMarka = (e) => {
@@ -303,16 +301,19 @@ class DodajKuta extends Component {
   };
   addWystawiajacy = (e, values) => {
     console.log(e, values);
-    if(values !== undefined) {
+    if (values !== undefined) {
       this.setState({
-        wystawiajacy: values,
-        defWystawiajacy: values,
+        wystawiajacy: values
+      });
+    } else if (values === null || e.target === null) {
+      this.setState({
+        wystawiajacy: "  "
       });
     } else {
-        this.setState({
-      wystawiajacy: e.target.value,
-      defWystawiajacy: e.target.value,}
-    )}
+      this.setState({
+        wystawiajacy: e.target.value
+      });
+    }
   };
   addOpis = (e) => {
     this.setState({
@@ -372,19 +373,19 @@ class DodajKuta extends Component {
       CzDataWyk: e.target.value,
     });
   };
- 
 
   addCzWykonawca = (e, values) => {
     console.log(e, values);
-    if(values !== undefined) {
+    if (values !== undefined) {
       this.setState({
-        CzWykonawca: values.toUpperCase()
+        CzWykonawca: values.toUpperCase(),
       });
     } else {
-        this.setState({
-          CzWykonawca: e.target.value.toUpperCase()
-        })  };
-      }
+      this.setState({
+        CzWykonawca: e.target.value.toUpperCase(),
+      });
+    }
+  };
   addCzWyszczegolnienie = (e) => {
     this.setState({
       CzWyszczegolnienie: e.target.value,
@@ -637,6 +638,7 @@ class DodajKuta extends Component {
               freeSolo
               options={this.props.persons.map((wystawia) => wystawia)}
               onChange={this.addWystawiajacy}
+              disableClearable
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -645,24 +647,12 @@ class DodajKuta extends Component {
                   margin="normal"
                   type="text"
                   name="wystawiajacy"
-                  defaultValue={this.state.defWystawiajacy}
                   autoComplete="on"
                   onChange={this.addWystawiajacy}
                   InputProps={{ ...params.InputProps }}
                 />
               )}
             />
-            {/* 
-            <TextField
-              label="  Kartę wystawił *"
-              className={classes.textField}
-              margin="normal"
-              type="text"
-              name="wystawiajacy"
-              defaultValue={this.state.defWystawiajacy}
-              autoComplete="on"
-              onChange={e => this.addWystawiajacy(e)}
-            /> */}
           </Form>
 
           <TextAr>
@@ -723,7 +713,7 @@ class DodajKuta extends Component {
           <Typography variant="subheading" gutterBottom>
             Rozliczenie Godzin Pracy
           </Typography>
-          <div>
+          <FormRBH>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="age-simple">Rodzaj *</InputLabel>
               <Select
@@ -763,7 +753,7 @@ class DodajKuta extends Component {
               onChange={(e) => this.addIloscSprzetuRBH(e)}
               defaultValue={this.state.iloscSprzetuRBH}
             />
-          </div>
+          </FormRBH>
         </Paper>
 
         {this.state.CzCzynnosci.length > 0 ? (
@@ -810,7 +800,7 @@ class DodajKuta extends Component {
                 defaultValue={this.state.CzDataWyk}
                 onChange={(e) => this.addCzDataWyk(e)}
               />
-{/* 
+              {/* 
               <TextField
                 label=" Wykonawca Nazwisko"
                 className={classes.textField}
@@ -820,25 +810,26 @@ class DodajKuta extends Component {
                 defaultValue={this.state.CzWykonawca}
                 onChange={(e) => this.addCzWykonawca(e)}
               /> */}
-                   <Autocomplete
-              freeSolo
-              options={this.props.persons.map((wystawia) => wystawia)}
-              onChange={this.addCzWykonawca}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="  Wykonawca Nazwisko"
-                  className={classes.textField}
-                  margin="normal"
-                  type="text"
-                  name="wystawiajacy"
-                  defaultValue={this.state.CzWykonawca}
-                  autoComplete="on"
-                  onChange={this.addCzWykonawca}
-                  InputProps={{ ...params.InputProps }}
-                />
-              )}
-            />
+              <Autocomplete
+                freeSolo
+                options={this.props.persons.map((wystawia) => wystawia)}
+                onChange={this.addCzWykonawca}
+                disableClearable
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="  Wykonawca Nazwisko"
+                    className={classes.textField}
+                    margin="normal"
+                    type="text"
+                    name="wystawiajacy"
+                    defaultValue={this.state.CzWykonawca}
+                    autoComplete="on"
+                    onChange={this.addCzWykonawca}
+                    InputProps={{ ...params.InputProps }}
+                  />
+                )}
+              />
             </Container>
             <Typography
               variant="subheading"
@@ -1023,6 +1014,15 @@ const Czynnosci = styled.div`
 
 const Form = styled.form`
   margin-bottom: 50px;
+  display:flex;
+  
+`;
+const FormRBH = styled.form`
+margin-bottom: 50px;
+display:flex;
+justify-content: center;
+align-items: center;
+
 `;
 const TextAr = styled.div`
   margin-top: 30px;
@@ -1047,7 +1047,7 @@ const mapStateToProps = (state) => {
     nowyNumerKuta: state.nowyNumerKuta,
     defWystawiajacy: state.defWystawiajacy,
     defWykonawca: state.defWykonawca,
-    persons: state.persons
+    persons: state.persons,
   };
 };
 

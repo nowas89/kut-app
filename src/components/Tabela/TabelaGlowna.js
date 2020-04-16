@@ -19,118 +19,142 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-
 // import styled from "styled-components";
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: "100%",
     marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
+    overflowX: "auto",
   },
   table: {
     minWidth: 700,
-    padding: 0
+    padding: 0,
   },
   row: {
     "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.background.default
-    }
+      backgroundColor: theme.palette.background.default,
+    },
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 200,
   },
   button: {
     margin: theme.spacing.unit,
-    fontFamily: "Arial"
+    fontFamily: "Arial",
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 220
-  }
+    minWidth: 220,
+  },
 });
 class TabelaGlowna extends Component {
   state = {
     searchString: "",
 
-    sorted: false
+    sorted: false,
   };
-  przeszukajKarty = e => {
+  przeszukajKarty = (e) => {
     this.setState({
-      searchString: e
-        .target
-        .value
-        .toLowerCase()
+      searchString: e.target.value.toLowerCase(),
     });
   };
 
   sort = () => {
     this.setState({
-      sorted: !this.state.sorted
-    })
-  }
+      sorted: !this.state.sorted,
+    });
+  };
 
-  resetState = e => {
+  resetState = (e) => {
     setTimeout(() => {
       this.setState({ searchString: "" });
     }, 50);
   };
-
-
 
   render() {
     const { classes } = this.props;
     let newArray;
 
     if (this.state.sorted) {
-      newArray = this
-        .props
-        .karty
-        .sort((a, b) => Number(a.numerKuta.split("/")[0]) - Number(b.numerKuta.split("/")[0]))
+      newArray = this.props.karty.sort(
+        (a, b) =>
+          Number(a.numerKuta.split("/")[0]) - Number(b.numerKuta.split("/")[0])
+      );
     } else {
-      newArray = this
-        .props
-        .karty
-        .sort((a, b) => Number(b.numerKuta.split("/")[0]) - Number(a.numerKuta.split("/")[0]))
+      newArray = this.props.karty.sort(
+        (a, b) =>
+          Number(b.numerKuta.split("/")[0]) - Number(a.numerKuta.split("/")[0])
+      );
     }
 
-    console.log('[sortowanie]', newArray)
-    let searchString = this
-      .state
-      .searchString
-      .trim()
-      .toLowerCase();
+    console.log("[sortowanie]", newArray);
+    let searchString = this.state.searchString.trim().toLowerCase();
 
     if (searchString.length > 0 && this.props.zdaneKarty) {
-      newArray = newArray.filter(karta => {
-        return ((karta.numerKuta.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.pobierajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.marka.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.nrRej.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wlasciciel.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wystawiajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana));
+      newArray = newArray.filter((karta) => {
+        return (
+          (karta.numerKuta.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.pobierajacy.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.marka.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.nrRej.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.wlasciciel.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.wystawiajacy.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana)
+        );
       });
     } else if (searchString.length > 0 && !this.props.zdaneKarty) {
-      newArray = newArray.filter(karta => {
-        return (karta.numerKuta.toLowerCase().includes(this.state.searchString) || karta.pobierajacy.toLowerCase().includes(this.state.searchString) || karta.marka.toLowerCase().includes(this.state.searchString) || karta.nrRej.toLowerCase().includes(this.state.searchString) || karta.wlasciciel.toLowerCase().includes(this.state.searchString) || karta.wystawiajacy.toLowerCase().includes(this.state.searchString));
+      newArray = newArray.filter((karta) => {
+        return (
+          karta.numerKuta.toLowerCase().includes(this.state.searchString) ||
+          karta.pobierajacy.toLowerCase().includes(this.state.searchString) ||
+          karta.marka.toLowerCase().includes(this.state.searchString) ||
+          karta.nrRej.toLowerCase().includes(this.state.searchString) ||
+          karta.wlasciciel.toLowerCase().includes(this.state.searchString) ||
+          karta.wystawiajacy.toLowerCase().includes(this.state.searchString)
+        );
       });
     } else if (searchString.length === 0 && this.props.zdaneKarty) {
-      newArray = newArray.filter(karta => {
-        return ((karta.numerKuta.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.pobierajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.marka.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.nrRej.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wlasciciel.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana) || (karta.wystawiajacy.toLowerCase().includes(this.state.searchString) && !karta.kartaZdana));
+      newArray = newArray.filter((karta) => {
+        return (
+          (karta.numerKuta.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.pobierajacy.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.marka.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.nrRej.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.wlasciciel.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana) ||
+          (karta.wystawiajacy.toLowerCase().includes(this.state.searchString) &&
+            !karta.kartaZdana)
+        );
       });
     }
 
-    console.log(new Date())
+    console.log(new Date());
 
     return (
       <Wrapper>
-
         <Paper
+          variant="outlined"
           style={{
             position: "relative",
-            marginTop: '30px',
+            marginTop: "30px",
             padding: "10px",
-            width: '310px'
-          }}>
+            width: "310px",
+          }}
+        >
           <Typography variant="subheading" gutterBottom style={{}}>
             Przeszukaj Karty
-                    </Typography>
+          </Typography>
           <TextField
             label="Szukaj"
             className={classes.textField}
@@ -138,337 +162,389 @@ class TabelaGlowna extends Component {
             type="text"
             defaultValue={this.state.searchString}
             autoComplete="on"
-            onChange={e => this.przeszukajKarty(e)} />
+            onChange={(e) => this.przeszukajKarty(e)}
+          />
 
           <FormControlLabel
             style={{
               margin: "0",
-              display: 'flex',
-              justifyContent: 'center'
+              display: "flex",
+              justifyContent: "center",
             }}
-            control={< Checkbox checked={
-              this.props.zdaneKarty
+            control={
+              <Checkbox
+                checked={this.props.zdaneKarty}
+                onChange={(e) => this.props.zdaneKartyFun(e)}
+                value="kartaZdana"
+                color="primary"
+              />
             }
-              onChange={
-                (e) => this.props.zdaneKartyFun(e)
-              }
-              value="kartaZdana" color="primary" />}
-            label={this.props.zdaneKarty
-              ? "Przeszukujesz Niezdane Karty"
-              : "Przeszukaj Niezdane Karty"} />
+            label={
+              this.props.zdaneKarty
+                ? "Przeszukujesz Niezdane Karty"
+                : "Przeszukaj Niezdane Karty"
+            }
+          />
         </Paper>
-        <Paper className={classes.root}>
+        <Paper className={classes.root} variant="outlined"ś>
           <Table className={classes.table} id="tabelaKart">
             <TableHead>
               <TableRow>
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Lp.
-                                </TableCell>
+                </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
                     padding: "4px 10px 4px 24px",
                     display: "flex",
-                    justifyContent: 'center',
+                    justifyContent: "center",
                     alignItems: "center",
-                    height: "56px"
-                  }}>
+                    height: "56px",
+                  }}
+                >
                   Numer Karty
-                  {this.state.sorted
-                    ? <SVG
+                  {this.state.sorted ? (
+                    <SVG
                       onClick={() => this.sort()}
                       width="25"
                       height="25"
                       xmlns="http://www.w3.org/2000/svg"
                       fill-rule="evenodd"
-                      clip-rule="evenodd"><path
-                        d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z" /></SVG>
-                    : <SVGS
+                      clip-rule="evenodd"
+                    >
+                      <path d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z" />
+                    </SVG>
+                  ) : (
+                    <SVGS
                       onClick={() => this.sort()}
                       width="25"
                       height="25"
                       xmlns="http://www.w3.org/2000/svg"
                       fill-rule="evenodd"
-                      clip-rule="evenodd"><path
-                        d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z" /></SVGS>
-                  }
-
+                      clip-rule="evenodd"
+                    >
+                      <path d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z" />
+                    </SVGS>
+                  )}
                 </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Marka i Typ
-                                </TableCell>
+                </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Nr Rejestracyjny
-                                </TableCell>
+                </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Właściciel
-                                </TableCell>
+                </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Termin Wykonania
-                                </TableCell>
-                                <TableCell
+                </TableCell>
+                <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Data Wystawienia
-                                </TableCell>
+                </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Zadanie
-                                </TableCell>
-                       
+                </TableCell>
+
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Pobierający
-                                </TableCell>
+                </TableCell>
                 <TableCell
                   style={{
                     textAlign: "center",
-                    padding: "4px 10px 4px 24px"
-                  }}>
+                    padding: "4px 10px 4px 24px",
+                  }}
+                >
                   Karta Została Zdana
-                                </TableCell>
+                </TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-              
               {this.state.searchString !== "" || this.props.zdaneKarty
                 ? newArray.map((karta, i) => (
-                
-                  <TableRow
-                    key={i + 1}
-                    className={classes.row}
-                    onClick={() => this.props.onOpeningKut(karta)}>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {i + 1}
-                    </TableCell>
-                    {
-console.log( new Date(
-  karta.terminWykonania.split(".")[2],
-  Number(karta.terminWykonania.split(".")[1]) - 1,
-  karta.terminWykonania.split(".")[0]))
-                      }
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.numerKuta}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.marka}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.nrRej}
-                    </TableCell>
-                 
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.wlasciciel}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                    {
-                        new Date() > new Date(
-                          karta.terminWykonania.split(".")[2],
-                          Number(karta.terminWykonania.split(".")[1]) - 1,
-                          karta.terminWykonania.split(".")[0]) && !karta.kartaZdana ?   <h3
-                            style={{
-                              color: 'red'
-                            }}>{karta.terminWykonania}</h3>
-                            : karta.terminWykonania
-
-                      }
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.waznoscKarty}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.zadanie}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.pobierajacy}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.kartaZdana
-                        ? "TAK"
-                        : <h3
-                          style={{
-                            color: 'red'
-                          }}>NIE</h3>}
-                    </TableCell>
-                  </TableRow>
-                
-                ))
-                : this
-                  .props
-                  .karty
-                  .map((karta, i) => (
                     <TableRow
                       key={i + 1}
                       className={classes.row}
-                      onClick={() => this.props.onOpeningKut(karta)}>
+                      onClick={() => this.props.onOpeningKut(karta)}
+                    >
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
                         {i + 1}
                       </TableCell>
+                      {console.log(
+                        new Date(
+                          karta.terminWykonania.split(".")[2],
+                          Number(karta.terminWykonania.split(".")[1]) - 1,
+                          karta.terminWykonania.split(".")[0]
+                        )
+                      )}
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
                         {karta.numerKuta}
                       </TableCell>
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
                         {karta.marka}
                       </TableCell>
-                      {
-
-console.log(
-  new Date(
-    karta.terminWykonania.split(".")[2],
-    Number(karta.terminWykonania.split(".")[1]) - 1,
-    karta.terminWykonania.split(".")[0]))
-}
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
                         {karta.nrRej}
                       </TableCell>
+
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
                         {karta.wlasciciel}
                       </TableCell>
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
-                           {
-                        new Date() > new Date(
-                          karta.terminWykonania.split(".")[2],
-                          Number(karta.terminWykonania.split(".")[1]) - 1,
-                          karta.terminWykonania.split(".")[0]) && !karta.kartaZdana ? <h3
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {new Date() >
+                          new Date(
+                            karta.terminWykonania.split(".")[2],
+                            Number(karta.terminWykonania.split(".")[1]) - 1,
+                            karta.terminWykonania.split(".")[0]
+                          ) && !karta.kartaZdana ? (
+                          <h3
                             style={{
-                              color: 'red'
-                            }}>{karta.terminWykonania}</h3>
-                            : karta.terminWykonania
-
-                      }
+                              color: "red",
+                            }}
+                          >
+                            {karta.terminWykonania}
+                          </h3>
+                        ) : (
+                          karta.terminWykonania
+                        )}
                       </TableCell>
-                      <TableCell
-                      style={{
-                        textAlign: "center",
-                        padding: "4px 10px 4px 24px"
-                      }}>
-                      {karta.waznoscKarty}
-                    </TableCell>
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.waznoscKarty}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
                         {karta.zadanie}
                       </TableCell>
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
                         {karta.pobierajacy}
                       </TableCell>
                       <TableCell
                         style={{
                           textAlign: "center",
-                          padding: "4px 10px 4px 24px"
-                        }}>
-                        {karta.kartaZdana
-                          ? "TAK"
-                          : <h3
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.kartaZdana ? (
+                          "TAK"
+                        ) : (
+                          <h3
                             style={{
-                              color: 'red'
-                            }}>NIE</h3>}
+                              color: "red",
+                            }}
+                          >
+                            NIE
+                          </h3>
+                        )}
                       </TableCell>
                     </TableRow>
-                    
+                  ))
+                : this.props.karty.map((karta, i) => (
+                    <TableRow
+                      key={i + 1}
+                      className={classes.row}
+                      onClick={() => this.props.onOpeningKut(karta)}
+                    >
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {i + 1}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.numerKuta}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.marka}
+                      </TableCell>
+                      {console.log(
+                        new Date(
+                          karta.terminWykonania.split(".")[2],
+                          Number(karta.terminWykonania.split(".")[1]) - 1,
+                          karta.terminWykonania.split(".")[0]
+                        )
+                      )}
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.nrRej}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.wlasciciel}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {new Date() >
+                          new Date(
+                            karta.terminWykonania.split(".")[2],
+                            Number(karta.terminWykonania.split(".")[1]) - 1,
+                            karta.terminWykonania.split(".")[0]
+                          ) && !karta.kartaZdana ? (
+                          <h3
+                            style={{
+                              color: "red",
+                            }}
+                          >
+                            {karta.terminWykonania}
+                          </h3>
+                        ) : (
+                          karta.terminWykonania
+                        )}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.waznoscKarty}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.zadanie}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.pobierajacy}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          textAlign: "center",
+                          padding: "4px 10px 4px 24px",
+                        }}
+                      >
+                        {karta.kartaZdana ? (
+                          "TAK"
+                        ) : (
+                          <h3
+                            style={{
+                              color: "red",
+                            }}
+                          >
+                            NIE
+                          </h3>
+                        )}
+                      </TableCell>
+                    </TableRow>
                   ))}
-                 
             </TableBody>
-
           </Table>
         </Paper>
         <ReactHTMLTableToExcel
@@ -477,8 +553,8 @@ console.log(
           table="tabelaKart"
           filename="Tabela Kart Usług Technicznych"
           sheet="tablexls"
-          buttonText="Eksportuj Listę do XML" />
-
+          buttonText="Eksportuj Listę do XML"
+        />
       </Wrapper>
     );
   }
@@ -496,27 +572,28 @@ const Wrapper = styled.div`
   width: 95%;
 `;
 const SVG = styled.svg`
-padding: 3px;
+  padding: 3px;
   cursor: pointer;
-
 `;
 
 const SVGS = styled.svg`
-transform: rotate(180deg);
+  transform: rotate(180deg);
   cursor: pointer;
-
 `;
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     karty: state.karty,
-    zdaneKarty: state.zdaneKarty
+    zdaneKarty: state.zdaneKarty,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onOpeningKut: karta => dispatch(actions.openKut(karta)),
-    zdaneKartyFun: event => dispatch(actions.zdaneKarty(event))
+    onOpeningKut: (karta) => dispatch(actions.openKut(karta)),
+    zdaneKartyFun: (event) => dispatch(actions.zdaneKarty(event)),
   };
 };
-export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(TabelaGlowna);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+)(TabelaGlowna);
