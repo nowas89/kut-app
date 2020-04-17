@@ -74,6 +74,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     LP.
@@ -83,6 +84,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Numer Karty
@@ -92,6 +94,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Nazwa sprzętu, typ sprzętu, numer fabryczny
@@ -101,6 +104,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Rodzaj naprawy
@@ -110,6 +114,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Data Wystawienia Karty
@@ -119,6 +124,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Termin Wykonania
@@ -128,6 +134,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Rodzaj / Typ / Kategoria
@@ -137,6 +144,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Ilość RBH
@@ -146,6 +154,7 @@ class EwidencjaPracy extends Component {
                                     style={{
                                         textAlign: "center",
                                         padding: "4px 10px 4px 24px",
+                                        fontSize: 12,
                                     }}
                                 >
                                     Jednostek Sprzętu
@@ -161,6 +170,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {i + 1}
@@ -169,6 +179,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.numerKuta}
@@ -177,6 +188,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.marka}
@@ -185,6 +197,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.zadanie}
@@ -193,6 +206,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.waznoscKarty}
@@ -201,6 +215,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.terminWykonania}
@@ -209,6 +224,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.rodzajRBH}
@@ -217,6 +233,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.iloscRBH}
@@ -225,6 +242,7 @@ class EwidencjaPracy extends Component {
                                             style={{
                                                 textAlign: "center",
                                                 padding: "4px 10px 4px 24px",
+                                                fontSize: 12,
                                             }}
                                         >
                                             {row.iloscSprzetuRBH}
