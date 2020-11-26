@@ -125,7 +125,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "electron": "electron .",
     "win": "electron-builder --win --x64 --dir",
-    "dev": "nf start -p 3000",
+    "dev": "nf start -p 3011",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",

@@ -60,7 +60,7 @@ class Menu extends Component {
                 <li >
                   <NavLink  to="/karty"  onClick={(e) => this.updateActive(e)}  style={{fontFamily: 'Arial'}} >Karty Usług Technicznych</NavLink>
                 </li>
-                {
+                {/* {
                   this.state.kartyIsActive & this.props.grupy.length > 0 ?  
                 this.props.grupy.map((grupa, id) => 
                   <li key={id}>
@@ -68,7 +68,7 @@ class Menu extends Component {
                   </li>
             )
                 : console.log('nie ma active')
-                }
+                } */}
                 <li>
                   <NavLink to="/ewidencja"  onClick={(e) => this.deActive(e)}  style={{fontFamily: 'Arial'}}>Ewidencja Kart</NavLink>
                 </li>
@@ -87,13 +87,13 @@ class Menu extends Component {
 </Button></NavLink></DOlnyDiv>
         </MenuWrap>
         <Switch>
-        <Route    path="/"  component={Karty} />
-        {
+        <Route    path="/karty"  component={Karty} />
+        {/* {
                  this.props.grupy.length > 0 
                  ?  this.props.grupy.map((grupa, id) => 
                  (<Route path={`/${grupa}` } component={Karty} key={id}>{grupa}</Route>))
                  : console.log('nie daje route')
-         }
+         } */}
           <Route    path="/ewidencja" component={TabelaEwidencyjna} />
           <Route    path="/ewidencjaPracy" component={EwidencjaPracy} />
           <Route    path="/ustawienia" component={Settings} />

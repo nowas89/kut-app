@@ -182,7 +182,7 @@ class Settings extends Component {
             Lp. proszę wpisać 0 w pole wprowadzania tekstu.
           </Typography>
         </Paper>
-        <Paper
+        {/* <Paper
           className={classes.root}
           style={{ marginTop: "50px", width: "900px" }}
           elevation={1}
@@ -215,7 +215,7 @@ class Settings extends Component {
            </List>
               ))
             : null}
-        </Paper>
+        </Paper> */}
         <Paper
           className={classes.root}
           style={{
