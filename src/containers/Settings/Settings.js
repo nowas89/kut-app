@@ -42,6 +42,7 @@ class Settings extends Component {
         rodzajRBH: "",
         ostatniNumer: 0,
         person: "",
+        wersja: this.props.wersja
     };
     addAkronim = (e) => {
         this.setState({
@@ -346,8 +347,9 @@ class Settings extends Component {
                     gutterBottom
                     style={{ position: "absolute", bottom: "-50px" }}
                 >
-                    Wersja programu: {this.props.wersja}
+                    Wersja programu: {this.state.wersja}
                 </Typography>
+                <input id="myFile"  webkitdirectory type="file" multiple />
             </Wrapper>
         );
     }

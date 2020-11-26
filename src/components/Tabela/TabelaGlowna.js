@@ -241,11 +241,12 @@ class TabelaGlowna extends Component {
                                 <TableCell
                                     style={{
                                         textAlign: "center",
-                                        padding: "4px 10px 4px 24px",
                                         display: "flex",
                                         justifyContent: "center",
                                         alignItems: "center",
                                         fontSize: 12,
+                                        // boxSizing: "border-box",
+
                                     }}
                                 >
                                     Numer Karty
