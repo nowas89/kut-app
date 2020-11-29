@@ -130,7 +130,7 @@
         "test": "node scripts/test.js --env=jsdom",
         "electron": "electron .",
         "win": "electron-builder --win",
-        "dev": "nf start -p 30110",
+        "dev": "nf start -p 30001",
         "pack": "electron-builder --dir",
         "dist": "electron-builder",
         "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3001&& electron .\"",
