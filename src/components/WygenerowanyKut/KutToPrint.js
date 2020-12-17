@@ -52,11 +52,19 @@ class KutToPrint extends Component {
         } = this.props.kartaDoDruku;
         console.log(CzCzynnosci);
         console.log(this.state.iloscPustych);
+    
 
         let markalen =
             marka.length < 14
                 ? { fontSize: "11px", marginTop: "3px" }
                 : { fontSize: "6px", marginTop: "3px" };
+
+        
+                let markalen2 =
+                nrRej.length < 14
+                    ? { fontSize: "11px", marginTop: "3px" }
+                    : { fontSize: "6px", marginTop: "3px" };
+    
 
         return (
             <div className="wrapper">
@@ -78,7 +86,7 @@ class KutToPrint extends Component {
                         </div>
                         <div className="third">
                             <h3>MER:</h3>
-                            <h1>{nrRej}</h1>
+                            <h1 style={markalen2}>{nrRej}</h1>
                         </div>
                         <div className="four">
                             <h3>SPRZĘT NALEŻY DO:</h3>
@@ -263,7 +271,7 @@ class KutToPrint extends Component {
                                 <div className="row4">
                                     <h2
                                         style={
-                                            row.CzOperacja.length < 15
+                                            row.CzWykonawca.length < 15
                                                 ? {
                                                       fontSize: "7px",
                                                       textAlign: "center",

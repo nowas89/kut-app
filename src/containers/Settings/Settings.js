@@ -349,7 +349,6 @@ class Settings extends Component {
                 >
                     Wersja programu: {this.state.wersja}
                 </Typography>
-                <input id="myFile"  webkitdirectory type="file" multiple />
             </Wrapper>
         );
     }

@@ -1,12 +1,12 @@
 version: 1.1.1
 files:
-  - url: Ewidencja-Pracy-Warsztatu-2020-1.1.1-mac.zip
-    sha512: RDVzKuuG0JcCv6a+NypulcYBtIsMQWSlEiEdH+iHOTVlUF2lYA8XvvvuIUmiQry3+yy8LD7nDQRy5gbB/0Ym8A==
-    size: 97034471
-    blockMapSize: 102898
-  - url: Ewidencja-Pracy-Warsztatu-2020-1.1.1.dmg
-    sha512: viJCSeH9uU+ccPovW4P7FsB4sIgaAunZ7qxyBCgt0xB7iKhgPq2PyyFzVveLtX9UT3Ezmc0xMGjOCDnLKMHJaw==
-    size: 100636884
-path: Ewidencja-Pracy-Warsztatu-2020-1.1.1-mac.zip
-sha512: RDVzKuuG0JcCv6a+NypulcYBtIsMQWSlEiEdH+iHOTVlUF2lYA8XvvvuIUmiQry3+yy8LD7nDQRy5gbB/0Ym8A==
-releaseDate: '2020-04-17T06:24:12.576Z'
+  - url: Ewidencja-Pracy-Warsztatu-2021-1.1.1-mac.zip
+    sha512: xmLqmas5YvrK9HNPSeInphDDzwWYJxJ0+ijz1TU92dN7SiPsud36CTq9nqo8usHIiHqB+ofSGzcC0JM8ngglxw==
+    size: 94364265
+    blockMapSize: 99486
+  - url: Ewidencja-Pracy-Warsztatu-2021-1.1.1.dmg
+    sha512: eyyUnZ4paYMxf1pyTeY7MxTuTETvpMh6gQTXZmUThmRuINbKjjlrzvAgDXWCjyLJAZax1PS2TOIHV93QDYMRqA==
+    size: 97821060
+path: Ewidencja-Pracy-Warsztatu-2021-1.1.1-mac.zip
+sha512: xmLqmas5YvrK9HNPSeInphDDzwWYJxJ0+ijz1TU92dN7SiPsud36CTq9nqo8usHIiHqB+ofSGzcC0JM8ngglxw==
+releaseDate: '2020-12-17T12:57:02.387Z'

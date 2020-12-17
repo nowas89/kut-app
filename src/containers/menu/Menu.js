@@ -33,7 +33,7 @@ class Menu extends Component {
                             <ul>
                                 <li>
                                     <NavLink
-                                        to="/"
+                                        to="/karty"
                                         style={{ fontFamily: "Arial" }}
                                     >
                                         Karty Usług Technicznych
@@ -85,7 +85,7 @@ class Menu extends Component {
                     <Route path="/ustawienia">
                         <Settings />
                     </Route>
-                    <Route path="/" exact>
+                    <Route path="/karty" exact>
                         <Karty />
                     </Route>
                 </Switch>
