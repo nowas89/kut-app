@@ -21,4 +21,4 @@ linux:
 win:
   target: squirrel
   icon: build/icon.ico
-electronVersion: 2.0.7
+electronVersion: 2.0.18
